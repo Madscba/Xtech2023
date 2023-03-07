@@ -7,14 +7,14 @@
 ## Getting started
 
 Backend
-
+* Install Python
+* Install Pip
 * Run `pip install shell`
 * Run `pipenv shell`
 * Run `pip install django`
 * Run ..
 
 Frontend
-
 * Run `cd frontend && npm install`
 
 ## Run project
