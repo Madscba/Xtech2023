@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef }  from 'react'; 
+import { useState, useRef }  from 'react'; 
 
 function ImagePicker () {
   
@@ -34,7 +34,7 @@ function ImagePicker () {
 
             canvas.toBlob = (blob) => {
                 const img = new Image();
-                img.src = window.URL.createObjectUrl(blob);
+                img.src = URL.createObjectUrl(blob);
             };
         };
     }
