@@ -1,0 +1,10 @@
+# dependencies
+/db.sqlite3
+/Pipfile
+
+# production
+/build
+
+# misc
+.DS_Store
+.env
