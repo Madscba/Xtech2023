@@ -34,7 +34,11 @@ function ImagePicker () {
 
     return (
         <div className="space-y-4">
-            <input type="file" onChange={handleVideoUpload}/>
+            <input 
+                type="file" 
+                onChange={handleVideoUpload} 
+                accept="video/*"
+            />
             {videoPath ? 
                 <div className="flex flex-row gap-4 items-start">
                     <div className="space-y-4">
