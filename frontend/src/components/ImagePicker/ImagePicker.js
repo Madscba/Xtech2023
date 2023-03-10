@@ -3,6 +3,7 @@ import { useState, useRef }  from 'react';
 function ImagePicker () {
   
     const [videoPath, setVideoPath] = useState();
+    const [imagePath, setImagePath] = useState();
 
     const canvasElement = useRef();
     const videoElement = useRef();
@@ -16,27 +17,19 @@ function ImagePicker () {
         const video = videoElement.current;
 
         canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
+        canvas.height = video.videoHeight
 
         canvas
             .getContext("2d")
             .drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
-        
-        const playImage = new Image();
 
-        playImage.onload = () => {
-            const startX = video.videoWidth / 2 - playImage.width / 2;
-            const startY = video.videoHeight / 2 - playImage.height / 2;
-
-            canvas
-            .getContext("2d")
-            .drawImage(playImage, startX, startY, playImage.width, playImage.height);
-
-            canvas.toBlob = (blob) => {
-                const img = new Image();
-                img.src = URL.createObjectUrl(blob);
-            };
-        };
+   
+        canvas.toBlob(blob => {
+                setImagePath(URL.createObjectURL(blob));
+            },
+            'image/jpeg',
+            0.9,
+        );
     }
 
     return (
