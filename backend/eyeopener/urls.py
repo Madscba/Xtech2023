@@ -15,7 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from . import views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    
+    #ML pats
+    path('ML/predict_local', views.machine_learning_test),
+    path('ML/predict_transfer', views.predict_dummy),
+    path('ML/predict', views.predict),
 ]
