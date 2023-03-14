@@ -1,12 +1,18 @@
-import { useState, useRef }  from 'react'; 
+import { useState, useRef, useEffect }  from 'react'; 
 
-function ImagePicker () {
+function ImagePicker ( props ) {
   
     const [videoPath, setVideoPath] = useState();
     const [imagePath, setImagePath] = useState();
+    const [eyeSide, setEyeSide] = useState();
 
     const canvasElement = useRef();
     const videoElement = useRef();
+
+
+    useEffect(() => {
+        setEyeSide(props.eyeSide + " eye")
+      }, [props]);
 
     const handleVideoUpload = (event) => {
         setVideoPath(URL.createObjectURL(event.target.files[0]));
@@ -34,6 +40,7 @@ function ImagePicker () {
 
     return (
         <div className="space-y-4">
+            <h2 className="text-2xl font-bold capitalize">{eyeSide ?? ""}</h2>
             <input 
                 type="file" 
                 onChange={handleVideoUpload} 
@@ -61,7 +68,16 @@ function ImagePicker () {
                         </button>
                     </div>
 
-                    <canvas ref={canvasElement} className="w-[400px]"/>
+                    <div>
+                        <canvas ref={canvasElement} className="w-[400px] pb-2"/>
+                        <a 
+                            class="bg-yellow-200 rounded-md py-2 px-4" 
+                            href={imagePath} 
+                            download
+                        >
+                            Ready to download
+                        </a>
+                    </div>
                 </div> : <></>
             }
         </div>
