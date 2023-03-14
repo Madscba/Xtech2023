@@ -53,13 +53,14 @@ def predict_dummy(request):
 
 
 
+#TODO add error handling
 ALLOWED_EXTENSIONS = {'png','jpg','jpeg'}
 def allowed_file(filename):
     """
     Helper function used in the following function/view "predict"
     Checks if file extension of image is valid.
     """
-    return '.' in filename and filename.rsplit('.',1)[-1].lower() in ALLOWED_EXTENSIONS
+    return True #'.' in filename and filename.rsplit('.',1)[-1].lower() in ALLOWED_EXTENSIONS
 
 
 @csrf_exempt
@@ -67,21 +68,22 @@ def predict(request):
     """
     To be the predict view that we set in production"""
     if request.method == "POST":
-        file = request.files.get('file')
-        if file is None or file.filename =="":
+        file = request.FILES['image']
+        #file = request.files.get('file')
+        if file is None:
             return JsonResponse({'error': 'no file'})
-        if not allowed_file(file.filename):
+        if not allowed_file(file):
             return JsonResponse({'error': 'format not supported. Only .PNG, .JPG and .JPEG files are allowed'})
 
-        try:
-            img_bytes = file.read()
-            tensor = transform_image(img_bytes)
+        #try:
+        img_bytes = file.read()
+        tensor = transform_image(img_bytes)
+        
+        prediction = get_prediction(tensor)
+        return JsonResponse({'prediction': prediction.item()})
 
-            prediction = get_prediction(tensor)
-            return JsonResponse({'prediction': prediction.item()})
-
-        except:
-            return JsonResponse({'error': 'error during prediction'})
+        #except:
+        return JsonResponse({'error': 'error during prediction'})
 
         img_data = request.FILES['image'].read()
         img = Image.open(io.BytesIO(img_data))

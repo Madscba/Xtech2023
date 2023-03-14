@@ -32,17 +32,17 @@ if __name__ == "__main__":
     w_image = True
     if w_image:
         path_img = "ML/great_hammerhead_shark.jpg"
-        url = "http://127.0.0.1:9000/ML/predict_transfer"
+        url = "http://127.0.0.1:9000/ML/predict"
         print(os.getcwd())
         with open(path_img, 'rb') as img:
             name_img = os.path.basename(path_img)
             files= {'image': (name_img,img,'multipart/form-data',{'Expires': '0'}) }
             with requests.Session() as s:
                 response = s.post(url,files=files)
-                print(response.status_code,"\n",response.json(),"\n",response.text)
+                print(response.status_code,"\n",response.text)
 
     else:
-        url = 'http://127.0.0.1:9000/playground/ML_no_file_trans/'
+        url = "http://127.0.0.1:8000/ML/predict"
         try:    
             response = requests.get(url)
         except:

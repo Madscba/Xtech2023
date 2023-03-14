@@ -12,6 +12,7 @@ from torch.utils.data import (
     DataLoader,
 )  # Gives easier dataset managment and creates mini batches
 from data_processing.data_loader import GlaucomaDataset
+from transformers import AutoImageProcessor, MobileNetV2ForImageClassification
 
 
 #Visualize data, and general workflow. https://www.pluralsight.com/guides/image-classification-with-pytorch
@@ -54,8 +55,22 @@ test_loader = DataLoader(dataset=test_set, batch_size=batch_size, shuffle=True)
 
 # Model
 #https://pytorch.org/hub/mateuszbuda_brain-segmentation-pytorch_unet/
-model = torchvision.models.mobilenet_v3_large(weights="DEFAULT")
+#model = torchvision.models.mobilenet_v3_large(weights="DEFAULT")
 
+
+#model.eval()
+#my_script_model = torch.jit.script(model)
+#my_script_model.save('my_scripted_model.pt')
+
+
+model = torch.jit.load('my_scripted_model.pt')
+for batch_idx, (data, targets) in enumerate(train_loader):
+    # Get data to cuda if possible
+    data = data.to(device=device)
+    targets = targets.to(device=device)
+
+    # forward
+    scores = model(data)
 # freeze all layers, change final linear layer with num_classes
 for param in model.parameters():
     param.requires_grad = False

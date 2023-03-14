@@ -21,17 +21,18 @@ import io
 
 
 #2 image -> tensor (same trans as train)
-#def transform_image(image_bytes):
-#   transform = transforms.Compose([transforms.Resize((28,28)),transforms.toTensor(), transforms.Normalize((0.1308,),(0.2309))])
-# image = Image.open(io.BytesIO(image_bytes)) 
- #return transform(image).unsqueeze(0)
+def transform_image(image_bytes):
+    transform = transforms.Compose([transforms.Resize((224,224)),transforms.ToTensor(), transforms.Normalize((0.1308,),(0.2309))])
+    image = Image.open(io.BytesIO(image_bytes)) 
+    trans_image = transform(image).unsqueeze(0) # should be [1, 3, 224, 224]
+    return trans_image
 #3 predict
 
-#def get_prediction(image_tensor):
-#   image = image_tensor.reshape(-1,28*28)
-#   output = model(image)
-#   _, predicted = torch.max(output.data,1)
-#   return predicted
+def get_prediction(image_tensor):
+    model = torch.jit.load('my_scripted_model.pt')
+    output = model(image_tensor)
+    _, predicted = torch.max(model(image_tensor.data),1)
+    return predicted
 
 
 
@@ -53,6 +54,7 @@ def prepare_moodel_for_deployment_tutorial(request):
 def model_to_torchscript(model):
     my_script_model = torch.jit.script(model)
     my_script_model.save('my_scripted_model.pt')
+
 
 def predict_w_torchscript_model(input_batch):
     model = torch.jit.load('my_scripted_model.pt')
