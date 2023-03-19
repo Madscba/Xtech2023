@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect }  from 'react'; 
+import VideoRecorder from '../VideoRecorder/VideoRecorder';
 
 function ImagePicker ( props ) {
   
@@ -9,10 +10,9 @@ function ImagePicker ( props ) {
     const canvasElement = useRef();
     const videoElement = useRef();
 
-
     useEffect(() => {
         setEyeSide(props.eyeSide + " eye")
-      }, [props]);
+    }, [props]);
 
     const handleVideoUpload = (event) => {
         setVideoPath(URL.createObjectURL(event.target.files[0]));
@@ -41,11 +41,16 @@ function ImagePicker ( props ) {
     return (
         <div className="space-y-4">
             <h2 className="text-2xl font-bold capitalize">{eyeSide ?? ""}</h2>
-            <input 
-                type="file" 
-                onChange={handleVideoUpload} 
-                accept="video/*"
-            />
+            <VideoRecorder/>
+            <div>
+                <p><strong>Upload a video</strong></p>
+                <input 
+                    type="file" 
+                    onChange={handleVideoUpload} 
+                    accept="video/*"
+                    className='py-2 px-4 bg-yellow-100 rounded-md'
+                />
+            </div>
             {videoPath ? 
                 <div className="flex flex-row gap-4 items-start">
                     <div className="space-y-4">
