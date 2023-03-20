@@ -2,18 +2,16 @@ import { useState, useRef }  from 'react';
 
 const mimeType = 'video/webm; codecs="opus,vp8"';
 
-function VideoRecorder( ) {
+function VideoRecorder({handleRecordedVideo}) {
     
     const [permission, setPermission] = useState(false);
 	const mediaRecorder = useRef();
-	const liveVideoFeed = useRef();
 	const [recordingStatus, setRecordingStatus] = useState("inactive");
 	const [stream, setStream] = useState();
 	const [recordedVideo, setRecordedVideo] = useState();
 	const [videoChunks, setVideoChunks] = useState([]);
 
 	const getCameraPermission = async () => {
-
 		setRecordedVideo(null);
 		//get video and audio permissions and then stream the result media stream to the videoSrc variable
 		if ("MediaRecorder" in window) {
@@ -22,29 +20,13 @@ function VideoRecorder( ) {
 					audio: false,
 					video: true,
 				};
-				const audioConstraints = { audio: true };
-
-				// create audio and video streams separately
-				const audioStream = await navigator.mediaDevices.getUserMedia(
-					audioConstraints
-				);
+		
 				const videoStream = await navigator.mediaDevices.getUserMedia(
 					videoConstraints
 				);
 
 				setPermission(true);
-
-				//combine both audio and video streams
-
-				const combinedStream = new MediaStream([
-					...videoStream.getVideoTracks(),
-					...audioStream.getAudioTracks(),
-				]);
-
-				setStream(combinedStream);
-
-				//set videostream to live feed player
-				liveVideoFeed.current.srcObject = videoStream;
+				setStream(videoStream);
 			} catch (err) {
 				alert(err.message);
 			}
@@ -82,7 +64,8 @@ function VideoRecorder( ) {
 			const videoBlob = new Blob(videoChunks, { type: mimeType });
 			const videoUrl = URL.createObjectURL(videoBlob);
 
-			setRecordedVideo(videoUrl);
+			//pass data to image picker comp
+			handleRecordedVideo(videoUrl);
 
 			setVideoChunks([]);
 		};
@@ -120,19 +103,10 @@ function VideoRecorder( ) {
 
 			<div className='space-y-4'>
 				{!recordedVideo ? (
-					<>
-                        <p className='py-4'>No recorded video</p>
-                        <video className='hidden' ref={liveVideoFeed}></video>
-                    </>
-				) : null}
-				{recordedVideo ? (
-					<>
-						<video 
-                            src={recordedVideo} 
-                            controls
-                        ></video>
-					</>
-				) : null}
+					<><p className='py-4'>No recorded video</p></>
+				) : 
+					<><p></p></>
+				}
 			</div>
 		</div>
 	);

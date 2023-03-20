@@ -38,20 +38,27 @@ function ImagePicker ( props ) {
         );
     }
 
+    const updateVideoPath = (recordedVideoPath) => {
+        setVideoPath(recordedVideoPath);
+    }
+
     return (
         <div className="space-y-4">
             <h2 className="text-2xl font-bold capitalize">{eyeSide ?? ""}</h2>
-            <VideoRecorder/>
-            <div>
-                <p><strong>Upload a video</strong></p>
-                <input 
-                    type="file" 
-                    onChange={handleVideoUpload} 
-                    accept="video/*"
-                    className='py-2 px-4 bg-yellow-100 rounded-md'
-                />
-            </div>
-            {videoPath ? 
+            {!videoPath ? 
+               <>
+                    <VideoRecorder handleRecordedVideo={updateVideoPath}/>
+                    <div>
+                        <p><strong>Upload a video</strong></p>
+                        <input 
+                            type="file" 
+                            onChange={handleVideoUpload} 
+                            accept="video/*"
+                            className='py-2 px-4 bg-yellow-100 rounded-md'
+                        />
+                    </div>
+               </>
+            : 
                 <div className="flex flex-row gap-4 items-start">
                     <div className="space-y-4">
                         <video 
@@ -83,7 +90,7 @@ function ImagePicker ( props ) {
                             Ready to download
                         </a>
                     </div>
-                </div> : <></>
+                </div>
             }
         </div>
     )
