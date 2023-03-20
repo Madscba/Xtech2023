@@ -1,6 +1,6 @@
 import { useState, useRef }  from 'react'; 
 
-const mimeType = 'video/webm; codecs="opus,vp8"';
+const mimeType = "video/webm";
 
 function VideoRecorder({handleRecordedVideo}) {
     
@@ -10,6 +10,7 @@ function VideoRecorder({handleRecordedVideo}) {
 	const [stream, setStream] = useState();
 	const [recordedVideo, setRecordedVideo] = useState();
 	const [videoChunks, setVideoChunks] = useState([]);
+	const liveVideoFeed = useRef(null);
 
 	const getCameraPermission = async () => {
 		setRecordedVideo(null);
@@ -27,6 +28,8 @@ function VideoRecorder({handleRecordedVideo}) {
 
 				setPermission(true);
 				setStream(videoStream);
+				//set videostream to live feed player
+				liveVideoFeed.current.srcObject = videoStream;
 			} catch (err) {
 				alert(err.message);
 			}
@@ -103,7 +106,7 @@ function VideoRecorder({handleRecordedVideo}) {
 
 			<div className='space-y-4'>
 				{!recordedVideo ? (
-					<><p className='py-4'>No recorded video</p></>
+					<video ref={liveVideoFeed} autoPlay width="400"></video>
 				) : 
 					<><p></p></>
 				}
