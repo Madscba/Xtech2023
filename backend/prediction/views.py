@@ -11,6 +11,10 @@ from django.views.decorators.csrf import csrf_exempt
 sys.path.insert(0, '')
 from ML.src.torch_utils import *
 
+
+def index(request):
+    return render(request, 'eyeopener/hello.html', {})
+
 @csrf_exempt
 def machine_learning_test(request):
     """
@@ -26,8 +30,7 @@ def machine_learning_test(request):
         logits = model(**inputs).logits
     predicted_label = logits.argmax(-1).item()
     print(model.config.id2label[predicted_label])
-    return render(request, 'eyeopener/hello.html', {})
-    #return render(request,'eyeopener/hello.html',{'name': model.config.id2label[predicted_label]})
+    return render(request,'eyeopener/index.html',{'name': model.config.id2label[predicted_label]})
     #return {'name': model.config.id2label[predicted_label]}
 
 #TODO fix csrf hack, such that there is no vulnerability.
