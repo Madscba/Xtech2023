@@ -69,7 +69,7 @@ sqlparse==0.4.3
 sympy>=1.10.1
 tokenizers==0.13.2
 tomlkit==0.11.6
-torch==2.0.0
+torch>=1.13.1
 torchvision==0.15.1
 tqdm==4.65.0
 transformers==4.27.2
