@@ -14,6 +14,7 @@ Backend
 * Run `pipenv shell`
 * Run `pip install -r requirements.txt`
 * Run `python manage.py migrate`
+* Run `python manage.py createsuperuser` to create a user you can access the admin panel with
 
 Frontend
 * Run `cd frontend && npm install`
