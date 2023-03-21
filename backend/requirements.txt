@@ -37,7 +37,7 @@ msgpack==1.0.5
 multidict==6.0.4
 multiprocess==0.70.14
 networkx>=2.6.3
-numpy==1.24.2
+numpy>=1.21.6
 packaging==23.0
 pandas==1.5.3
 pexpect==4.8.0
