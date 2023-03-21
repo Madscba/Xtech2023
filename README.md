@@ -16,6 +16,8 @@ Backend
 * Run `python manage.py migrate`
 * Run `python manage.py createsuperuser` to create a user you can access the admin panel with
 
+* Add all needed environment variables to your env
+
 Frontend
 * Run `cd frontend && npm install`
 

@@ -4,7 +4,7 @@ from . import views
 
 urlpatterns = [
     path('', views.index),
-    path('ML/predict_local', views.machine_learning_test),
-    path('ML/predict_transfer', views.predict_dummy),
-    path('ML/predict', views.predict),
+    path('ml/predict-local', views.machine_learning_test),
+    path('ml/predict-transfer', views.predict_dummy),
+    path('ml/predict', views.predict),
 ] 
