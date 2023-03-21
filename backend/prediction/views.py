@@ -30,7 +30,7 @@ def machine_learning_test(request):
         logits = model(**inputs).logits
     predicted_label = logits.argmax(-1).item()
     print(model.config.id2label[predicted_label])
-    return render(request,'eyeopener/index.html',{'name': model.config.id2label[predicted_label]})
+    return render(request,'eyeopener/index.html',{'prediction': model.config.id2label[predicted_label]})
     #return {'name': model.config.id2label[predicted_label]}
 
 #TODO fix csrf hack, such that there is no vulnerability.
