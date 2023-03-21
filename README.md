@@ -9,10 +9,10 @@
 Backend
 * Install Python
 * Install Pip
+* Run `cd backend`
 * Run `pip install shell`
 * Run `pipenv shell`
-* Run `pip install django`
-* Run ..
+* Run `pip install -r requirements.txt`
 
 Frontend
 * Run `cd frontend && npm install`
