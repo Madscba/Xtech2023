@@ -13,6 +13,7 @@ Backend
 * Run `pip install shell`
 * Run `pipenv shell`
 * Run `pip install -r requirements.txt`
+* Run `python manage.py migrate`
 
 Frontend
 * Run `cd frontend && npm install`
