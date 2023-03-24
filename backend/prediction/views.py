@@ -4,7 +4,7 @@ from django.http import HttpResponse, JsonResponse
 from transformers import AutoImageProcessor, MobileNetV2ForImageClassification
 import torch, io
 from datasets import load_dataset
-import requests, sys, os
+import requests, sys, os, piq
 from PIL import Image
 from io import StringIO
 from django.views.decorators.csrf import csrf_exempt 
@@ -54,8 +54,9 @@ def predict_dummy(request):
     predicted_label = logits.argmax(-1).item()
     probability = round(torch.nn.functional.softmax(logits, dim=1).max().item(),3)
 
-    print(model.config.id2label[predicted_label])
-    return JsonResponse({'prediction': model.config.id2label[predicted_label],"probability":probability})
+    #print(model.config.id2label[predicted_label])
+    msg = f'The probability of suffering from glaucoma is {probability} and we advice that you seek a doctor.' if probability > 0.6 else f'There was found no signs of having glaucoma! Check again in 6 months.'
+    return JsonResponse({'prediction': model.config.id2label[predicted_label], "probability": probability, "msg": msg})
 
 
 
@@ -106,3 +107,60 @@ def predict(request):
         print(model.config.id2label[predicted_label])
         #return render(request,'hello.html',{'name': model.config.id2label[predicted_label]})
         return JsonResponse({'prediction': model.config.id2label[predicted_label]})
+    
+
+
+    ################# Image quality views ########################
+    
+@csrf_exempt
+def img_quality_local_test(request):
+    """
+    Purpose: test function. Test if local file can be loaded, transformed and inference run, and result returned.
+    Result: Yes, it works.
+    Returns response that is simple HTML with ML prediction as part of text.
+    """
+    image_input = Image.open('backend/stingray.jpg')
+    image_reference = Image.open('backend/prediction/fundus_image_reference.jpg')
+
+    brisque_score = round(piq.brisque(resize_and_to_torch(image_input), data_range=1., reduction='none').item(),3)
+    DISTS_score = round(piq.DISTS(reduction='none')(resize_and_to_torch(image_reference), resize_and_to_torch(image_input)).item(),3)
+    score_dict = {"brisque_score": brisque_score, "DISTS": DISTS_score}
+    print(score_dict)
+    return JsonResponse(score_dict)
+
+
+
+#TODO add error handling
+
+def resize_and_to_torch(img):
+    img_resized = img.resize((256,256))
+    transform = transforms.Compose([
+    transforms.ToTensor()])
+    img_tensor = transform(img_resized)
+    img_tensor = torch.reshape(img_tensor.unsqueeze(1), (1, 3, 256, 256))
+    return img_tensor
+
+@csrf_exempt
+def evaluate_img_quality(request):
+    """
+    To be the predict view that we set in production"""
+    if request.method == "POST":
+        file = request.FILES['image']
+        #file = request.files.get('file')
+        if file is None:
+            return JsonResponse({'error': 'no file'})
+        if not allowed_file(file):
+            return JsonResponse({'error': 'format not supported. Only .PNG, .JPG and .JPEG files are allowed'})
+
+        #try:
+        img_bytes = file.read()
+        PIL_img = transform_image(img_bytes, to_tensor=False)
+
+        image_reference = Image.open('backend/prediction/fundus_image_reference.jpg')
+        brisque_score = round(piq.brisque(resize_and_to_torch(PIL_img), data_range=1., reduction='none').item(),3)
+        DISTS_score = round(piq.DISTS(reduction='none')(resize_and_to_torch(image_reference), resize_and_to_torch(PIL_img)).item(),3)
+        score_dict = {"brisque_score": brisque_score, "DISTS": DISTS_score}
+
+        return JsonResponse(score_dict)
+
+    

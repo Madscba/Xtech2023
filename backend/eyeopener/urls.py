@@ -20,5 +20,6 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('prediction.urls')),
+    path('ml/', include('prediction.urls')),
+    #path('', include('eyeopener.urls')),
 ]

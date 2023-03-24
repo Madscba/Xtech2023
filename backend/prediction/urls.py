@@ -4,7 +4,9 @@ from . import views
 
 urlpatterns = [
     path('', views.index),
-    path('ml/predict-local', views.machine_learning_test),
-    path('ml/predict-transfer', views.predict_dummy),
-    path('ml/predict', views.predict),
+    path('predict-local', views.machine_learning_test),
+    path('predict-transfer', views.predict_dummy),
+    path('predict', views.predict),
+    path('img_quality_local_test', views.img_quality_local_test),
+    path('evaluate_img_quality', views.evaluate_img_quality),
 ] 

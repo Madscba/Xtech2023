@@ -21,11 +21,14 @@ import io
 
 
 #2 image -> tensor (same trans as train)
-def transform_image(image_bytes):
+def transform_image(image_bytes,to_tensor:bool=True):
     transform = transforms.Compose([transforms.Resize((224,224)),transforms.ToTensor(), transforms.Normalize((0.1308,),(0.2309))])
     image = Image.open(io.BytesIO(image_bytes)) 
-    trans_image = transform(image).unsqueeze(0) # should be [1, 3, 224, 224]
-    return trans_image
+    if to_tensor:
+        trans_image = transform(image).unsqueeze(0) # should be [1, 3, 224, 224]
+        return trans_image
+    else:
+        return image
 #3 predict
 
 def get_prediction(image_tensor):
