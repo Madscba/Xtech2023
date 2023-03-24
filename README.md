@@ -32,6 +32,7 @@ Backend:
 * Run `pipenv shell` to start virtual environment
 * Run `python manage.py runserver`
 * Backend runs on `http://127.0.0.1:8000/`
+* Admin dashboard on `http://127.0.0.1:8000/admin`
 
 
 ## Learn more
