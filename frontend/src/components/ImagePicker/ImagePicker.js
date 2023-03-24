@@ -81,7 +81,7 @@ function ImagePicker ( props ) {
                     </div>
 
                     <div>
-                        <canvas ref={canvasElement} className="w-[400px] pb-2"/>
+                        <canvas ref={canvasElement} className="w-[400px] pb-4"/>
                         {imagePath ? 
                             <a 
                                 class="bg-yellow-200 rounded-md py-2 px-4" 
