@@ -4,8 +4,9 @@ import requests, os
 import numpy as np
 import piq
 import torch
+from transformers import AutoImageProcessor, MobileNetV2ForImageClassification
 import torchvision.transforms as transforms
-
+import requests,io
 
 
 # requests.get('https://download.pytorch.org/models/densenet161-8d451a50.pth')
@@ -29,14 +30,25 @@ import torchvision.transforms as transforms
 
 
 
+def test_predict_local():
+    image = Image.open('backend/stingray.jpg')
+    image_processor = AutoImageProcessor.from_pretrained("google/mobilenet_v2_1.0_224")
+    model = MobileNetV2ForImageClassification.from_pretrained("google/mobilenet_v2_1.0_224")
+    inputs = image_processor(image, return_tensors="pt")
+    with torch.no_grad():
+        logits = model(**inputs).logits
+    predicted_label = logits.argmax(-1).item()
+    prob = torch.nn.functional.softmax(logits, dim=1).max().item()
+    print(model.config.id2label[predicted_label],prob)
 
-def test_ml():
+
+def test_predict():
         #alternative post.request format
     #requests.post(url, files = open('file.png','rb')) #read as binary.
     w_image = True
     if w_image:
-        path_img = "ML/great_hammerhead_shark.jpg"
-        url = "http://127.0.0.1:9000/ML/predict"
+        path_img = "backend/ML/great_hammerhead_shark.jpg"
+        url = "http://127.0.0.1:9000/ml/predict"
         print(os.getcwd())
         with open(path_img, 'rb') as img:
             name_img = os.path.basename(path_img)
@@ -61,13 +73,14 @@ def test_img_quality(img):
 
 
 if __name__ == "__main__":
-    img_to_be_assessed = ['stingray.jpg','/ML/great_hammerhead_shark.jpg','/ML/fundus-reference.jpg','/ML/fundus_img_quality1','/ML/fundus_img_quality2','/ML/fundus_img_quality3','/ML/fundus_img_quality4']
-    image_reference = Image.open('stingray.jpg')
-
-    for img_path in img_to_be_assessed:
-        image_input = Image.open(img_path)
-        brisque_score = test_img_quality(image_reference)
-        DISTS_score = piq.DISTS(reduction='none')(image_reference, image_input)
-        print(f'{img_path}: {brisque_score}, DISTS: {DISTS_score}')
-    a = 2
+    #test_predict_local()
+    test_predict()
+    #img_to_be_assessed = ['stingray.jpg','/ML/great_hammerhead_shark.jpg','/ML/fundus-reference.jpg','/ML/fundus_img_quality1','/ML/fundus_img_quality2','/ML/fundus_img_quality3','/ML/fundus_img_quality4']
+    #image_reference = Image.open('stingray.jpg')
+    #for img_path in img_to_be_assessed:
+    #    image_input = Image.open(img_path)
+    #    brisque_score = test_img_quality(image_reference)
+    #    DISTS_score = piq.DISTS(reduction='none')(image_reference, image_input)
+    #    print(f'{img_path}: {brisque_score}, DISTS: {DISTS_score}')
+    #a = 2
 

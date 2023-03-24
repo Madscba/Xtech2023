@@ -9,7 +9,7 @@ from PIL import Image
 from io import StringIO
 from django.views.decorators.csrf import csrf_exempt 
 sys.path.insert(0, '')
-from ML.src.torch_utils import *
+from backend.ML.src.torch_utils import *
 
 @csrf_exempt
 def machine_learning_test(request):
@@ -18,7 +18,7 @@ def machine_learning_test(request):
     Result: Yes, it works.
     Returns response that is simple HTML with ML prediction as part of text.
     """
-    image = Image.open('./stingray.jpg')
+    image = Image.open('backend/ML/stingray.jpg')
     image_processor = AutoImageProcessor.from_pretrained("google/mobilenet_v2_1.0_224")
     model = MobileNetV2ForImageClassification.from_pretrained("google/mobilenet_v2_1.0_224")
     inputs = image_processor(image, return_tensors="pt")

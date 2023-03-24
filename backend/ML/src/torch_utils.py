@@ -29,10 +29,11 @@ def transform_image(image_bytes):
 #3 predict
 
 def get_prediction(image_tensor):
-    model = torch.jit.load('my_scripted_model.pt')
+    model = torch.jit.load('backend/my_scripted_model.pt')
     output = model(image_tensor)
-    _, predicted = torch.max(model(image_tensor.data),1)
-    return predicted
+    probability = round(torch.nn.functional.softmax(output, dim=1).max().item(),3)
+    predicted = torch.argmax(output).item()
+    return {"prediction": predicted, "probability": probability}
 
 
 

@@ -22,15 +22,16 @@ def machine_learning_test(request):
     Result: Yes, it works.
     Returns response that is simple HTML with ML prediction as part of text.
     """
-    image = Image.open('./stingray.jpg')
+    image = Image.open('backend/stingray.jpg')
     image_processor = AutoImageProcessor.from_pretrained("google/mobilenet_v2_1.0_224")
     model = MobileNetV2ForImageClassification.from_pretrained("google/mobilenet_v2_1.0_224")
     inputs = image_processor(image, return_tensors="pt")
     with torch.no_grad():
         logits = model(**inputs).logits
     predicted_label = logits.argmax(-1).item()
+    probability = round(torch.nn.functional.softmax(logits, dim=1).max().item(),3)
     print(model.config.id2label[predicted_label])
-    return render(request,'eyeopener/index.html',{'prediction': model.config.id2label[predicted_label]})
+    return render(request,'eyeopener/index.html',{'prediction': model.config.id2label[predicted_label],"probability": probability})
     #return {'name': model.config.id2label[predicted_label]}
 
 #TODO fix csrf hack, such that there is no vulnerability.
@@ -51,8 +52,10 @@ def predict_dummy(request):
         logits = model(**inputs).logits
 
     predicted_label = logits.argmax(-1).item()
+    probability = round(torch.nn.functional.softmax(logits, dim=1).max().item(),3)
+
     print(model.config.id2label[predicted_label])
-    return JsonResponse({'prediction': model.config.id2label[predicted_label]})
+    return JsonResponse({'prediction': model.config.id2label[predicted_label],"probability":probability})
 
 
 
