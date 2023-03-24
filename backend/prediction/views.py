@@ -7,9 +7,10 @@ from datasets import load_dataset
 import requests, sys, os, piq
 from PIL import Image
 from io import StringIO
+import torchvision.transforms as transforms
 from django.views.decorators.csrf import csrf_exempt 
+from ML.src.torch_utils import transform_image,get_prediction
 sys.path.insert(0, '')
-from ML.src.torch_utils import *
 
 
 def index(request):
@@ -56,7 +57,8 @@ def predict_dummy(request):
 
     #print(model.config.id2label[predicted_label])
     msg = f'The probability of suffering from glaucoma is {probability} and we advice that you seek a doctor.' if probability > 0.6 else f'There was found no signs of having glaucoma! Check again in 6 months.'
-    return JsonResponse({'prediction': model.config.id2label[predicted_label], "probability": probability, "msg": msg})
+    resp_dict = {'prediction': model.config.id2label[predicted_label], "probability": probability, "msg": msg}
+    return JsonResponse(resp_dict)
 
 
 
@@ -87,7 +89,8 @@ def predict(request):
         tensor = transform_image(img_bytes)
         
         prediction = get_prediction(tensor)
-        return JsonResponse({'prediction': prediction.item()})
+        resp_dict = {'prediction': prediction.item()}
+        return JsonResponse(resp_dict)
 
         #except:
         return JsonResponse({'error': 'error during prediction'})
@@ -124,13 +127,26 @@ def img_quality_local_test(request):
 
     brisque_score = round(piq.brisque(resize_and_to_torch(image_input), data_range=1., reduction='none').item(),3)
     DISTS_score = round(piq.DISTS(reduction='none')(resize_and_to_torch(image_reference), resize_and_to_torch(image_input)).item(),3)
-    score_dict = {"brisque_score": brisque_score, "DISTS": DISTS_score}
-    print(score_dict)
-    return JsonResponse(score_dict)
+    resp_dict = {"brisque_score": brisque_score, "DISTS": DISTS_score}
+    print(resp_dict)
+    return JsonResponse(resp_dict)
 
 
 
 #TODO add error handling
+def image_quality_msg(brisque_score,DISTS_score, brisque_score_threshold:float=20, DISTS_score_threshold:float=0.3 ):
+    brisque = brisque_score > brisque_score_threshold  
+    dist = DISTS_score < DISTS_score_threshold
+    good_enough = (brisque and dist)
+
+    if good_enough:
+        msg = "Image appears ready for diagnosis!"
+    if brisque:
+        msg =  "Try again, image quality does not appear to be high enough"
+    else:
+        msg =  "Try again, the anterior part of the eye does not appear to be visible"
+    return msg, good_enough
+
 
 def resize_and_to_torch(img):
     img_resized = img.resize((256,256))
@@ -159,8 +175,11 @@ def evaluate_img_quality(request):
         image_reference = Image.open('backend/prediction/fundus_image_reference.jpg')
         brisque_score = round(piq.brisque(resize_and_to_torch(PIL_img), data_range=1., reduction='none').item(),3)
         DISTS_score = round(piq.DISTS(reduction='none')(resize_and_to_torch(image_reference), resize_and_to_torch(PIL_img)).item(),3)
-        score_dict = {"brisque_score": brisque_score, "DISTS": DISTS_score}
 
-        return JsonResponse(score_dict)
+        
+        msg, good_enough = image_quality_msg(brisque_score, DISTS_score)
+        resp_dict = {"brisque_score": brisque_score, "DISTS": DISTS_score,"good_enough": good_enough, "msg":msg}
+
+        return JsonResponse(resp_dict)
 
     

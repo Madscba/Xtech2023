@@ -85,7 +85,10 @@ def test_evaluate_img_quality():
             files= {'image': (name_img,img,'multipart/form-data',{'Expires': '0'}) }
             with requests.Session() as s:
                 response = s.post(url,files=files)
-                print(response.status_code,"\n",response.json())
+                if response.status_code == 200:
+                    print(response.status_code,"\n",response.json())
+                else:
+                    print(response.status_code)
 
 if __name__ == "__main__":
     test_evaluate_img_quality()
