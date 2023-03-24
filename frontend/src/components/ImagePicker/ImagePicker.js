@@ -82,13 +82,16 @@ function ImagePicker ( props ) {
 
                     <div>
                         <canvas ref={canvasElement} className="w-[400px] pb-2"/>
-                        <a 
-                            class="bg-yellow-200 rounded-md py-2 px-4" 
-                            href={imagePath} 
-                            download
-                        >
-                            Ready to download
-                        </a>
+                        {imagePath ? 
+                            <a 
+                                class="bg-yellow-200 rounded-md py-2 px-4" 
+                                href={imagePath} 
+                                download
+                            >
+                                Ready to download
+                            </a>
+                            : <></>
+                        }
                     </div>
                 </div>
             }

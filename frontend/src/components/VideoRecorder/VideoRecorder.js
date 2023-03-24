@@ -105,10 +105,10 @@ function VideoRecorder({handleRecordedVideo}) {
             </div>
 
 			<div className='space-y-4'>
-				{!recordedVideo ? (
+				{!recordedVideo && stream ? (
 					<video ref={liveVideoFeed} autoPlay width="400"></video>
 				) : 
-					<><p></p></>
+					<video ref={liveVideoFeed} autoPlay className="hidden"></video>
 				}
 			</div>
 		</div>
