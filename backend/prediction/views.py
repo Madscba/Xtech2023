@@ -22,7 +22,7 @@ def machine_learning_test(request):
     Result: Yes, it works.
     Returns response that is simple HTML with ML prediction as part of text.
     """
-    image = Image.open('backend/stingray.jpg')
+    image = Image.open('prediction/stingray.jpg')
     image_processor = AutoImageProcessor.from_pretrained("google/mobilenet_v2_1.0_224")
     model = MobileNetV2ForImageClassification.from_pretrained("google/mobilenet_v2_1.0_224")
     inputs = image_processor(image, return_tensors="pt")
@@ -119,8 +119,8 @@ def img_quality_local_test(request):
     Result: Yes, it works.
     Returns response that is simple HTML with ML prediction as part of text.
     """
-    image_input = Image.open('backend/stingray.jpg')
-    image_reference = Image.open('backend/prediction/fundus_image_reference.jpg')
+    image_input = Image.open('prediction/stingray.jpg')
+    image_reference = Image.open('prediction/fundus_image_reference.jpg')
 
     brisque_score = round(piq.brisque(resize_and_to_torch(image_input), data_range=1., reduction='none').item(),3)
     DISTS_score = round(piq.DISTS(reduction='none')(resize_and_to_torch(image_reference), resize_and_to_torch(image_input)).item(),3)
@@ -156,7 +156,7 @@ def evaluate_img_quality(request):
         img_bytes = file.read()
         PIL_img = transform_image(img_bytes, to_tensor=False)
 
-        image_reference = Image.open('backend/prediction/fundus_image_reference.jpg')
+        image_reference = Image.open('prediction/fundus_image_reference.jpg')
         brisque_score = round(piq.brisque(resize_and_to_torch(PIL_img), data_range=1., reduction='none').item(),3)
         DISTS_score = round(piq.DISTS(reduction='none')(resize_and_to_torch(image_reference), resize_and_to_torch(PIL_img)).item(),3)
         score_dict = {"brisque_score": brisque_score, "DISTS": DISTS_score}
