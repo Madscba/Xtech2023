@@ -6,10 +6,10 @@ import BackButton from "../components/base/Navigation/BackButton";
 function Feedback() {
     return (
         <Wrapper>
-            <div className="p-20 space-y-8">
+            <div className="p-10 md:p-20 space-y-8">
                 <BackButton/>
-                <div className="flex flex-row justify-between w-full">
-                    <div className="flex flex-row gap-6 items-start w-fit">
+                <div className="flex flex-col md:flex-row gap-2 justify-between w-full">
+                    <div className="flex flex-row gap-6 justify-between md:justify-none items-start w-full md:w-fit">
                         <div>
                             <h2>Mia's Feedback</h2>
                             <p>Case #42423432</p>

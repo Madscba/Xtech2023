@@ -14,7 +14,7 @@ h2{
     @apply text-2xl font-bold capitalize;
 }
 .card{
-    @apply shadow-lg rounded-lg bg-white p-10;
+    @apply shadow-lg rounded-lg bg-white p-5 md:p-10;
 }
 
 .button{

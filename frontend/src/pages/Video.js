@@ -5,7 +5,7 @@ import BackButton from "../components/base/Navigation/BackButton";
 function Video() {
     return (
         <Wrapper>
-            <div className="p-20 space-y-6">
+            <div className="p-10 md:p-20 space-y-6">
                 <BackButton/>
                 <h2>Create a submission</h2>
                 <ImagePicker eyeSide="left"/>

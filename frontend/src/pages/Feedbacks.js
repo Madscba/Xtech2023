@@ -57,7 +57,7 @@ function Feedbacks() {
 
     return (
         <Wrapper>
-            <div className="p-20 space-y-6">
+            <div className="p-10 md:p-20 space-y-6">
                 <BackButton/>
                 <h2>Feedbacks</h2>
                 <div className="flex flex-row flex-wrap gap-4 pb-4">

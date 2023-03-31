@@ -33,7 +33,7 @@ function Person() {
 
     return (
         <Wrapper>
-            <div className="p-20 space-y-6">
+            <div className="p-10 md:p-20 space-y-6">
                 <BackButton/>
                 <div className="flex flex-row justify-between w-full">
                     <h2>Mia</h2>

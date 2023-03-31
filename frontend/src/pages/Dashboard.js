@@ -62,16 +62,16 @@ function Dashboard() {
 
     return (
         <Wrapper>
-            <div className="py-20 pl-20 space-y-10">
-                <section className="flex flex-row justify-between gap-20 pr-20">
-                    <div className="card w-2/3 space-y-4 flex flex-row items-center gap-4">
-                        <div className="w-2/3 space-y-4">
+            <div className="py-10 pl-10 md:py-20 md:pl-20 space-y-10">
+                <section className="flex flex-col md:flex-row justify-between gap-10 md:gap-20 pr-10 md:pr-20">
+                    <div className="card w-full md:w-2/3 space-y-4 flex flex-col md:flex-row items-center gap-4">
+                        <div className="space-y-4">
                             <h2>Hello Mia</h2>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                         </div>
                         <div className="w-1/3 text-5xl flex justify-center items-center">👋</div>
                     </div>
-                    <div className="card w-2/3 space-y-4">
+                    <div className="card w-full md:w-2/3 space-y-4">
                         <h2>Material</h2>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                         <div>
@@ -110,7 +110,7 @@ function Dashboard() {
                     </div>
                 </section>
 
-                <section className="space-y-4 pr-20">
+                <section className="space-y-4 pr-10 md:pr-20">
                     <div className="flex flex-row justify-between">
                         <div className="flex flex-row gap-2 items-center">
                             <h2>People</h2>

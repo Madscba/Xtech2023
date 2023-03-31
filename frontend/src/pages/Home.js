@@ -25,7 +25,7 @@ function Home() {
       <div className="w-1/2 flex flex-col items-center justify-center space-y-4">
           <h1 className="text-indigo-500">Login</h1>
           <p>You just need to click the submit button for now. No need to fill in data.</p>
-          <form onSubmit={(e) => handleSubmit(e)} className="w-full flex flex-col items-center justify-center gap-4">
+          <form onSubmit={(e) => handleSubmit(e)} className="w-full md:w-1/3  flex flex-col items-center justify-center gap-4">
             <input 
                 type="email" 
                 required 
@@ -33,7 +33,7 @@ function Home() {
                 name="email"
                 value={email}
                 onChange={(e) => handleChange(e)}
-                className="w-1/3 border-grey-200 border-2 p-3 rounded-lg"
+                className="border-grey-200 border-2 p-3 rounded-lg"
             ></input>
             <input 
                 type="password" 
@@ -42,7 +42,7 @@ function Home() {
                 name="password"
                 value={password}
                 onChange={(e) => handleChange(e)}
-                className="w-1/3 border-grey-200 border-2 p-3 rounded-lg"
+                className="border-grey-200 border-2 p-3 rounded-lg"
             ></input>
             <button className="button w-fit">Submit</button>
         </form>
