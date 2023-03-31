@@ -25,10 +25,9 @@ function Home() {
       <div className="w-1/2 flex flex-col items-center justify-center space-y-4">
           <h1 className="text-indigo-500">Login</h1>
           <p>You just need to click the submit button for now. No need to fill in data.</p>
-          <form onSubmit={(e) => handleSubmit(e)} className="w-full md:w-1/3  flex flex-col items-center justify-center gap-4">
+          <form onSubmit={(e) => handleSubmit(e)} className="w-full md:w-2/3  flex flex-col items-center justify-center gap-4">
             <input 
                 type="email" 
-                required 
                 placeholder="e-mail" 
                 name="email"
                 value={email}
@@ -37,7 +36,6 @@ function Home() {
             ></input>
             <input 
                 type="password" 
-                required 
                 placeholder="password" 
                 name="password"
                 value={password}
