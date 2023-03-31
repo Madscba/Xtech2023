@@ -9,6 +9,20 @@ import torchvision.transforms as transforms
 import requests,io
 import glob
 
+from django.db import connection
+from django.http import HttpResponse
+
+class HealthCheckView(View):
+    """
+    Checks to see if the site is healthy.
+    """
+    def get(self, request, *args, **kwargs):
+        with connection.cursor() as cursor:
+            cursor.execute("select 1")
+            one = cursor.fetchone()[0]
+            if one != 1:
+                raise Exception('The site did not pass the health check')
+        return HttpResponse("ok")
 
 # requests.get('https://download.pytorch.org/models/densenet161-8d451a50.pth')
 # #Test import of model and do inference.

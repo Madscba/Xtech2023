@@ -28,6 +28,9 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', default=True)
 
+DATABASES = os.environ.get('DATABASE',default='default')
+
+
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
@@ -87,8 +90,8 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     },
     'production': dj_database_url.config(        # Feel free to alter this value to suit your needs.
-            default='postgresql://postgres:postgres@localhost:5432/database_xtech_web_app_db',
-            conn_max_age=600    )
+            default = os.environ.get('DATABASE_URL'),
+            conn_max_age=600)
 }
 
 
