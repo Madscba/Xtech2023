@@ -54,7 +54,6 @@ function ImagePicker ( props ) {
                             type="file" 
                             onChange={handleVideoUpload} 
                             accept="video/*"
-                            className='py-2 px-4 bg-yellow-100 rounded-md'
                         />
                     </div>
                </>
@@ -75,7 +74,7 @@ function ImagePicker ( props ) {
 
                         <button 
                             onClick={handleFrameSelection} 
-                            className='py-2 px-4 bg-blue-100 rounded-md'
+                            className='button'
                         > Get image
                         </button>
                     </div>
@@ -84,7 +83,7 @@ function ImagePicker ( props ) {
                         <canvas ref={canvasElement} className="w-[400px] pb-4"/>
                         {imagePath ? 
                             <a 
-                                class="bg-yellow-200 rounded-md py-2 px-4" 
+                                class="bg-yellow-200 px-6 py-2 rounded-3xl text-sm" 
                                 href={imagePath} 
                                 download
                             >

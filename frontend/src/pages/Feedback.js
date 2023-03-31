@@ -9,12 +9,15 @@ function Feedback() {
                 <a href="/dashboard">
                     <p className="text-indigo-500"><strong>Go back to dashboard</strong></p>
                 </a>
-                <div className="flex flex-row gap-6 items-start w-fit">
-                    <div>
-                        <h2>Mia's Feedback</h2>
-                        <p>Case #42423432</p>
+                <div className="flex flex-row justify-between w-full">
+                    <div className="flex flex-row gap-6 items-start w-fit">
+                        <div>
+                            <h2>Mia's Feedback</h2>
+                            <p>Case #42423432</p>
+                        </div>
+                        <RiskLabel>Risk is low</RiskLabel>
                     </div>
-                    <RiskLabel>Risk is low</RiskLabel>
+                    <button className="button">Send to a doctor</button>
                 </div>
                 <div className="w-2/3 space-y-2">
                     <h2>Feedback</h2>

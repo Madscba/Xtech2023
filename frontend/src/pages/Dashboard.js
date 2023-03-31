@@ -75,7 +75,7 @@ function Dashboard() {
                         <h2>Material</h2>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                         <div>
-                            <a href="/material" className="bg-indigo-500 text-white px-4 py-2 rounded-3xl">
+                            <a href="/material" className="button">
                                 Learn more
                             </a>
                         </div>

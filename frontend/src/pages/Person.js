@@ -36,7 +36,11 @@ function Person() {
                 <a href="/dashboard">
                     <p className="text-indigo-500"><strong>Go back to dashboard</strong></p>
                 </a>
-                <h2>Mia</h2>
+                <div className="flex flex-row justify-between w-full">
+                    <h2>Mia</h2>
+                    <a href="/video" className="button">Create new submission</a>
+                </div>
+
                 <div className="space-y-4">
                     <h2>Your data</h2>
                     <div className="flex flex-col gap-2">
