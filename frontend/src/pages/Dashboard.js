@@ -133,8 +133,9 @@ function Dashboard() {
                     <div className="flex gap-4 w-full flex-wrap">
                         {people.map((person, index) => (
                             <a href={`/person/${index}`}>
-                                <div key={index} className="card small w-[300px] hover:scale-110">
+                                <div key={index} className="card small w-[350px] flex flex-row justify-between items-center">
                                     <p><strong>{person}</strong></p>
+                                    <a href="/video" className="button">Create new image</a>
                                 </div>
                             </a>
                         ))}

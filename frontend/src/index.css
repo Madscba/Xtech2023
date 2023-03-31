@@ -21,6 +21,10 @@ h2{
     @apply bg-indigo-500 text-white px-6 py-2 rounded-3xl text-sm;
 }
 
+.button.orange{
+     @apply bg-orange-500 text-white px-6 py-2 rounded-3xl text-sm;
+}
+
 .button:hover{
     @apply scale-110;
 }

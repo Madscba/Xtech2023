@@ -74,7 +74,7 @@ function ImagePicker ( props ) {
 
                         <button 
                             onClick={handleFrameSelection} 
-                            className='button'
+                            className='button orange'
                         > Get image
                         </button>
                     </div>

@@ -81,7 +81,7 @@ function VideoRecorder({handleRecordedVideo}) {
                 {!permission ? (
                     <button 
                         onClick={getCameraPermission}
-                        className="button"
+                        className="button orange"
                     >
                         Record a video
                     </button>
@@ -89,7 +89,7 @@ function VideoRecorder({handleRecordedVideo}) {
                 {permission && recordingStatus === "inactive" ? (
                     <button 
                         onClick={startRecording}
-                        className="py-2 px-4 bg-green-100 rounded-md"
+                        className="bg-green-100 px-6 py-2 rounded-3xl text-sm"
                     >
                         Start Recording
                     </button>
@@ -97,7 +97,7 @@ function VideoRecorder({handleRecordedVideo}) {
                 {recordingStatus === "recording" ? (
                     <button 
                         onClick={stopRecording}
-                        className="py-2 px-4 bg-red-100 rounded-md"
+                        className="bg-red-100 px-6 py-2 rounded-3xl text-sm"
                     >
                         Stop Recording
                     </button>
