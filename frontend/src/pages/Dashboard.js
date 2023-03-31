@@ -56,7 +56,8 @@ function Dashboard() {
     ]
 
     const people = [
-        "Freja", "Thomas", "Heidi", "Lotte", "Lola", "Mark", "Will", "Lala", "Sasa", "Lilo", "Max"]
+        "Freja", "Thomas", "Heidi", "Lotte", "Lola", "Mark", "Will", "Lala", "Sasa", "Lilo", "Max"
+    ]
 
 
     return (
