@@ -1,14 +1,13 @@
 import Wrapper from "../layouts/Wrapper";
 import RiskLabel from "../components/base/Labels/RiskLabel";
 import NumberLabel from "../components/base/Labels/NumberLabel";
+import BackButton from "../components/base/Navigation/BackButton";
 
 function Feedback() {
     return (
         <Wrapper>
             <div className="p-20 space-y-8">
-                <a href="/dashboard">
-                    <p className="text-indigo-500"><strong>Go back to dashboard</strong></p>
-                </a>
+                <BackButton/>
                 <div className="flex flex-row justify-between w-full">
                     <div className="flex flex-row gap-6 items-start w-fit">
                         <div>

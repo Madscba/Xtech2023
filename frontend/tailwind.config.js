@@ -7,6 +7,9 @@ module.exports = {
     extend: {
       width:{
         'fit': 'fit-content'
+      },
+      height:{
+        'fit': 'fit-content'
       }
     },
   },

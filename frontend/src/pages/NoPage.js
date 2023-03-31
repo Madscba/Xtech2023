@@ -1,6 +1,8 @@
 function NoPage() {
   return (
-      <h2>No page found</h2>
+    <div className="bg-gray-200/50 h-screen w-screen flex items-center justify-center">
+       <h1 className="text-indigo-500 pb-4">No Page Found</h1>
+    </div>
   );
 }
 

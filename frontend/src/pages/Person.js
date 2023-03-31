@@ -1,6 +1,7 @@
 import Wrapper from "../layouts/Wrapper";
 import RiskLabel from "../components/base/Labels/RiskLabel";
 import StatusLabel from "../components/base/Labels/StatusLabel";
+import BackButton from "../components/base/Navigation/BackButton";
 
 function Person() {
     const feedbacks = [
@@ -33,9 +34,7 @@ function Person() {
     return (
         <Wrapper>
             <div className="p-20 space-y-6">
-                <a href="/dashboard">
-                    <p className="text-indigo-500"><strong>Go back to dashboard</strong></p>
-                </a>
+                <BackButton/>
                 <div className="flex flex-row justify-between w-full">
                     <h2>Mia</h2>
                     <a href="/video" className="button">Create new submission</a>

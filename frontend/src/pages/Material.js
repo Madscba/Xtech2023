@@ -1,13 +1,12 @@
 import Wrapper from "../layouts/Wrapper";
 import NumberLabel from "../components/base/Labels/NumberLabel";
+import BackButton from "../components/base/Navigation/BackButton";
 
 function Material() {
     return (
         <Wrapper>
             <div className="p-20 space-y-4">
-                <a href="/dashboard">
-                    <p className="text-indigo-500"><strong>Go back to dashboard</strong></p>
-                </a>
+                <BackButton/>
                 <div className="space-y-6 w-2/3">
                     <div className="space-y-2">
                         <h2>How to?</h2>

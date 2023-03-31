@@ -62,7 +62,6 @@ function Dashboard() {
     return (
         <Wrapper>
             <div className="py-20 pl-20 space-y-10">
-                
                 <section className="flex flex-row justify-between gap-20 pr-20">
                     <div className="card w-2/3 space-y-4 flex flex-row items-center gap-4">
                         <div className="w-2/3 space-y-4">
@@ -141,7 +140,6 @@ function Dashboard() {
                         ))}
                     </div>
                 </section>
-
             </div>
         </Wrapper>
     );
