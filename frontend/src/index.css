@@ -16,3 +16,7 @@ h2{
 .card{
     @apply shadow-lg rounded-lg bg-white p-10;
 }
+
+button:hover{
+    @apply scale-110;
+}

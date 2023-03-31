@@ -66,7 +66,11 @@ function Dashboard() {
                     <div className="card w-2/3 space-y-4">
                         <h2>Material</h2>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                        <button className="bg-indigo-500 text-white px-4 py-2 rounded-3xl">Learn more</button>
+                        <div>
+                            <a href="/material" className="bg-indigo-500 text-white px-4 py-2 rounded-3xl">
+                                Learn more
+                            </a>
+                        </div>
                     </div>
                 </section>
 
@@ -76,19 +80,23 @@ function Dashboard() {
                             <h2>Feedback</h2>
                             <NumberLabel>6</NumberLabel>
                         </div>
-                        <div className="flex items-center justify-center w-10 h-10 cursor-pointer text-sm font-semibold text-indigo-500 bg-white/30 hover:bg-white/80 rounded-full">
-                            Go
-                        </div>
+                        <a href="/feedbacks">
+                            <div className="flex items-center justify-center w-10 h-10 cursor-pointer text-sm font-semibold text-indigo-500 bg-white/30 hover:bg-white/80 rounded-full">
+                                Go
+                            </div>
+                        </a>
                     </div>
 
-                    <div className="flex flex-row flex-nowrap gap-4 overflow-auto py-4">
-                    {feedbacks.map((feedback, index) => (
-                        <div key={index} className="card min-w-[200px] flex flex-col gap-4 hover:scale-110">
-                            <p><strong>{feedback.name}</strong></p>
-                            <p>Case #{feedback.case}</p>
-                            <RiskLabel riskLevel={feedback.riskLevel}>Risk is {feedback.riskLevel}</RiskLabel>
-                        </div>
-                    ))}
+                    <div className="flex flex-row flex-nowrap gap-4 overflow-auto pb-4">
+                        {feedbacks.map((feedback, index) => (
+                            <a href={`/feedback/${index}`}>
+                                <div key={index} className="card min-w-[200px] flex flex-col gap-4 hover:scale-110">
+                                    <p><strong>{feedback.name}</strong></p>
+                                    <p>Case #{feedback.case}</p>
+                                    <RiskLabel riskLevel={feedback.riskLevel}>Risk is {feedback.riskLevel}</RiskLabel>
+                                </div>
+                            </a>
+                        ))}
                     </div>
                 </section>
 
@@ -104,17 +112,21 @@ function Dashboard() {
                                     Add
                                 </div>
                             </a>
-                            <div className="flex items-center justify-center w-10 h-10 cursor-pointer text-sm font-semibold text-indigo-500 bg-white/30 hover:bg-white/80 rounded-full">
-                                Go
-                            </div>
+                            <a href="/people">
+                                <div className="flex items-center justify-center w-10 h-10 cursor-pointer text-sm font-semibold text-indigo-500 bg-white/30 hover:bg-white/80 rounded-full">
+                                    Go
+                                </div>
+                            </a>
                         </div>
                     </div>
 
                     <div className="flex gap-4 w-full flex-wrap">
                         {people.map((person, index) => (
-                            <div key={index} className="card small w-[300px] hover:scale-110">
-                                <p><strong>{person}</strong></p>
-                            </div>
+                            <a href={`/person/${index}`}>
+                                <div key={index} className="card small w-[300px] hover:scale-110">
+                                    <p><strong>{person}</strong></p>
+                                </div>
+                            </a>
                         ))}
                     </div>
                 </section>
