@@ -20,3 +20,7 @@ h2{
 button:hover{
     @apply scale-110;
 }
+
+.number-bullet-point{
+    @apply flex flex-row gap-2 items-center;
+}
