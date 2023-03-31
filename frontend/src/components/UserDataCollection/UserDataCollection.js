@@ -5,13 +5,12 @@ function UserDataCollection ( ) {
         name: "",
         email: "",
         age: null,
-        consent: false
     });
 
-    const { name, email, age, consent } = userData;
+    const { name, email, age } = userData;
 
     const handleChange = (e) => {
-        setUserData({ ...userData, [e.target.name]: e.target.name === "consent" ? !consent : e.target.value });
+        setUserData({ ...userData, [e.target.name]: e.target.value });
     };
 
     const handleSubmit = (e) => {
@@ -29,6 +28,7 @@ function UserDataCollection ( ) {
                 name="name"
                 value={name}
                 onChange={(e) => handleChange(e)}
+                className="w-1/3 border-grey-200 border-2 p-3 rounded-lg"
             ></input>
 
             <input 
@@ -38,6 +38,7 @@ function UserDataCollection ( ) {
                 name="email"
                 value={email}
                 onChange={(e) => handleChange(e)}
+                className="w-1/3 border-grey-200 border-2 p-3 rounded-lg"
             ></input>
 
             <input 
@@ -47,18 +48,8 @@ function UserDataCollection ( ) {
                 name="age"
                 value={age}
                 onChange={(e) => handleChange(e)}
+                className="w-1/3 border-grey-200 border-2 p-3 rounded-lg"
             ></input>
-
-            <label className='flex flex-row gap-3 items-center'>
-                Consent
-                <input 
-                    type="checkbox" 
-                    required 
-                    name="consent"
-                    value={consent ?? false}
-                    onChange={(e) => handleChange(e)}
-                ></input>
-            </label>
 
             <button className='py-2 px-4 bg-green-100 rounded-md w-40'>Submit</button>
         </form>

@@ -44,7 +44,7 @@ function ImagePicker ( props ) {
 
     return (
         <div className="space-y-4">
-            <h2 className="text-2xl font-bold capitalize">{eyeSide ?? ""}</h2>
+            <h2>{eyeSide ?? ""}</h2>
             {!videoPath ? 
                <>
                     <VideoRecorder handleRecordedVideo={updateVideoPath}/>
