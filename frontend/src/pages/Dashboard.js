@@ -8,42 +8,50 @@ function Dashboard() {
         {
             name: "Freja",
             case: 23455,
-            riskLevel: "high"
+            riskLevel: "high",
+            status: "completed"
         },
         {
             name: "Mia",
             case: 5311,
-            riskLevel: "low"
+            riskLevel: "low",
+            status: "completed"
         },
         {
             name: "Paul",
             case: 41155,
-            riskLevel: "high"
+            riskLevel: "high",
+            status: "completed"
         },
         {
             name: "Freja",
             case: 23455,
-            riskLevel: "high"
+            riskLevel: "high",
+            status: "completed"
         },
         {
             name: "Mia",
             case: 5311,
-            riskLevel: "low"
+            riskLevel: "low",
+            status: "completed"
         },
         {
             name: "Paul",
             case: 41155,
-            riskLevel: "high"
+            riskLevel: "high",
+            status: "completed"
         },
         {
             name: "Freja",
             case: 23455,
-            riskLevel: "low"
+            riskLevel: "low",
+            status: "completed"
         },
         {
             name: "Mia",
             case: 5311,
-            riskLevel: "low"
+            riskLevel: "low",
+            status: "completed"
         },
     ]
 
@@ -90,10 +98,12 @@ function Dashboard() {
                     <div className="flex flex-row flex-nowrap gap-4 overflow-auto pb-4">
                         {feedbacks.map((feedback, index) => (
                             <a href={`/feedback/${index}`}>
-                                <div key={index} className="card min-w-[200px] flex flex-col gap-4 hover:scale-110">
+                                <div key={index} className="card min-w-[200px] flex flex-col items-center gap-3 hover:scale-110">
                                     <p><strong>{feedback.name}</strong></p>
-                                    <p>Case #{feedback.case}</p>
-                                    <RiskLabel riskLevel={feedback.riskLevel}>Risk is {feedback.riskLevel}</RiskLabel>
+                                    <p className="text-sm">Case #{feedback.case}</p>
+                                    {feedback.riskLevel ? 
+                                      <RiskLabel riskLevel={feedback.riskLevel}>Risk is {feedback.riskLevel}</RiskLabel> : <></>
+                                    }
                                 </div>
                             </a>
                         ))}
