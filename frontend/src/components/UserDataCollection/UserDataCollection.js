@@ -42,7 +42,7 @@ function UserDataCollection ( ) {
             ></input>
 
             <input 
-                type="number" 
+                type="date" 
                 required 
                 placeholder="f.e. 50" 
                 name="age"
@@ -51,7 +51,7 @@ function UserDataCollection ( ) {
                 className="w-1/3 border-grey-200 border-2 p-3 rounded-lg"
             ></input>
 
-            <button className='py-2 px-4 bg-green-100 rounded-md w-40'>Submit</button>
+            <button className="bg-indigo-500 text-white px-4 py-2 rounded-3xl w-fit">Submit</button>
         </form>
     )
 }

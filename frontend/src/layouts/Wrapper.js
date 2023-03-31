@@ -4,7 +4,7 @@ function Wrapper({children}) {
     return (
         <div>
             <TopNav/>
-            <div className="bg-blue-100/50 w-screen h-screen overflow-y-auto">
+            <div className="bg-gray-200/50 w-screen h-screen overflow-y-auto">
                 {children}
             </div>
         </div>

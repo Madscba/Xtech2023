@@ -54,6 +54,7 @@ function Dashboard() {
     return (
         <Wrapper>
             <div className="py-20 pl-20 space-y-10">
+                
                 <section className="flex flex-row justify-between gap-20 pr-20">
                     <div className="card w-2/3 space-y-4 flex flex-row items-center gap-4">
                         <div className="w-2/3">
@@ -98,9 +99,11 @@ function Dashboard() {
                             <NumberLabel>22</NumberLabel>
                         </div>
                         <div className="flex flex-row items-center gap-4">
-                            <div className="flex items-center justify-center w-10 h-10 cursor-pointer text-sm font-semibold text-indigo-500 bg-white/30 hover:bg-white/80 rounded-full">
-                                Add
-                            </div>
+                            <a href="/add/person">
+                                <div className="flex items-center justify-center w-10 h-10 cursor-pointer text-sm font-semibold text-indigo-500 bg-white/30 hover:bg-white/80 rounded-full">
+                                    Add
+                                </div>
+                            </a>
                             <div className="flex items-center justify-center w-10 h-10 cursor-pointer text-sm font-semibold text-indigo-500 bg-white/30 hover:bg-white/80 rounded-full">
                                 Go
                             </div>
@@ -115,6 +118,7 @@ function Dashboard() {
                         ))}
                     </div>
                 </section>
+
             </div>
         </Wrapper>
     );
