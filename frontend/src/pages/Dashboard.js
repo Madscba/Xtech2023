@@ -57,7 +57,7 @@ function Dashboard() {
                 
                 <section className="flex flex-row justify-between gap-20 pr-20">
                     <div className="card w-2/3 space-y-4 flex flex-row items-center gap-4">
-                        <div className="w-2/3">
+                        <div className="w-2/3 space-y-4">
                             <h2>Hello Mia</h2>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                         </div>

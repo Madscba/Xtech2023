@@ -6,6 +6,10 @@ body {
     @apply text-gray-700;
 }
 
+h1{
+    @apply text-4xl font-bold capitalize;
+}
+
 h2{
     @apply text-2xl font-bold capitalize;
 }
