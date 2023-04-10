@@ -16,7 +16,7 @@ function Feedback() {
                         </div>
                         <RiskLabel>Risk is low</RiskLabel>
                     </div>
-                    <button className="button">Send to a doctor</button>
+                    <a className="button" href="/send/feedback/42423432">Send to a doctor</a>
                 </div>
                 <div className="w-2/3 space-y-2">
                     <h2>Feedback</h2>

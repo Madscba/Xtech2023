@@ -11,6 +11,7 @@ import Feedbacks from './pages/Feedbacks';
 import Person from './pages/Person';
 import AllPeople from './pages/AllPeople';
 import Material from './pages/Material';
+import SendFeedback from './pages/SendFeedback';
 import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -20,14 +21,15 @@ root.render(
         <Routes>
             <Route index element={<Home/>} />
             <Route path="dashboard" element={<Dashboard/>} />
-            <Route path="create/submission" element={<CreateSubmission />} />
+            <Route path="create/submission" element={<CreateSubmission/>} />
             <Route path="add/person" element={<AddPerson />} />
-            <Route path="person/:id" element={<Person />} />
-            <Route path="people" element={<AllPeople />} />
-            <Route path="material" element={<Material />} />
-            <Route path="feedback/:id" element={<Feedback />} />
-            <Route path="feedbacks" element={<Feedbacks />} />
-            <Route path="*" element={<NoPage />} />
+            <Route path="person/:id" element={<Person/>} />
+            <Route path="people" element={<AllPeople/>} />
+            <Route path="material" element={<Material/>} />
+            <Route path="send/feedback/:id" element={<SendFeedback/>} />
+            <Route path="feedback/:id" element={<Feedback/>} />
+            <Route path="feedbacks" element={<Feedbacks/>} />
+            <Route path="*" element={<NoPage/>} />
         </Routes>
       </BrowserRouter>
   </React.StrictMode>
