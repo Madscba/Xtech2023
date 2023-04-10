@@ -76,7 +76,7 @@ function VideoRecorder({handleRecordedVideo}) {
 
 	return (
 		<div>
-            <div className='space-y-4'>
+            <div className="space-y-2">
                 <p><strong>Record a video</strong></p>
                 {!permission ? (
                     <button 

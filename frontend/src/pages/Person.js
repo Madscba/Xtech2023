@@ -37,7 +37,7 @@ function Person() {
                 <BackButton/>
                 <div className="flex flex-row justify-between w-full">
                     <h2>Mia</h2>
-                    <a href="/video" className="button">Create new submission</a>
+                    <a href="/create/submission" className="button">Create new submission</a>
                 </div>
 
                 <div className="space-y-4">
