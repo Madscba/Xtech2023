@@ -89,7 +89,7 @@ function Dashboard() {
                             <NumberLabel>6</NumberLabel>
                         </div>
                         <a href="/feedbacks">
-                            <div className="flex items-center justify-center w-10 h-10 cursor-pointer text-sm font-semibold text-indigo-500 bg-white/30 hover:bg-white/80 rounded-full">
+                            <div className="secondary-button">
                                 Go
                             </div>
                         </a>
@@ -118,12 +118,12 @@ function Dashboard() {
                         </div>
                         <div className="flex flex-row items-center gap-4">
                             <a href="/add/person">
-                                <div className="flex items-center justify-center w-10 h-10 cursor-pointer text-sm font-semibold text-indigo-500 bg-white/30 hover:bg-white/80 rounded-full">
+                                <div className="secondary-button">
                                     Add
                                 </div>
                             </a>
                             <a href="/people">
-                                <div className="flex items-center justify-center w-10 h-10 cursor-pointer text-sm font-semibold text-indigo-500 bg-white/30 hover:bg-white/80 rounded-full">
+                                <div className="secondary-button">
                                     Go
                                 </div>
                             </a>
@@ -135,7 +135,7 @@ function Dashboard() {
                             <a href={`/person/${index}`}>
                                 <div key={index} className="card small w-[350px] flex flex-row justify-between items-center">
                                     <p><strong>{person}</strong></p>
-                                    <a href="/video" className="button">Create new image</a>
+                                    <a href="/create/submission" className="button">Create submission</a>
                                 </div>
                             </a>
                         ))}

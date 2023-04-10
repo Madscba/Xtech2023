@@ -23,7 +23,7 @@ function Home() {
   return (
     <div className="bg-gray-200/50 h-screen w-screen flex items-center justify-center">
       <div className="w-1/2 flex flex-col items-center justify-center space-y-4">
-          <h1 className="text-indigo-500">Login</h1>
+          <h1 className="text-teal-500">Login</h1>
           <p>You just need to click the submit button for now. No need to fill in data.</p>
           <form onSubmit={(e) => handleSubmit(e)} className="w-full md:w-2/3  flex flex-col items-center justify-center gap-4">
             <input 

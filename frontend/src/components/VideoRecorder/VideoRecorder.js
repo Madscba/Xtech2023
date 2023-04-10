@@ -76,7 +76,7 @@ function VideoRecorder({handleRecordedVideo}) {
 
 	return (
 		<div>
-            <div className='space-y-4'>
+            <div className="space-y-2">
                 <p><strong>Record a video</strong></p>
                 {!permission ? (
                     <button 
@@ -89,22 +89,22 @@ function VideoRecorder({handleRecordedVideo}) {
                 {permission && recordingStatus === "inactive" ? (
                     <button 
                         onClick={startRecording}
-                        className="bg-green-100 px-6 py-2 rounded-3xl text-sm"
+                        className="bg-green-100 px-6 py-2 rounded-3xl text-sm font-semibold"
                     >
-                        Start Recording
+                        Start
                     </button>
                 ) : null}
                 {recordingStatus === "recording" ? (
                     <button 
                         onClick={stopRecording}
-                        className="bg-red-100 px-6 py-2 rounded-3xl text-sm"
+                        className="bg-red-100 px-6 py-2 rounded-3xl text-sm font-semibold"
                     >
-                        Stop Recording
+                        Stop
                     </button>
                 ) : null}
             </div>
 
-			<div className='space-y-4'>
+			<div className='space-y-4 mt-2'>
 				{!recordedVideo && stream ? (
 					<video ref={liveVideoFeed} autoPlay width="400"></video>
 				) : 

@@ -51,7 +51,7 @@ function UserDataCollection ( ) {
                 className="border-grey-200 border-2 p-3 rounded-lg"
             ></input>
 
-            <button className="bg-indigo-500 text-white px-4 py-2 rounded-3xl w-fit">Submit</button>
+            <button className="bg-teal-500 text-white px-4 py-2 rounded-3xl w-fit">Submit</button>
         </form>
     )
 }

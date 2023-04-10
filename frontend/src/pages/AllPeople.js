@@ -16,7 +16,7 @@ function AllPeople() {
                         <a href={`/person/${index}`}>
                             <div key={index} className="card small w-[350px] flex flex-row justify-between items-center">
                                 <p><strong>{person}</strong></p>
-                                <a href="/video" className="button">Create new image</a>
+                                <a href="/create/submission" className="button">Create new submission</a>
                             </div>
                         </a>
                     ))}

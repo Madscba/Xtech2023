@@ -2,7 +2,7 @@ import ImagePicker from "../components/ImagePicker/ImagePicker";
 import Wrapper from "../layouts/Wrapper";
 import BackButton from "../components/base/Navigation/BackButton";
 
-function Video() {
+function CreateSubmission() {
     return (
         <Wrapper>
             <div className="p-10 md:p-20 space-y-6">
@@ -16,5 +16,5 @@ function Video() {
     );
   }
   
-export default Video;
+export default CreateSubmission;
   
