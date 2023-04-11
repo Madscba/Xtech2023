@@ -43,59 +43,60 @@ function ImagePicker ( props ) {
     }
 
     return (
-        <div className="space-y-4">
-            <h2 className="text-2xl font-bold capitalize">{eyeSide ?? ""}</h2>
-            {!videoPath ? 
-               <>
-                    <VideoRecorder handleRecordedVideo={updateVideoPath}/>
-                    <div>
-                        <p><strong>Upload a video</strong></p>
-                        <input 
-                            type="file" 
-                            onChange={handleVideoUpload} 
-                            accept="video/*"
-                            className='py-2 px-4 bg-yellow-100 rounded-md'
-                        />
-                    </div>
-               </>
-            : 
-                <div className="flex flex-row gap-4 items-start">
-                    <div className="space-y-4">
-                        <video 
-                            ref={videoElement} 
-                            controls 
-                            muted 
-                            width="400"
-                        >
-                            <source 
-                                src={videoPath} 
-                                type="video/mp4"
-                            ></source>
-                        </video>
-
-                        <button 
-                            onClick={handleFrameSelection} 
-                            className='py-2 px-4 bg-blue-100 rounded-md'
-                        > Get image
-                        </button>
-                    </div>
-
-                    <div>
-                        <canvas ref={canvasElement} className="w-[400px] pb-4"/>
-                        {imagePath ? 
-                            <a 
-                                class="bg-yellow-200 rounded-md py-2 px-4" 
-                                href={imagePath} 
-                                download
+       <div>
+            <h2>{eyeSide ?? ""}</h2>
+            <div className="flex flex-col md:flex-row gap-4 md:gap-10 pt-4">
+                {!videoPath ? 
+                    <>
+                        <VideoRecorder handleRecordedVideo={updateVideoPath}/>
+                        <div className="space-y-2">
+                            <p><strong>Upload a video</strong></p>
+                            <input 
+                                type="file" 
+                                onChange={handleVideoUpload} 
+                                accept="video/*"
+                            />
+                        </div>
+                    </>
+                : 
+                    <div className="flex flex-row gap-4 items-start">
+                        <div className="space-y-2">
+                            <video 
+                                ref={videoElement} 
+                                controls 
+                                muted 
+                                width="400"
                             >
-                                Ready to download
-                            </a>
-                            : <></>
-                        }
+                                <source 
+                                    src={videoPath} 
+                                    type="video/mp4"
+                                ></source>
+                            </video>
+
+                            <button 
+                                onClick={handleFrameSelection} 
+                                className='button orange'> 
+                                Get image
+                            </button>
+                        </div>
+
+                        <div>
+                            <canvas ref={canvasElement} className="w-[400px] pb-4"/>
+                            {imagePath ? 
+                                <a 
+                                    class="bg-yellow-200 px-6 py-2 rounded-3xl text-sm" 
+                                    href={imagePath} 
+                                    download
+                                >
+                                    Ready to download
+                                </a>
+                                : <></>
+                            }
+                        </div>
                     </div>
-                </div>
-            }
-        </div>
+                }
+            </div>
+       </div>
     )
 }
 

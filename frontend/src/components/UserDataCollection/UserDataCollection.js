@@ -5,13 +5,12 @@ function UserDataCollection ( ) {
         name: "",
         email: "",
         age: null,
-        consent: false
     });
 
-    const { name, email, age, consent } = userData;
+    const { name, email, age } = userData;
 
     const handleChange = (e) => {
-        setUserData({ ...userData, [e.target.name]: e.target.name === "consent" ? !consent : e.target.value });
+        setUserData({ ...userData, [e.target.name]: e.target.value });
     };
 
     const handleSubmit = (e) => {
@@ -21,7 +20,7 @@ function UserDataCollection ( ) {
     }
 
     return (
-        <form onSubmit={(e) => handleSubmit(e)} className="flex flex-col gap-4">
+        <form onSubmit={(e) => handleSubmit(e)} className="w-full md:w-1/3  flex flex-col gap-4">
             <input 
                 type="text" 
                 required 
@@ -29,6 +28,7 @@ function UserDataCollection ( ) {
                 name="name"
                 value={name}
                 onChange={(e) => handleChange(e)}
+                className="border-grey-200 border-2 p-3 rounded-lg"
             ></input>
 
             <input 
@@ -38,29 +38,20 @@ function UserDataCollection ( ) {
                 name="email"
                 value={email}
                 onChange={(e) => handleChange(e)}
+                className="border-grey-200 border-2 p-3 rounded-lg"
             ></input>
 
             <input 
-                type="number" 
+                type="date" 
                 required 
                 placeholder="f.e. 50" 
                 name="age"
                 value={age}
                 onChange={(e) => handleChange(e)}
+                className="border-grey-200 border-2 p-3 rounded-lg"
             ></input>
 
-            <label className='flex flex-row gap-3 items-center'>
-                Consent
-                <input 
-                    type="checkbox" 
-                    required 
-                    name="consent"
-                    value={consent ?? false}
-                    onChange={(e) => handleChange(e)}
-                ></input>
-            </label>
-
-            <button className='py-2 px-4 bg-green-100 rounded-md w-40'>Submit</button>
+            <button className="bg-teal-500 text-white px-4 py-2 rounded-3xl w-fit">Submit</button>
         </form>
     )
 }
