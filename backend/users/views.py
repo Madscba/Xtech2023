@@ -9,10 +9,11 @@ from io import StringIO
 from django.views.decorators.csrf import csrf_exempt 
 from ML.src.torch_utils import transform_image
 import torchvision.transforms as transforms
-
+from prediction.models import Users
+from collections import defaultdict
 
 @csrf_exempt
-def test(request):
+def compress_img_size(request):
     """
     Purpose: test function. Test if image (represented as bytes) can be transferred from client with POST HTTP method.
     Then loaded, transformed and inference run from the server side, and result returned.
@@ -33,3 +34,19 @@ def test(request):
         resp_dict = {"msg": "Cannot save to database"}
 
     return JsonResponse(resp_dict)
+
+@csrf_exempt
+def push_personal_info_form_to_db(request):
+    temp_user = defaultdict(list)
+    #[temp_user[key] = None for key in ['id', 'email', 'first_name', 'last_name', 'gender', 'birth_year', 'user_password', 'user_type', 'practioner_id']]
+    try:
+        b = dict(request.POST)
+    except:
+        raise
+    for key,val in request.POST.items():
+        print(f'{key} : {val}')
+        temp_user[key] = val
+
+    a = 2
+    temp_user.save()
+    pass

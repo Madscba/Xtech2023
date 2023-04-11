@@ -21,5 +21,5 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('ml/', include('prediction.urls')),
-    #path('', include('eyeopener.urls')),
+    path('users/', include('users.urls'))
 ]
