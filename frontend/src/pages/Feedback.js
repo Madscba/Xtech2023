@@ -26,8 +26,18 @@ function Feedback() {
                     </div>
                     <p>Turpis cursus in hac habitasse platea. Ultrices neque ornare aenean euismod elementum. At elementum eu facilisis sed odio morbi quis commodo odio. Massa placerat duis ultricies lacus sed turpis. Lectus sit amet est placerat in egestas erat imperdiet sed. Tincidunt lobortis feugiat vivamus at augue. Placerat vestibulum lectus mauris ultrices eros in cursus turpis</p>
                 </div>
-                <div>
+                <div className="space-y-4">
                     <h2>What you have submitted</h2>
+                    <div className="flex flex-row gap-4">
+                        <div className="flex flex-col gap-4 w-1/3">
+                            <span className="font-bold">Left eye</span>
+                            <img className="w-full" src="/assets/images/placeholder-left-eye.png"/>
+                        </div>
+                        <div className="flex flex-col gap-4 w-1/3">
+                            <span className="font-bold">Right eye</span>
+                            <img className="w-full" src="/assets/images/placeholder-right-eye.png"/>
+                        </div>
+                    </div>
                 </div>
             </div>
         </Wrapper>

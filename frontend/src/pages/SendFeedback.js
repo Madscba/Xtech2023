@@ -42,8 +42,18 @@ function SendFeedback() {
                             Kind regards, prototype
                         </p>
                     </div>
-                    <div className="space-y-2">
+                    <div className="space-y-4">
                         <p><strong>Images attached</strong></p>
+                        <div className="flex flex-row gap-4">
+                        <div className="flex flex-col gap-4 w-3/12">
+                            <span className="font-bold">Left eye</span>
+                            <img className="w-full" src="/assets/images/placeholder-left-eye.png"/>
+                        </div>
+                        <div className="flex flex-col gap-4 w-3/12">
+                            <span className="font-bold">Right eye</span>
+                            <img className="w-full" src="/assets/images/placeholder-right-eye.png"/>
+                        </div>
+                    </div>
                     </div>
                 </div>
                 <button className="button">Send submission</button>
