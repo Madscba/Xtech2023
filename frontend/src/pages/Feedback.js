@@ -4,6 +4,9 @@ import NumberLabel from "../components/base/Labels/NumberLabel";
 import BackButton from "../components/base/Navigation/BackButton";
 
 function Feedback() {
+
+    const isReffered = false;
+
     return (
         <Wrapper>
             <div className="p-10 md:p-20 space-y-10">
@@ -16,7 +19,12 @@ function Feedback() {
                         </div>
                         <RiskLabel>Risk is low</RiskLabel>
                     </div>
-                    <a className="button" href="/send/feedback/42423432">Send to a doctor</a>
+                    <div>
+                        { isReffered ?  
+                            <p>Reffered to Dr. Freja Larsen</p> 
+                            : <a className="button" href="/send/feedback/42423432">Make a referral</a>
+                        }
+                    </div>
                 </div>
                 <div className="w-2/3 space-y-2">
                     <h2>Feedback</h2>

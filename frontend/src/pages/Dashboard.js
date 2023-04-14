@@ -72,7 +72,7 @@ function Dashboard() {
                         <div className="w-1/3 text-5xl flex justify-center items-center">👋</div>
                     </div>
                     <div className="card w-full md:w-2/3 space-y-4">
-                        <h2>Material</h2>
+                        <h2>How To...?</h2>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                         <div>
                             <a href="/material" className="button">

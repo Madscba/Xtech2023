@@ -25,9 +25,9 @@ function SendFeedback() {
             <div className="p-10 md:p-20 space-y-14">
                 <BackButton/>
                 <div className="space-y-10">
-                    <h2>Send submission #42423432 to a doctor</h2>
+                    <h2>Make a referral for submission #42423432</h2>
                     <div className="space-y-2">
-                        <p><strong>Who do you want to send it to?</strong></p>
+                        <p><strong>Who to reffer to?</strong></p>
                         <select className="px-4 py-2 rounded-md">
                             {doctors.map((doctor, index) => (
                                 <option key={index} value={doctor.email}>{doctor.name}</option>
@@ -56,7 +56,7 @@ function SendFeedback() {
                     </div>
                     </div>
                 </div>
-                <button className="button">Send submission</button>
+                <button className="button">Make the referral</button>
             </div>
         </Wrapper>
     );
