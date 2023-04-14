@@ -1,6 +1,5 @@
 import Wrapper from "../layouts/Wrapper";
 import BackButton from "../components/base/Navigation/BackButton";
-import RiskLabel from "../components/base/Labels/RiskLabel";
 
 function SendFeedback() {
 

@@ -21,10 +21,11 @@ function Home() {
 
   
   return (
-    <div className="bg-gray-200/50 h-screen w-screen flex items-center justify-center">
-      <div className="w-1/2 flex flex-col items-center justify-center space-y-4">
+    <div className="bg-white md:h-screen w-screen flex flex-col-reverse md:flex-row items-center justify-start">
+      <img src="/assets/images/eye.jpg" className="w-full h-auto md:h-screen md:w-auto"/>
+      <div className="h-fit mx-auto w-1/2 flex flex-col items-center justify-center space-y-4 py-10">
           <h1 className="text-teal-500">Login</h1>
-          <p>You just need to click the submit button for now. No need to fill in data.</p>
+          <p>No need to fill in data. You just need to click the submit button for now.</p>
           <form onSubmit={(e) => handleSubmit(e)} className="w-full md:w-2/3  flex flex-col items-center justify-center gap-4">
             <input 
                 type="email" 

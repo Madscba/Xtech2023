@@ -68,9 +68,7 @@ function Feedbacks() {
                                     <p><strong>{feedback.name}</strong></p>
                                     <p className="text-sm">Case #{feedback.case}</p>
                                     <StatusLabel status={feedback.status}>{feedback.status}</StatusLabel>
-                                    {feedback.riskLevel ? 
-                                        <RiskLabel riskLevel={feedback.riskLevel}>Risk is {feedback.riskLevel}</RiskLabel> : <></>
-                                    }
+                                    { feedback.riskLevel ? <RiskLabel riskLevel={feedback.riskLevel}>Risk is {feedback.riskLevel}</RiskLabel> : <></> }
                                 </div>
                             </a>
                         ))}

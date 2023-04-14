@@ -20,10 +20,7 @@ function Feedback() {
                         <RiskLabel>Risk is low</RiskLabel>
                     </div>
                     <div>
-                        { isReffered ?  
-                            <p>Reffered to Dr. Freja Larsen</p> 
-                            : <a className="button" href="/send/feedback/42423432">Make a referral</a>
-                        }
+                        { isReffered ?  <p>Reffered to Dr. Freja Larsen</p> : <a className="button" href="/send/feedback/42423432">Make a referral</a> }
                     </div>
                 </div>
                 <div className="w-2/3 space-y-2">
