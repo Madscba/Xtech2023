@@ -30,7 +30,7 @@ h2{
 }
 
 .secondary-button{
-    @apply flex items-center justify-center w-10 h-10 cursor-pointer text-sm font-semibold text-teal-500 bg-white/30 hover:bg-white/80 rounded-full;
+    @apply flex items-center justify-center w-10 h-10 cursor-pointer text-sm font-semibold text-teal-500 bg-white/50 hover:bg-white/80 rounded-full;
 }
 
 .number-bullet-point{

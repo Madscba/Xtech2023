@@ -8,19 +8,21 @@ function AllPeople() {
 
     return (
         <Wrapper>
-            <div className="p-10 md:p-20 space-y-6">
+            <div className="p-10 md:p-20 space-y-10">
                 <BackButton/>
-                <h2>People List</h2>
-                <div className="flex gap-4 w-full flex-wrap">
-                    {people.map((person, index) => (
-                        <a href={`/person/${index}`}>
-                            <div key={index} className="card small w-[350px] flex flex-row justify-between items-center">
-                                <p><strong>{person}</strong></p>
-                                <a href="/create/submission" className="button">Create new submission</a>
-                            </div>
-                        </a>
-                    ))}
-                 </div>
+               <div className="space-y-4">
+                    <h2>People List</h2>
+                    <div className="flex gap-4 w-full flex-wrap">
+                        {people.map((person, index) => (
+                            <a href={`/person/${index}`}>
+                                <div key={index} className="card small w-[350px] flex flex-row justify-between items-center">
+                                    <p><strong>{person}</strong></p>
+                                    <a href="/create/submission" className="button">Create new submission</a>
+                                </div>
+                            </a>
+                        ))}
+                    </div>
+               </div>
             </div>
         </Wrapper>
     );

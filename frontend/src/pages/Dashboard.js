@@ -95,7 +95,7 @@ function Dashboard() {
                         </a>
                     </div>
 
-                    <div className="flex flex-row flex-nowrap gap-4 overflow-auto pb-4">
+                    <div className="flex flex-row flex-nowrap gap-4 overflow-auto pb-4 last:mr-10"> 
                         {feedbacks.map((feedback, index) => (
                             <a href={`/feedback/${index}`}>
                                 <div key={index} className="card min-w-[200px] flex flex-col items-center gap-3 hover:scale-110">

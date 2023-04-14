@@ -2,12 +2,15 @@ import { useState }  from 'react';
 
 function UserDataCollection ( ) {
     const [userData, setUserData] = useState({
-        name: "",
+        firstname: "",
+        lastname: "",
         email: "",
-        age: null,
+        birthday: null,
+        ethnicity: "",
+        diseases : ""
     });
 
-    const { name, email, age } = userData;
+    const { firstname, lastname, email, birthday, ethnicity, diseases } = userData;
 
     const handleChange = (e) => {
         setUserData({ ...userData, [e.target.name]: e.target.value });
@@ -20,17 +23,30 @@ function UserDataCollection ( ) {
     }
 
     return (
-        <form onSubmit={(e) => handleSubmit(e)} className="w-full md:w-1/3  flex flex-col gap-4">
+        <form onSubmit={(e) => handleSubmit(e)} className="w-full md:w-1/3 flex flex-col gap-2">
+            <label for="firstname" className="text-sm font-bold">First name</label>
             <input 
                 type="text" 
                 required 
-                placeholder="name" 
-                name="name"
-                value={name}
+                placeholder="first name" 
+                name="firstname"
+                value={firstname}
                 onChange={(e) => handleChange(e)}
-                className="border-grey-200 border-2 p-3 rounded-lg"
+                className="mb-2 border-grey-200 border-2 p-3 rounded-lg"
             ></input>
 
+            <label for="lastname" className="text-sm font-bold">Last name</label>
+            <input 
+                type="text" 
+                required 
+                placeholder="last name" 
+                name="lastname"
+                value={lastname}
+                onChange={(e) => handleChange(e)}
+                className="mb-2 border-grey-200 border-2 p-3 rounded-lg"
+            ></input>
+
+            <label for="email" className="text-sm font-bold">Email</label>
             <input 
                 type="email" 
                 required 
@@ -38,20 +54,50 @@ function UserDataCollection ( ) {
                 name="email"
                 value={email}
                 onChange={(e) => handleChange(e)}
-                className="border-grey-200 border-2 p-3 rounded-lg"
+                className="mb-2 border-grey-200 border-2 p-3 rounded-lg"
             ></input>
 
+            <label for="birthday" className="text-sm font-bold">Birthday</label>
             <input 
                 type="date" 
                 required 
-                placeholder="f.e. 50" 
-                name="age"
-                value={age}
+                name="birthday"
+                value={birthday}
                 onChange={(e) => handleChange(e)}
-                className="border-grey-200 border-2 p-3 rounded-lg"
+                className="mb-2 border-grey-200 border-2 p-3 rounded-lg"
             ></input>
 
-            <button className="bg-teal-500 text-white px-4 py-2 rounded-3xl w-fit">Submit</button>
+            <label for="birthday" className="text-sm font-bold">Gender</label>
+            <select className="mb-2 px-2 py-2 rounded-md">
+                <option value="female">Female</option>
+                <option value="male">Male</option>
+                <option value="diverse">Diverse</option>
+            </select>
+
+
+            <label for="ethnicity" className="text-sm font-bold">Ethnicity</label>
+            <input 
+                type="text" 
+                required 
+                placeholder="ethnicity" 
+                name="ethnicity"
+                value={ethnicity}
+                onChange={(e) => handleChange(e)}
+                className="mb-2 border-grey-200 border-2 p-3 rounded-lg"
+            ></input>
+
+            <label for="diseases" className="text-sm font-bold">Previous diseases</label>
+            <input 
+                type="text" 
+                required 
+                placeholder="previous diseases" 
+                name="diseases"
+                value={diseases}
+                onChange={(e) => handleChange(e)}
+                className="mb-5 border-grey-200 border-2 p-3 rounded-lg"
+            ></input>
+
+            <button className="mb-2 bg-teal-500 text-white px-4 py-2 rounded-3xl w-fit">Submit</button>
         </form>
     )
 }

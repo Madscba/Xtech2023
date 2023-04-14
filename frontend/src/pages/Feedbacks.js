@@ -57,23 +57,25 @@ function Feedbacks() {
 
     return (
         <Wrapper>
-            <div className="p-10 md:p-20 space-y-6">
+            <div className="p-10 md:p-20 space-y-10">
                 <BackButton/>
-                <h2>Feedbacks</h2>
-                <div className="flex flex-row flex-wrap gap-4 pb-4">
-                    {feedbacks.map((feedback, index) => (
-                        <a href={`/feedback/${index}`}>
-                            <div key={index} className="card min-w-[200px] flex flex-col items-center gap-3 hover:scale-110">
-                                <p><strong>{feedback.name}</strong></p>
-                                <p className="text-sm">Case #{feedback.case}</p>
-                                <StatusLabel status={feedback.status}>{feedback.status}</StatusLabel>
-                                {feedback.riskLevel ? 
-                                    <RiskLabel riskLevel={feedback.riskLevel}>Risk is {feedback.riskLevel}</RiskLabel> : <></>
-                                }
-                            </div>
-                        </a>
-                    ))}
-                 </div>
+                <div className="space-y-6">
+                    <h2>Feedbacks</h2>
+                    <div className="flex flex-row flex-wrap gap-4 pb-4">
+                        {feedbacks.map((feedback, index) => (
+                            <a href={`/feedback/${index}`}>
+                                <div key={index} className="card min-w-[200px] flex flex-col items-center gap-3 hover:scale-110">
+                                    <p><strong>{feedback.name}</strong></p>
+                                    <p className="text-sm">Case #{feedback.case}</p>
+                                    <StatusLabel status={feedback.status}>{feedback.status}</StatusLabel>
+                                    {feedback.riskLevel ? 
+                                        <RiskLabel riskLevel={feedback.riskLevel}>Risk is {feedback.riskLevel}</RiskLabel> : <></>
+                                    }
+                                </div>
+                            </a>
+                        ))}
+                    </div>
+                </div>
             </div>
         </Wrapper>
     );

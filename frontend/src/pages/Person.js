@@ -33,7 +33,7 @@ function Person() {
 
     return (
         <Wrapper>
-            <div className="p-10 md:p-20 space-y-6">
+            <div className="p-10 md:p-20 space-y-10">
                 <BackButton/>
                 <div className="flex flex-row justify-between w-full">
                     <h2>Mia</h2>
@@ -48,8 +48,16 @@ function Person() {
                             <p>Mia</p>
                         </div>
                         <div className="flex flex-row gap-2">
-                            <p><strong>Name:</strong></p>
-                            <p>Mia</p>
+                            <p><strong>Age:</strong></p>
+                            <p>55</p>
+                        </div>
+                        <div className="flex flex-row gap-2">
+                            <p><strong>Gender:</strong></p>
+                            <p>Female</p>
+                        </div>
+                        <div className="flex flex-row gap-2">
+                            <p><strong>Previous Diseases:</strong></p>
+                            <p>None</p>
                         </div>
                     </div>
                 </div>

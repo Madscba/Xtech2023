@@ -5,7 +5,7 @@ import BackButton from "../components/base/Navigation/BackButton";
 function Material() {
     return (
         <Wrapper>
-            <div className="p-10 md:p-20 space-y-4">
+            <div className="p-10 md:p-20 space-y-10">
                 <BackButton/>
                 <div className="space-y-6 md:w-2/3">
                     <div className="space-y-2">
