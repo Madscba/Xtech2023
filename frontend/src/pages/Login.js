@@ -40,7 +40,7 @@ function Login() {
                         value={password}
                         onChange={(e) => handleChange(e)}
                     ></input>
-                    <button className="button w-full">Login</button>
+                    <button className="button orange w-full">Login</button>
                 </form>
 
                 <div className="pt-10 text-sm">

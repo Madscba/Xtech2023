@@ -32,7 +32,7 @@ function SignUp() {
                         placeholder="password" 
                         name="password"
                     ></input>
-                    <button className="button w-full">Create Account</button>
+                    <button className="button orange w-full">Create Account</button>
                 </form>
             </div>
         </PlainWrapper>

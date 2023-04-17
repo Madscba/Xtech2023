@@ -30,7 +30,7 @@ function Feedback() {
                     <h2>Feedback</h2>
                     <div className="flex flex-row items-center gap-2">
                         <p>Your calculated risk:</p>
-                        <NumberLabel>27%</NumberLabel>
+                        <NumberLabel>27 %</NumberLabel>
                     </div>
                     <p>Turpis cursus in hac habitasse platea. Ultrices neque ornare aenean euismod elementum. At elementum eu facilisis sed odio morbi quis commodo odio. Massa placerat duis ultricies lacus sed turpis. Lectus sit amet est placerat in egestas erat imperdiet sed. Tincidunt lobortis feugiat vivamus at augue. Placerat vestibulum lectus mauris ultrices eros in cursus turpis</p>
                 </div>

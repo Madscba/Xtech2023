@@ -1,7 +1,13 @@
 import Wrapper from "../layouts/Wrapper";
 import BackButton from "../components/base/Navigation/BackButton";
+import { useNavigate } from 'react-router-dom';
 
 function SendFeedback() {
+    const navigate = useNavigate();
+
+    const sendReferral = () => {
+        navigate("/send/feedback/successfull");
+    }
 
     const doctors = [
         {
@@ -56,7 +62,7 @@ function SendFeedback() {
                     </div>
                     </div>
                 </div>
-                <button className="button">Make the referral</button>
+                <button className="button" onClick={sendReferral}>Make the referral</button>
             </div>
         </Wrapper>
     );
