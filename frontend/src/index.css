@@ -16,6 +16,11 @@ h1{
 h2{
     @apply text-2xl font-bold;
 }
+
+h3{
+    @apply text-xl font-bold;
+}
+
 .card{
     @apply shadow-lg rounded-2xl bg-white p-5 md:p-8;
 

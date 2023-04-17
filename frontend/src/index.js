@@ -14,6 +14,8 @@ import Material from './pages/Material';
 import SendFeedback from './pages/SendFeedback';
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
+import Pending from './pages/Pending';
+import SuccessfullFeedbackSending from './pages/SuccessfullFeedbackSending';
 import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -30,9 +32,12 @@ root.render(
             <Route path="person/:id" element={<Person/>} />
             <Route path="people" element={<AllPeople/>} />
             <Route path="material" element={<Material/>} />
+            <Route path="send/feedback/successfull" element={<SuccessfullFeedbackSending/>} />
             <Route path="send/feedback/:id" element={<SendFeedback/>} />
             <Route path="feedback/:id" element={<Feedback/>} />
             <Route path="feedbacks" element={<Feedbacks/>} />
+            <Route path="pending" element={<Pending/>} />
+            <Route path="pending" element={<SuccessfullFeedbackSending/>} />
             <Route path="*" element={<NoPage/>} />
         </Routes>
       </BrowserRouter>
