@@ -5,11 +5,17 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors:{
+        'primary': '#4EB093',
+        'accent': '#B1FFE8'
+      },
       width:{
-        'fit': 'fit-content'
+        'fit': 'fit-content',
+        'inherit': 'inherit'
       },
       height:{
-        'fit': 'fit-content'
+        'fit': 'fit-content',
+        'inherit': 'inherit'
       }
     },
   },

@@ -32,7 +32,7 @@ function UserDataCollection ( ) {
                 name="firstname"
                 value={firstname}
                 onChange={(e) => handleChange(e)}
-                className="mb-2 border-grey-200 border-2 p-3 rounded-lg"
+                className="mb-2"
             ></input>
 
             <label for="lastname" className="text-sm font-bold">Last name</label>
@@ -43,7 +43,7 @@ function UserDataCollection ( ) {
                 name="lastname"
                 value={lastname}
                 onChange={(e) => handleChange(e)}
-                className="mb-2 border-grey-200 border-2 p-3 rounded-lg"
+                className="mb-2"
             ></input>
 
             <label for="email" className="text-sm font-bold">Email</label>
@@ -54,7 +54,7 @@ function UserDataCollection ( ) {
                 name="email"
                 value={email}
                 onChange={(e) => handleChange(e)}
-                className="mb-2 border-grey-200 border-2 p-3 rounded-lg"
+                className="mb-2"
             ></input>
 
             <label for="birthday" className="text-sm font-bold">Birthday</label>
@@ -64,7 +64,7 @@ function UserDataCollection ( ) {
                 name="birthday"
                 value={birthday}
                 onChange={(e) => handleChange(e)}
-                className="mb-2 border-grey-200 border-2 p-3 rounded-lg"
+                className="mb-2"
             ></input>
 
             <label for="birthday" className="text-sm font-bold">Gender</label>
@@ -83,7 +83,7 @@ function UserDataCollection ( ) {
                 name="ethnicity"
                 value={ethnicity}
                 onChange={(e) => handleChange(e)}
-                className="mb-2 border-grey-200 border-2 p-3 rounded-lg"
+                className="mb-2"
             ></input>
 
             <label for="diseases" className="text-sm font-bold">Previous diseases</label>
@@ -94,7 +94,7 @@ function UserDataCollection ( ) {
                 name="diseases"
                 value={diseases}
                 onChange={(e) => handleChange(e)}
-                className="mb-5 border-grey-200 border-2 p-3 rounded-lg"
+                className="mb-5"
             ></input>
 
             <button className="mb-2 bg-teal-500 text-white px-4 py-2 rounded-3xl w-fit">Submit</button>

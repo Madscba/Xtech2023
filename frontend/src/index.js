@@ -12,6 +12,8 @@ import Person from './pages/Person';
 import AllPeople from './pages/AllPeople';
 import Material from './pages/Material';
 import SendFeedback from './pages/SendFeedback';
+import SignUp from './pages/SignUp';
+import Login from './pages/Login';
 import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -20,6 +22,8 @@ root.render(
       <BrowserRouter>
         <Routes>
             <Route index element={<Home/>} />
+            <Route path="login" element={<Login/>} />
+            <Route path="signup" element={<SignUp/>} />
             <Route path="dashboard" element={<Dashboard/>} />
             <Route path="create/submission" element={<CreateSubmission/>} />
             <Route path="add/person" element={<AddPerson />} />

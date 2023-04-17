@@ -44,7 +44,7 @@ function ImagePicker ( props ) {
 
     return (
        <div>
-            <h2>{eyeSide ?? ""}</h2>
+            <h2 className="capitalize">{eyeSide ?? ""}</h2>
             <div className="flex flex-col md:flex-row gap-4 md:gap-10 pt-4">
                 {!videoPath ? 
                     <>

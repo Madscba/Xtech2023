@@ -63,18 +63,18 @@ function Dashboard() {
     return (
         <Wrapper>
             <div className="py-10 pl-10 md:py-20 md:pl-20 space-y-10">
-                <section className="flex flex-col md:flex-row justify-between gap-10 md:gap-20 pr-10 md:pr-20">
-                    <div className="card w-full md:w-2/3 space-y-4 flex flex-col md:flex-row items-center gap-4">
-                        <div className="space-y-4">
+                <section className="flex flex-col md:flex-row justify-between gap-10 pr-10 md:pr-20">
+                    <div className="card w-full md:w-2/3 space-y-4 flex flex-col lg:flex-row items-center gap-4">
+                        <div className="md:space-y-2">
                             <h2>Hello Mia</h2>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                         </div>
-                        <div className="w-1/3 text-5xl flex justify-center items-center">👋</div>
+                        <div className="lg:w-1/3 text-7xl flex justify-center items-center">👋</div>
                     </div>
-                    <div className="card w-full md:w-2/3 space-y-4">
-                        <h2>How To...?</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                        <div>
+                    <div className="card w-full md:w-2/3 space-y-2">
+                        <h2>How to take a good picture</h2>
+                        <p className="pb-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <div className="pb-4">
                             <a href="/material" className="button">
                                 Learn more
                             </a>
@@ -132,8 +132,8 @@ function Dashboard() {
 
                     <div className="flex gap-4 w-full flex-wrap">
                         {people.map((person, index) => (
-                            <a href={`/person/${index}`}>
-                                <div key={index} className="card small w-[350px] flex flex-row justify-between items-center">
+                            <a href={`/person/${index}`} className="w-inherit md:w-[320px]">
+                                <div key={index} className="card small flex flex-row justify-between items-center">
                                     <p><strong>{person}</strong></p>
                                     <a href="/create/submission" className="button">Create submission</a>
                                 </div>
