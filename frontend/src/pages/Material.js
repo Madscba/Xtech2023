@@ -9,7 +9,7 @@ function Material() {
                 <BackButton/>
                 <div className="space-y-6 md:w-2/3">
                     <div className="space-y-2">
-                        <h2>How to?</h2>
+                        <h2>How to take a good picture</h2>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Adipiscing diam donec adipiscing tristique risus nec feugiat. Cursus euismod quis viverra nibh cras pulvinar mattis nunc sed</p>
                     </div>
                     <ul className="space-y-6">

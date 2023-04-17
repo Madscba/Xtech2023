@@ -65,11 +65,11 @@ function Dashboard() {
             <div className="py-10 pl-10 md:py-20 md:pl-20 space-y-10">
                 <section className="flex flex-col md:flex-row justify-between gap-10 pr-10 md:pr-20">
                     <div className="card w-full md:w-2/3 space-y-4 flex flex-col lg:flex-row items-center gap-4">
-                        <div className="md:space-y-2">
+                        <div className="space-y-2">
                             <h2>Hello Mia</h2>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                         </div>
-                        <div className="lg:w-1/3 text-7xl flex justify-center items-center">👋</div>
+                        <div className="hidden md:flex lg:w-1/3 text-7xl justify-center items-center">👋</div>
                     </div>
                     <div className="card w-full md:w-2/3 space-y-2">
                         <h2>How to take a good picture</h2>
@@ -90,7 +90,7 @@ function Dashboard() {
                         </div>
                         <a href="/feedbacks">
                             <div className="secondary-button">
-                                Go
+                            →
                             </div>
                         </a>
                     </div>
@@ -102,7 +102,9 @@ function Dashboard() {
                                     <p><strong>{feedback.name}</strong></p>
                                     <p className="text-sm">Case #{feedback.case}</p>
                                     {feedback.riskLevel ? 
-                                      <RiskLabel riskLevel={feedback.riskLevel}>Risk is {feedback.riskLevel}</RiskLabel> : <></>
+                                        <RiskLabel riskLevel={feedback.riskLevel}>
+                                            Risk is {feedback.riskLevel}
+                                        </RiskLabel> : <></>
                                     }
                                 </div>
                             </a>
@@ -119,12 +121,15 @@ function Dashboard() {
                         <div className="flex flex-row items-center gap-4">
                             <a href="/add/person">
                                 <div className="secondary-button">
-                                    Add
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                                        <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                        <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+                                    </svg>
                                 </div>
                             </a>
                             <a href="/people">
                                 <div className="secondary-button">
-                                    Go
+                                →
                                 </div>
                             </a>
                         </div>

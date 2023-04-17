@@ -36,31 +36,31 @@ function Person() {
             <div className="p-10 md:p-20 space-y-10">
                 <BackButton/>
                 <div className="flex flex-row justify-between w-full">
-                    <h2>Mia</h2>
+                    <div className="space-y-4">
+                        <h2>Your data</h2>
+                        <div className="flex flex-col gap-2">
+                            <div className="flex flex-row gap-2">
+                                <p><strong>Name:</strong></p>
+                                <p>Mia</p>
+                            </div>
+                            <div className="flex flex-row gap-2">
+                                <p><strong>Age:</strong></p>
+                                <p>55</p>
+                            </div>
+                            <div className="flex flex-row gap-2">
+                                <p><strong>Gender:</strong></p>
+                                <p>Female</p>
+                            </div>
+                            <div className="flex flex-row gap-2">
+                                <p><strong>Previous Diseases:</strong></p>
+                                <p>None</p>
+                            </div>
+                        </div>
+                    </div>
+
                     <a href="/create/submission" className="button">Create new submission</a>
                 </div>
 
-                <div className="space-y-4">
-                    <h2>Your data</h2>
-                    <div className="flex flex-col gap-2">
-                        <div className="flex flex-row gap-2">
-                            <p><strong>Name:</strong></p>
-                            <p>Mia</p>
-                        </div>
-                        <div className="flex flex-row gap-2">
-                            <p><strong>Age:</strong></p>
-                            <p>55</p>
-                        </div>
-                        <div className="flex flex-row gap-2">
-                            <p><strong>Gender:</strong></p>
-                            <p>Female</p>
-                        </div>
-                        <div className="flex flex-row gap-2">
-                            <p><strong>Previous Diseases:</strong></p>
-                            <p>None</p>
-                        </div>
-                    </div>
-                </div>
                 <div className="space-y-4">
                     <h2>Your submissions</h2>
                     <div className="flex flex-row flex-nowrap gap-4 overflow-auto pb-4">

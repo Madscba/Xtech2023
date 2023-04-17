@@ -34,7 +34,7 @@ input{
 }
 
 .button.orange{
-    @apply bg-orange-500;
+    @apply text-white bg-primary ;
 }
 
 .button:hover{
@@ -42,7 +42,7 @@ input{
 }
 
 .secondary-button{
-    @apply flex items-center justify-center w-10 h-10 cursor-pointer text-sm font-semibold text-primary bg-white/80 hover:bg-white rounded-full;
+    @apply flex items-center justify-center w-12 h-12 cursor-pointer text-sm font-semibold text-white bg-primary rounded-full;
 }
 
 .number-bullet-point{
