@@ -133,7 +133,7 @@ function Dashboard() {
                     <div className="flex gap-4 w-full flex-wrap">
                         {people.map((person, index) => (
                             <a href={`/person/${index}`} className="w-inherit md:w-[320px]">
-                                <div key={index} className="card small flex flex-row justify-between items-center">
+                                <div key={index} className="card small flex flex-row flex-wrap justify-between items-center">
                                     <p><strong>{person}</strong></p>
                                     <a href="/create/submission" className="button">Create submission</a>
                                 </div>

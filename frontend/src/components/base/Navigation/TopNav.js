@@ -7,7 +7,10 @@ function TopNav() {
                     <span className="text-white font-bold">Eye Opener</span>
                 </div>
             </a>
-            <div className="text-white">Dr. Mia Berg</div>
+            <div className="flex flex-row gap-4 items-center">
+                <img src="/assets/images/doctor-profile-image.png" className="rounded-full w-10 h-10 object-cover object-center"/>
+                <a className="text-white font-semibold cursor-pointer" href="/">Logout</a>
+            </div>
         </div>
     );
   }
