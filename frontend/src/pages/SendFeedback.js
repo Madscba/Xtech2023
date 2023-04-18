@@ -11,26 +11,49 @@ function SendFeedback() {
 
     const doctors = [
         {
-            name: "Dr. Freja Larsen",
-            email: "flarsen@email.io"
+            name: "Dr. Sofie Larsen",
+            email: "slarsen@email.io"
         },
         {
-            name: "Dr. Mikkel Anders",
-            email: "manders@email.io"
+            name: "Dr. Mikkel Nielsen",
+            email: "mnielsen@email.io"
         },
         {
-            name: "Dr. Sven Berg",
-            email: "sberg@email.io"
+            name: "Dr. Emilie Hansen",
+            email: "ehansen@email.io"
+        },
+        {
+            name: "Dr. Frederik Pedersen",
+            email: "fpedersen@email.io"
+        },
+        {
+            name: "Dr. Amalie Andersen",
+            email: "aandersen@email.io"
+        },
+        {
+            name: "Dr. Christian Christensen",
+            email: "cchristensen@email.io"
+        },
+        {
+            name: "Dr. Laura Petersen",
+            email: "lpetersen@email.io"
+        },
+        {
+            name: "Dr. Mathias Rasmussen",
+            email: "mrasmussen@email.io"
         }
     ]
 
 
     return (
         <Wrapper>
-            <div className="p-10 md:p-20 space-y-14">
+            <div className="p-10 md:p-20 space-y-10">
                 <BackButton/>
                 <div className="space-y-10">
-                    <h2>Make a referral for submission #42423432</h2>
+                    <h2>Make a referral for case #42423432</h2>
+                    <div className="space-y-2">
+                        <p><strong>For:</strong> Ida</p>
+                    </div>
                     <div className="space-y-2">
                         <p><strong>Choose a doctor</strong></p>
                         <select className="px-4 py-2 rounded-md">

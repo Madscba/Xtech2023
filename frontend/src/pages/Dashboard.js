@@ -5,7 +5,7 @@ import { useState }  from 'react';
 
 function Dashboard() {
 
-    const [personWasAdded, setPersonWasAdded] = useState(false);
+    const [personWasAdded, setPersonWasAdded] = useState(true);
 
     const feedbacks = [
         {
@@ -15,43 +15,49 @@ function Dashboard() {
             status: "completed"
         },
         {
-            name: "Mia",
+            name: "Signe",
             case: 5311,
             riskLevel: "low",
             status: "completed"
         },
         {
-            name: "Paul",
+            name: "Anders",
             case: 41155,
             riskLevel: "high",
             status: "completed"
         },
         {
-            name: "Freja",
+            name: "Marie",
             case: 23455,
             riskLevel: "high",
             status: "completed"
         },
         {
-            name: "Mia",
+            name: "Matilde",
             case: 5311,
             riskLevel: "low",
             status: "completed"
         },
         {
-            name: "Paul",
+            name: "Emil",
             case: 41155,
             riskLevel: "high",
             status: "completed"
         },
         {
-            name: "Freja",
+            name: "Oscar",
             case: 23455,
             riskLevel: "low",
             status: "completed"
         },
         {
-            name: "Mia",
+            name: "Noah",
+            case: 5311,
+            riskLevel: "low",
+            status: "completed"
+        },
+        {
+            name: "Laura",
             case: 5311,
             riskLevel: "low",
             status: "completed"
@@ -59,7 +65,7 @@ function Dashboard() {
     ]
 
     const people = [
-        "Freja", "Thomas", "Heidi", "Lotte", "Lola", "Mark", "Will", "Lala", "Sasa", "Lilo", "Max"
+        "Freja", "Signe", "Marie", "Matilde", "Emil", "Oscar", "Noah", "Laura"
     ]
 
 
@@ -69,7 +75,7 @@ function Dashboard() {
                 <section className="flex flex-col md:flex-row justify-between gap-10 pr-10 md:pr-20">
                     <div className="card w-full md:w-2/3 space-y-4 flex flex-col lg:flex-row items-center gap-4">
                         <div className="space-y-2">
-                            <h2>Hello Mia</h2>
+                            <h2>Hello Mie</h2>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                         </div>
                         <div className="hidden md:flex lg:w-1/3 text-7xl justify-center items-center">👋</div>
@@ -103,7 +109,7 @@ function Dashboard() {
                             <a href={`/feedback/${index}`}>
                                 <div key={index} className="card min-w-[200px] flex flex-col items-center gap-3 hover:scale-110">
                                     <p><strong>{feedback.name}</strong></p>
-                                    <p className="text-sm">Case #{feedback.case}</p>
+                                    <p className="text-sm pb-1">Case #{feedback.case}</p>
                                     {feedback.riskLevel ? 
                                         <RiskLabel riskLevel={feedback.riskLevel}>
                                             Risk is {feedback.riskLevel}
@@ -142,7 +148,7 @@ function Dashboard() {
                         { personWasAdded ? 
                             <a href="/person/22" className="w-inherit md:w-[320px]">
                                 <div key="22" className="card small flex flex-row flex-wrap justify-between items-center">
-                                    <p><strong>Berta</strong></p>
+                                    <p><strong>Ida</strong></p>
                                     <a href="/create/submission" className="button">Create submission</a>
                                 </div>
                             </a>: <></>

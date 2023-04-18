@@ -15,7 +15,7 @@ function Feedback() {
                     <div className="w-full md:w-fit">
                         <div className="space-y-2">
                             <div className="flex flex-row gap-6 items-center">
-                                <h2>Mia's Feedback</h2>
+                                <h2>Ida's Feedback</h2>
                                 <RiskLabel>Risk is low</RiskLabel>
                             </div>
                             <p>Case #42423432</p>
