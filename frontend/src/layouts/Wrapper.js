@@ -5,7 +5,9 @@ function Wrapper( {children} ) {
         <div>
             <TopNav/>
             <div className="w-full bg-[#F6F6F8] h-screen overflow-y-auto">
-                {children}
+                <div className="max-w-[1400px] mx-auto">
+                    {children}
+                </div>
             </div>
         </div>
     );

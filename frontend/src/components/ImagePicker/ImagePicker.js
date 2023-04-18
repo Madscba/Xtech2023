@@ -44,7 +44,7 @@ function ImagePicker ( props ) {
 
     return (
        <div>
-            <h2 className="capitalize">{eyeSide ?? ""}</h2>
+            <h3 className="capitalize">{eyeSide ?? ""}</h3>
             <div className="flex flex-col md:flex-row gap-4 md:gap-10 pt-4">
                 {!videoPath ? 
                     <>
@@ -55,6 +55,7 @@ function ImagePicker ( props ) {
                                 type="file" 
                                 onChange={handleVideoUpload} 
                                 accept="video/*"
+                                className="p-0!"
                             />
                         </div>
                     </>
@@ -84,7 +85,7 @@ function ImagePicker ( props ) {
                             <canvas ref={canvasElement} className="w-[400px] pb-4"/>
                             {imagePath ? 
                                 <a 
-                                    class="bg-yellow-200 px-6 py-2 rounded-3xl text-sm" 
+                                    class="bg-yellow-200 px-6 py-2 rounded-3xl text-sm font-bold" 
                                     href={imagePath} 
                                     download
                                 >

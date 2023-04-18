@@ -1,8 +1,11 @@
 import Wrapper from "../layouts/Wrapper";
 import RiskLabel from "../components/base/Labels/RiskLabel";
 import NumberLabel from "../components/base/Labels/NumberLabel";
+import { useState }  from 'react'; 
 
 function Dashboard() {
+
+    const [personWasAdded, setPersonWasAdded] = useState(false);
 
     const feedbacks = [
         {
@@ -12,43 +15,49 @@ function Dashboard() {
             status: "completed"
         },
         {
-            name: "Mia",
+            name: "Signe",
             case: 5311,
             riskLevel: "low",
             status: "completed"
         },
         {
-            name: "Paul",
+            name: "Anders",
             case: 41155,
             riskLevel: "high",
             status: "completed"
         },
         {
-            name: "Freja",
+            name: "Marie",
             case: 23455,
             riskLevel: "high",
             status: "completed"
         },
         {
-            name: "Mia",
+            name: "Matilde",
             case: 5311,
             riskLevel: "low",
             status: "completed"
         },
         {
-            name: "Paul",
+            name: "Emil",
             case: 41155,
             riskLevel: "high",
             status: "completed"
         },
         {
-            name: "Freja",
+            name: "Oscar",
             case: 23455,
             riskLevel: "low",
             status: "completed"
         },
         {
-            name: "Mia",
+            name: "Noah",
+            case: 5311,
+            riskLevel: "low",
+            status: "completed"
+        },
+        {
+            name: "Laura",
             case: 5311,
             riskLevel: "low",
             status: "completed"
@@ -56,7 +65,7 @@ function Dashboard() {
     ]
 
     const people = [
-        "Freja", "Thomas", "Heidi", "Lotte", "Lola", "Mark", "Will", "Lala", "Sasa", "Lilo", "Max"
+        "Freja", "Signe", "Marie", "Matilde", "Emil", "Oscar", "Noah", "Laura"
     ]
 
 
@@ -66,7 +75,7 @@ function Dashboard() {
                 <section className="flex flex-col md:flex-row justify-between gap-10 pr-10 md:pr-20">
                     <div className="card w-full md:w-2/3 space-y-4 flex flex-col lg:flex-row items-center gap-4">
                         <div className="space-y-2">
-                            <h2>Hello Mia</h2>
+                            <h2>Hello Mie</h2>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                         </div>
                         <div className="hidden md:flex lg:w-1/3 text-7xl justify-center items-center">👋</div>
@@ -83,7 +92,7 @@ function Dashboard() {
                 </section>
 
                 <section className="space-y-4">
-                    <div className="flex flex-row justify-between pr-20">
+                    <div className="flex flex-row justify-between pr-10 md:pr-20">
                         <div className="flex flex-row gap-2 items-center">
                             <h2>Feedback</h2>
                             <NumberLabel>6</NumberLabel>
@@ -95,12 +104,12 @@ function Dashboard() {
                         </a>
                     </div>
 
-                    <div className="flex flex-row flex-nowrap gap-4 overflow-auto pb-4 last:mr-10"> 
+                    <div className="flex flex-row flex-nowrap gap-4 overflow-auto pb-4 last:mr-10 lg:last:mr-20"> 
                         {feedbacks.map((feedback, index) => (
                             <a href={`/feedback/${index}`}>
                                 <div key={index} className="card min-w-[200px] flex flex-col items-center gap-3 hover:scale-110">
                                     <p><strong>{feedback.name}</strong></p>
-                                    <p className="text-sm">Case #{feedback.case}</p>
+                                    <p className="text-sm pb-1">Case #{feedback.case}</p>
                                     {feedback.riskLevel ? 
                                         <RiskLabel riskLevel={feedback.riskLevel}>
                                             Risk is {feedback.riskLevel}
@@ -118,10 +127,10 @@ function Dashboard() {
                             <h2>People</h2>
                             <NumberLabel>22</NumberLabel>
                         </div>
-                        <div className="flex flex-row items-center gap-4">
+                        <div className="flex flex-row items-center flex-wrap gap-4">
                             <a href="/add/person">
                                 <div className="secondary-button">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="" class="fill-white bi bi-person-plus-fill" viewBox="0 0 16 16">
                                         <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                                         <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
                                     </svg>
@@ -136,6 +145,15 @@ function Dashboard() {
                     </div>
 
                     <div className="flex gap-4 w-full flex-wrap">
+                        { personWasAdded ? 
+                            <a href="/person/22" className="w-inherit md:w-[320px]">
+                                <div key="22" className="card small flex flex-row flex-wrap justify-between items-center">
+                                    <p><strong>Ida</strong></p>
+                                    <a href="/create/submission" className="button">Create submission</a>
+                                </div>
+                            </a>: <></>
+                        }
+                
                         {people.map((person, index) => (
                             <a href={`/person/${index}`} className="w-inherit md:w-[320px]">
                                 <div key={index} className="card small flex flex-row flex-wrap justify-between items-center">

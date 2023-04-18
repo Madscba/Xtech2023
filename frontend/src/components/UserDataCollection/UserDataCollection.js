@@ -1,6 +1,9 @@
 import { useState }  from 'react'; 
+import { useNavigate } from 'react-router-dom';
 
-function UserDataCollection ( ) {
+function UserDataCollection () {
+    const navigate = useNavigate();
+
     const [userData, setUserData] = useState({
         firstname: "",
         lastname: "",
@@ -18,7 +21,7 @@ function UserDataCollection ( ) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(userData);
+        navigate("/dashboard");
         //TODO: save data
     }
 
@@ -26,8 +29,7 @@ function UserDataCollection ( ) {
         <form onSubmit={(e) => handleSubmit(e)} className="w-full md:w-1/3 flex flex-col gap-2">
             <label for="firstname" className="text-sm font-bold">First name</label>
             <input 
-                type="text" 
-                required 
+                type="text"  
                 placeholder="first name" 
                 name="firstname"
                 value={firstname}
@@ -37,8 +39,7 @@ function UserDataCollection ( ) {
 
             <label for="lastname" className="text-sm font-bold">Last name</label>
             <input 
-                type="text" 
-                required 
+                type="text"  
                 placeholder="last name" 
                 name="lastname"
                 value={lastname}
@@ -48,8 +49,7 @@ function UserDataCollection ( ) {
 
             <label for="email" className="text-sm font-bold">Email</label>
             <input 
-                type="email" 
-                required 
+                type="email"  
                 placeholder="e-mail" 
                 name="email"
                 value={email}
@@ -59,8 +59,7 @@ function UserDataCollection ( ) {
 
             <label for="birthday" className="text-sm font-bold">Birthday</label>
             <input 
-                type="date" 
-                required 
+                type="date"  
                 name="birthday"
                 value={birthday}
                 onChange={(e) => handleChange(e)}
@@ -77,8 +76,7 @@ function UserDataCollection ( ) {
 
             <label for="ethnicity" className="text-sm font-bold">Ethnicity</label>
             <input 
-                type="text" 
-                required 
+                type="text"  
                 placeholder="ethnicity" 
                 name="ethnicity"
                 value={ethnicity}
@@ -88,8 +86,7 @@ function UserDataCollection ( ) {
 
             <label for="diseases" className="text-sm font-bold">Previous diseases</label>
             <input 
-                type="text" 
-                required 
+                type="text"  
                 placeholder="previous diseases" 
                 name="diseases"
                 value={diseases}
@@ -97,7 +94,7 @@ function UserDataCollection ( ) {
                 className="mb-5"
             ></input>
 
-            <button className="mb-2 bg-teal-500 text-white px-4 py-2 rounded-3xl w-fit">Submit</button>
+            <button className="button">Add person</button>
         </form>
     )
 }

@@ -16,6 +16,11 @@ h1{
 h2{
     @apply text-2xl font-bold;
 }
+
+h3{
+    @apply text-xl font-bold;
+}
+
 .card{
     @apply shadow-lg rounded-2xl bg-white p-5 md:p-8;
 
@@ -30,11 +35,11 @@ input{
 }
 
 .button{
-    @apply bg-accent text-gray-800 px-6 py-3 rounded-3xl text-sm h-fit font-semibold;
+    @apply bg-primary text-white px-6 py-3 rounded-3xl text-sm h-fit font-semibold;
 }
 
 .button.orange{
-    @apply text-white bg-primary ;
+    @apply text-gray-600 bg-accent;
 }
 
 .button:hover{
@@ -42,7 +47,7 @@ input{
 }
 
 .secondary-button{
-    @apply flex items-center justify-center w-12 h-12 cursor-pointer text-sm font-semibold text-white bg-primary rounded-full;
+    @apply flex items-center justify-center w-12 h-12 cursor-pointer text-sm font-semibold bg-primary text-white rounded-full;
 }
 
 .number-bullet-point{
