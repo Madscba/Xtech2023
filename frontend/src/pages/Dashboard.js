@@ -94,7 +94,7 @@ function Dashboard() {
                 <section className="space-y-4">
                     <div className="flex flex-row justify-between pr-10 md:pr-20">
                         <div className="flex flex-row gap-2 items-center">
-                            <h2>Feedback</h2>
+                            <h2>Feedbacks</h2>
                             <NumberLabel>6</NumberLabel>
                         </div>
                         <a href="/feedbacks">

@@ -12,43 +12,49 @@ function Feedbacks() {
             status: "completed"
         },
         {
-            name: "Mia",
+            name: "Signe",
             case: 5311,
             riskLevel: "low",
             status: "completed"
         },
         {
-            name: "Paul",
+            name: "Anders",
             case: 41155,
             riskLevel: "high",
             status: "completed"
         },
         {
-            name: "Freja",
+            name: "Marie",
             case: 23455,
             riskLevel: "high",
             status: "completed"
         },
         {
-            name: "Mia",
+            name: "Matilde",
             case: 5311,
             riskLevel: "low",
             status: "completed"
         },
         {
-            name: "Paul",
+            name: "Emil",
             case: 41155,
             riskLevel: "high",
             status: "completed"
         },
         {
-            name: "Freja",
+            name: "Oscar",
             case: 23455,
             riskLevel: "low",
             status: "completed"
         },
         {
-            name: "Mia",
+            name: "Noah",
+            case: 5311,
+            riskLevel: "low",
+            status: "completed"
+        },
+        {
+            name: "Laura",
             case: 5311,
             riskLevel: "low",
             status: "completed"

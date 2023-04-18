@@ -6,25 +6,25 @@ import BackButton from "../components/base/Navigation/BackButton";
 function Person() {
     const feedbacks = [
         {
-            name: "Mia",
+            name: "Ida",
             case: 23455,
             riskLevel: "",
             status: "open"
         },
         {
-            name: "Mia",
+            name: "Ida",
             case: 5311,
             riskLevel: "low",
             status: "completed"
         },
         {
-            name: "Mia",
+            name: "Ida",
             case: 41155,
             riskLevel: "high",
             status: "completed"
         },
         {
-            name: "Mia",
+            name: "Ida",
             case: 23455,
             riskLevel: "high",
             status: "completed"
@@ -41,7 +41,7 @@ function Person() {
                         <div className="flex flex-col gap-2">
                             <div className="flex flex-row gap-2">
                                 <p><strong>Name:</strong></p>
-                                <p>Mia</p>
+                                <p>Ida</p>
                             </div>
                             <div className="flex flex-row gap-2">
                                 <p><strong>Age:</strong></p>
