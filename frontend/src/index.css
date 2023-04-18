@@ -42,7 +42,7 @@ input{
     @apply text-gray-600 bg-accent;
 }
 
-.button:hover{
+.button:hover, .secondary-button:hover, .button.orange:hover{
     @apply scale-110;
 }
 
