@@ -75,7 +75,7 @@ function Dashboard() {
                 <section className="flex flex-col md:flex-row justify-between gap-10 pr-10 md:pr-20">
                     <div className="card w-full md:w-2/3 space-y-4 flex flex-col lg:flex-row items-center gap-4">
                         <div className="space-y-2">
-                            <h2>Hello Mie</h2>
+                            <h2>Welcome back Mie</h2>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                         </div>
                         <div className="hidden md:flex lg:w-1/3 text-7xl justify-center items-center">👋</div>

@@ -12,35 +12,43 @@ function SendFeedback() {
 
     const doctors = [
         {
-            name: "Dr. Sofie Larsen",
+            first_name: "Sofie",
+            last_name: "Larsen",
             email: "slarsen@email.io"
         },
         {
-            name: "Dr. Mikkel Nielsen",
+            first_name: "Mikkel",
+            last_name: "Nielsen",
             email: "mnielsen@email.io"
         },
         {
-            name: "Dr. Emilie Hansen",
+            first_name: "Emilie",
+            last_name: "Hansen",
             email: "ehansen@email.io"
         },
         {
-            name: "Dr. Frederik Pedersen",
+            first_name: "Frederik",
+            last_name: "Pedersen",
             email: "fpedersen@email.io"
         },
         {
-            name: "Dr. Amalie Andersen",
+            first_name: "Amalie",
+            last_name: "Andersen",
             email: "aandersen@email.io"
         },
         {
-            name: "Dr. Christian Christensen",
+            first_name: "Christian",
+            last_name: "Christensen",
             email: "cchristensen@email.io"
         },
         {
-            name: "Dr. Laura Petersen",
+            first_name: "Laura",
+            last_name: "Petersen",
             email: "lpetersen@email.io"
         },
         {
-            name: "Dr. Mathias Rasmussen",
+            first_name: "Mathias",
+            last_name: "Rasmussen",
             email: "mrasmussen@email.io"
         }
     ]
@@ -64,17 +72,17 @@ function SendFeedback() {
                         <p><strong>Choose a doctor</strong></p>
                         <select className="px-4 py-2 rounded-md" onChange={(e) => handleChange(e)}>
                             {doctors.map((doctor, index) => (
-                                <option key={index} value={doctor.name}>{doctor.name}</option>
+                                <option key={index} value={doctor.first_name}>Dr. {doctor.first_name} {doctor.last_name}</option>
                             ))}
                         </select>
                     </div>
                     <div className="space-y-2">
                         <p><strong>What we are sending</strong></p>
                         <p className="w-2/3">
-                            Dear {selectedDoctor} <br/> 
+                            Dear {selectedDoctor},<br/> 
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.<br/>
                             Kind regards, <br/>
-                            Mia
+                            Mie
                         </p>
                     </div>
                     <div className="space-y-4">
