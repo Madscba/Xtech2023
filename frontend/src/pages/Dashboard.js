@@ -5,7 +5,7 @@ import { useState }  from 'react';
 
 function Dashboard() {
 
-    const [personWasAdded, setPersonWasAdded] = useState(true);
+    const [personWasAdded, setPersonWasAdded] = useState(false);
 
     const feedbacks = [
         {
