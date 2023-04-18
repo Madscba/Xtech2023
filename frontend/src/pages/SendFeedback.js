@@ -53,7 +53,7 @@ function SendFeedback() {
         }
     ]
 
-    const [selectedDoctor, setSelectedDoctor] = useState("Dr. xxx");
+    const [selectedDoctor, setSelectedDoctor] = useState("Sofie");
       
     const handleChange = (e) => {
         setSelectedDoctor(e.target.value);
@@ -80,7 +80,7 @@ function SendFeedback() {
                         <p><strong>What we are sending</strong></p>
                         <p className="w-2/3">
                             Dear {selectedDoctor},<br/> 
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.<br/>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu.<br/>
                             Kind regards, <br/>
                             Mie
                         </p>
