@@ -1,5 +1,6 @@
 import Wrapper from "../layouts/Wrapper";
 import BackButton from "../components/base/Navigation/BackButton";
+import { useState }  from 'react'; 
 import { useNavigate } from 'react-router-dom';
 
 function SendFeedback() {
@@ -44,6 +45,11 @@ function SendFeedback() {
         }
     ]
 
+    const [selectedDoctor, setSelectedDoctor] = useState("Dr. xxx");
+      
+    const handleChange = (e) => {
+        setSelectedDoctor(e.target.value);
+    };
 
     return (
         <Wrapper>
@@ -56,16 +62,16 @@ function SendFeedback() {
                     </div>
                     <div className="space-y-2">
                         <p><strong>Choose a doctor</strong></p>
-                        <select className="px-4 py-2 rounded-md">
+                        <select className="px-4 py-2 rounded-md" onChange={(e) => handleChange(e)}>
                             {doctors.map((doctor, index) => (
-                                <option key={index} value={doctor.email}>{doctor.name}</option>
+                                <option key={index} value={doctor.name}>{doctor.name}</option>
                             ))}
                         </select>
                     </div>
                     <div className="space-y-2">
                         <p><strong>What we are sending</strong></p>
                         <p className="w-2/3">
-                            Dear ..., <br/> 
+                            Dear {selectedDoctor} <br/> 
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.<br/>
                             Kind regards, <br/>
                             Mia
