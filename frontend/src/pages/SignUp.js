@@ -7,6 +7,7 @@ function SignUp() {
         <PlainWrapper>
             <div className="space-y-4 flex flex-col items-center justify-start">
                 <h1 className="text-accent">Sign Up</h1>
+                <p className="text-sm text-white">Lorem ipsum dolor sit amet, consectetur adipiscing eli.</p>
                 <form className="w-full md:w-1/3 flex flex-col items-center justify-center gap-4">
                     <div className="w-full flex flex-row gap-2">
                         <input 
