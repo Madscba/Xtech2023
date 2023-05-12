@@ -23,11 +23,12 @@ function Login() {
     return (
         <PlainWrapper>
             <div className="space-y-4 flex flex-col items-center justify-start">
-                <h1 className="text-accent">Login</h1>
-                <p className="text-sm text-white">Lorem ipsum dolor sit amet, consectetur adipiscing eli.</p>
+                <h1 className="text-primary">Login</h1>
+                <p className="text-sm text-dark">Lorem ipsum dolor sit amet, consectetur adipiscing eli.</p>
                 <form onSubmit={(e) => handleSubmit(e)} className="w-full md:w-1/3 flex flex-col items-center justify-center gap-4">
                     <input 
                         type="email" 
+                        required
                         placeholder="e-mail" 
                         name="email"
                         value={email}
@@ -35,16 +36,17 @@ function Login() {
                     ></input>
                     <input 
                         type="password" 
+                        required
                         placeholder="password" 
                         name="password"
                         value={password}
                         onChange={(e) => handleChange(e)}
                     ></input>
-                    <button className="button orange w-full">Login</button>
+                    <button className="button w-full">Login</button>
                 </form>
 
                 <div className="pt-10 text-sm">
-                    <p className="text-white">Don't have an account? <a href="/signup" className="text-accent">Sign Up now</a></p>
+                    <p className="text-dark">Don't have an account? <a href="/signup" className="text-primary">Sign Up now</a></p>
                 </div>
             </div>
         </PlainWrapper>

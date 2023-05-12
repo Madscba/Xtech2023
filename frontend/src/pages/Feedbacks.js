@@ -70,7 +70,7 @@ function Feedbacks() {
                     <div className="flex flex-row flex-wrap gap-4 pb-4">
                         {feedbacks.map((feedback, index) => (
                             <a href={`/feedback/${index}`}>
-                                <div key={index} className="card min-w-[200px] flex flex-col items-center gap-3 hover:scale-110">
+                                <div key={index} className="card w-full md:min-w-[200px] flex flex-col items-center gap-3 hover:scale-110">
                                     <p><strong>{feedback.name}</strong></p>
                                     <p className="text-sm">Case #{feedback.case}</p>
                                     <StatusLabel status={feedback.status}>{feedback.status}</StatusLabel>

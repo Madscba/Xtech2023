@@ -39,7 +39,7 @@ input{
 }
 
 .button.orange{
-    @apply text-gray-600 bg-accent;
+    @apply text-dark bg-accent;
 }
 
 .button:hover, .secondary-button:hover, .button.orange:hover{
@@ -48,6 +48,10 @@ input{
 
 .secondary-button{
     @apply flex items-center justify-center w-12 h-12 cursor-pointer text-sm font-semibold bg-primary text-white rounded-full;
+}
+
+.secondary-button.orange{
+    @apply bg-accent;
 }
 
 .number-bullet-point{

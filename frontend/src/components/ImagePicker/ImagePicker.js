@@ -50,11 +50,11 @@ function ImagePicker ( props ) {
                     <>
                         <VideoRecorder handleRecordedVideo={updateVideoPath}/>
                         <div className="space-y-2">
-                            <p><strong>Upload a video</strong></p>
+                            <p><strong>Upload a video or image</strong></p>
                             <input 
                                 type="file" 
                                 onChange={handleVideoUpload} 
-                                accept="video/*"
+                                accept="video/*, image/png, image/jpeg"
                                 className="p-0!"
                             />
                         </div>
