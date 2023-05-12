@@ -1,6 +1,6 @@
 function NumberLabel({children}) {
     return (
-        <span className="flex items-center justify-center p-2 text-sm font-semibold text-primary bg-primary/10 rounded">
+        <span className="flex items-center justify-center p-2 text-sm font-semibold text-primary bg-base/20 rounded">
             {children}
         </span>
     );

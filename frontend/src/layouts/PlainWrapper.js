@@ -2,7 +2,7 @@ import PlainNavbar from "../components/base/Navigation/PlainNavbar";
 
 function PlainWrapper( {children} ) {
     return (
-        <div className="relative bg-primary min-h-screen">
+        <div className="relative bg-base min-h-screen">
             <PlainNavbar/>
             <div className=" md:h-screen w-screen flex flex-col lg:flex-row items-center justify-start overflow-hidden">
                 <div className=" w-full lg:w-1/3 lg:max-w-[450px] h-[220px] sm:h-[350px] md:h-[400px] lg:h-full flex items-center overflow-hidden">

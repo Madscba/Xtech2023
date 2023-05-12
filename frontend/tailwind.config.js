@@ -6,8 +6,10 @@ module.exports = {
   theme: {
     extend: {
       colors:{
-        'primary': 'rgb(79 70 229)',
-        'accent': '#B1FFE8'
+        'primary': ' #02ACE8',
+        'base': '#BCE3FF',
+        'accent': '#FDC60A',
+        'dark': '#242424'
       },
       width:{
         'fit': 'fit-content',

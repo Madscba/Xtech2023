@@ -15,9 +15,11 @@ function CreateSubmission() {
             <div className="p-10 md:p-20 space-y-10">
                 <BackButton/>
                 <div className="space-y-4">
-                    <h2 className="pb-4">Create a submission</h2>
-                    <ImagePicker eyeSide="left"/>
-                    <ImagePicker eyeSide="right"/>
+                    <h2 className="pb-4">Create a submission for Mads</h2>
+                    <div className="flex flex-col gap-4">
+                        <ImagePicker eyeSide="left"/>
+                        <ImagePicker eyeSide="right"/>
+                    </div>
                 </div>
                 <button className="button" onClick={redirectToFeedback}>Send submission</button>
             </div>
