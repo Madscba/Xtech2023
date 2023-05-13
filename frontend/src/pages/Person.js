@@ -1,9 +1,28 @@
+import React, { useState, useEffect, } from 'react';
+import { useParams } from 'react-router-dom'
 import Wrapper from "../layouts/Wrapper";
 import RiskLabel from "../components/base/Labels/RiskLabel";
 import StatusLabel from "../components/base/Labels/StatusLabel";
 import BackButton from "../components/base/Navigation/BackButton";
 
 function Person() {
+    const { id } = useParams();
+
+    const [patientData, setPatientData] = useState();
+
+    useEffect(() => {
+        setPatientData()
+        getPatientData();
+    }, []);
+
+    const getPatientData = async () => {
+        if(id){
+            const response = await fetch(`http://localhost:8000/prediction/patient/${id}`);
+            const jsonData = await response.json();
+            setPatientData(jsonData.data)
+        }
+    }
+
     const feedbacks = [
         {
             name: "Mads",
@@ -37,31 +56,31 @@ function Person() {
                 <BackButton/>
                 <div className="flex flex-row justify-between w-full">
                     <div className="space-y-4">
-                        <h2>Your data</h2>
+                        <h2>Data - {patientData?.first_name ?? ""} </h2>
                         <div className="flex flex-col gap-2">
                             <div className="flex flex-row gap-2">
                                 <p><strong>Name:</strong></p>
-                                <p>Mads</p>
+                                <p>{patientData?.first_name} {patientData?.last_name}</p>
                             </div>
                             <div className="flex flex-row gap-2">
-                                <p><strong>Age:</strong></p>
-                                <p>55</p>
+                                <p><strong>Birth year:</strong></p>
+                                <p>{patientData?.birth_year}</p>
                             </div>
                             <div className="flex flex-row gap-2">
                                 <p><strong>Email:</strong></p>
-                                <p>test@test.io</p>
+                                <p>{patientData?.email}</p>
                             </div>
                             <div className="flex flex-row gap-2">
                                 <p><strong>Gender:</strong></p>
-                                <p>Female</p>
+                                <p>{patientData?.gender ?? "not defined"}</p>
                             </div>
                             <div className="flex flex-row gap-2">
                                 <p><strong>Ethnicity:</strong></p>
-                                <p>Caucasian</p>
+                                <p>{patientData?.ethnicity ?? "not defined"}</p>
                             </div>
                             <div className="flex flex-row gap-2">
                                 <p><strong>Previous Diseases:</strong></p>
-                                <p>None</p>
+                                <p>{patientData?.diseases ?? "not defined"}</p>
                             </div>
                         </div>
                     </div>

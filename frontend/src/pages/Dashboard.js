@@ -14,7 +14,8 @@ function Dashboard() {
     const getPatients = async () => {
         const response = await fetch("http://localhost:8000/prediction/patients");
         const jsonData = await response.json();
-        setPatients(jsonData.patients ?? []);
+        console.log(jsonData)
+        setPatients(jsonData.data ?? []);
     }
 
     const feedbacks = [
@@ -151,10 +152,10 @@ function Dashboard() {
 
                     <div className="flex gap-4 w-full flex-wrap">
                         {patients.map((patient, index) => (
-                            <a href={`/person/${index}`} className="w-inherit md:w-[320px]">
+                            <a href={`/person/${patient.id}`} className="w-inherit md:w-[320px]">
                                 <div key={index} className="card small flex flex-row flex-wrap justify-between items-center">
                                     <p><strong>{patient.first_name}</strong></p>
-                                    <a href="/create/submission" className="button">Create submission</a>
+                                    <a href={`/create/submission/${patient.id}`} className="button">Create submission</a>
                                 </div>
                             </a>
                         ))}

@@ -34,10 +34,20 @@ def add_patient(request):
 def get_patients(request):
     try:
         patients = Patient.objects.all()[:10]
-        serialized_patients =  PatientSerializer(patients, many=True)
+        serialized_patients = PatientSerializer(patients, many=True)
     except:
         return JsonResponse({ "message": "fetching patients failed" }, status=400)
-    return JsonResponse({ "patients": serialized_patients.data }, status=200)
+    return JsonResponse({ "data": serialized_patients.data }, status=200)
+
+def get_patient(request, patient_id):
+    try:
+        if request.method == 'GET':
+            if patient_id: 
+                patient = Patient.objects.get(id=patient_id)
+                serialized_patient = PatientSerializer(patient, many=False)
+    except:
+        return JsonResponse({ "message": "fetching patients failed" }, status=400)
+    return JsonResponse({ "data": serialized_patient.data }, status=200)
 
 
 @csrf_exempt
