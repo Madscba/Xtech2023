@@ -22,7 +22,6 @@ function UserDataCollection () {
     const handleSubmit = (e) => {
         e.preventDefault();
         navigate("/dashboard");
-        //TODO: save data
     }
 
     return (
@@ -84,7 +83,7 @@ function UserDataCollection () {
                 className="mb-2"
             ></input>
 
-            <label for="diseases" className="text-sm font-bold">Previous diseases</label>
+            <label for="diseases" className="text-sm font-bold">(Previous) diseases</label>
             <input 
                 type="text"  
                 placeholder="previous diseases" 

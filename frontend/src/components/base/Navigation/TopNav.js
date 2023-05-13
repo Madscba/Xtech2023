@@ -8,7 +8,7 @@ function TopNav() {
             </a>
             <div className="flex flex-row gap-4 items-center">
                 <img src="/assets/images/doctor-profile-image.png" className="rounded-full w-10 h-10 object-cover object-center"/>
-                <a className="text-dark font-medium cursor-pointer" href="/">Logout</a>
+                <a className="text-dark font-semibold cursor-pointer" href="/">Logout</a>
             </div>
         </div>
     );

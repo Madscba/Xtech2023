@@ -9,7 +9,6 @@ from io import StringIO
 from django.views.decorators.csrf import csrf_exempt 
 from ML.src.torch_utils import transform_image
 import torchvision.transforms as transforms
-from prediction.models import Users
 from collections import defaultdict
 
 @csrf_exempt

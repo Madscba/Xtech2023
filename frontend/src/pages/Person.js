@@ -48,8 +48,16 @@ function Person() {
                                 <p>55</p>
                             </div>
                             <div className="flex flex-row gap-2">
+                                <p><strong>Email:</strong></p>
+                                <p>test@test.io</p>
+                            </div>
+                            <div className="flex flex-row gap-2">
                                 <p><strong>Gender:</strong></p>
                                 <p>Female</p>
+                            </div>
+                            <div className="flex flex-row gap-2">
+                                <p><strong>Ethnicity:</strong></p>
+                                <p>Caucasian</p>
                             </div>
                             <div className="flex flex-row gap-2">
                                 <p><strong>Previous Diseases:</strong></p>
@@ -69,9 +77,7 @@ function Person() {
                                 <div key={index} className="card min-w-[200px] h-[180px] flex flex-col items-center gap-3 hover:scale-110">
                                     <p><strong>Case #{feedback.case}</strong></p>
                                     <StatusLabel status={feedback.status}>{feedback.status}</StatusLabel>
-                                    {feedback.riskLevel ? 
-                                      <RiskLabel riskLevel={feedback.riskLevel}>Risk is {feedback.riskLevel}</RiskLabel> : <></>
-                                    }
+                                    {feedback.riskLevel && <RiskLabel riskLevel={feedback.riskLevel}>Risk is {feedback.riskLevel}</RiskLabel>}
                                 </div>
                             </a>
                         ))}

@@ -1,12 +1,8 @@
 import Wrapper from "../layouts/Wrapper";
 import RiskLabel from "../components/base/Labels/RiskLabel";
 import NumberLabel from "../components/base/Labels/NumberLabel";
-import { useState }  from 'react'; 
 
 function Dashboard() {
-
-    const [personWasAdded, setPersonWasAdded] = useState(false);
-
     const feedbacks = [
         {
             name: "Freja",
@@ -110,11 +106,11 @@ function Dashboard() {
                                 <div key={index} className="card min-w-[200px] flex flex-col items-center gap-3 hover:scale-110">
                                     <p><strong>{feedback.name}</strong></p>
                                     <p className="text-sm pb-1">Case #{feedback.case}</p>
-                                    {feedback.riskLevel ? 
+                                    {feedback.riskLevel && (
                                         <RiskLabel riskLevel={feedback.riskLevel}>
                                             Risk is {feedback.riskLevel}
-                                        </RiskLabel> : <></>
-                                    }
+                                        </RiskLabel>
+                                    )}
                                 </div>
                             </a>
                         ))}
@@ -145,15 +141,6 @@ function Dashboard() {
                     </div>
 
                     <div className="flex gap-4 w-full flex-wrap">
-                        { personWasAdded ? 
-                            <a href="/person/22" className="w-inherit md:w-[320px]">
-                                <div key="22" className="card small flex flex-row flex-wrap justify-between items-center">
-                                    <p><strong>Ida</strong></p>
-                                    <a href="/create/submission" className="button">Create submission</a>
-                                </div>
-                            </a>: <></>
-                        }
-                
                         {people.map((person, index) => (
                             <a href={`/person/${index}`} className="w-inherit md:w-[320px]">
                                 <div key={index} className="card small flex flex-row flex-wrap justify-between items-center">

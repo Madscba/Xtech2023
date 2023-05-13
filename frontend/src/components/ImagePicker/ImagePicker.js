@@ -50,11 +50,11 @@ function ImagePicker ( props ) {
                     <>
                         <VideoRecorder handleRecordedVideo={updateVideoPath}/>
                         <div className="space-y-2">
-                            <p><strong>Upload a video or image</strong></p>
+                            <p><strong>Upload a video</strong></p>
                             <input 
                                 type="file" 
                                 onChange={handleVideoUpload} 
-                                accept="video/*, image/png, image/jpeg"
+                                accept="video/*"
                                 className="p-0!"
                             />
                         </div>
@@ -85,11 +85,11 @@ function ImagePicker ( props ) {
                             <canvas ref={canvasElement} className="w-[400px] pb-4"/>
                             {imagePath ? 
                                 <a 
-                                    class="bg-yellow-200 px-6 py-2 rounded-3xl text-sm font-bold" 
+                                    class="bg-yellow-200 px-6 py-3 rounded-3xl text-sm h-fit font-semibold" 
                                     href={imagePath} 
                                     download
                                 >
-                                    Ready to download
+                                    Ready to download 
                                 </a>
                                 : <></>
                             }

@@ -34,6 +34,11 @@ Backend:
 * Backend runs on `http://127.0.0.1:8000/`
 * Admin dashboard on `http://127.0.0.1:8000/admin`
 
+Make changes in DB:
+* Make the changes in the models.py files
+* Run `python manage.py manage.py makemigrations`
+* Run `python manage.py migrate`
+* Register your changes in the admin.py of the respective app
 
 ## Learn more
 
