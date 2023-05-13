@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-# Create your views here.
+from .serializers import PatientSerializer
 from transformers import AutoImageProcessor, MobileNetV2ForImageClassification
 import torch, io
 from datasets import load_dataset
@@ -28,8 +28,17 @@ def add_patient(request):
             patient = Patient(first_name=data['firstname'], last_name=data['lastname'], email=data['email'], birth_year=data['birthyear'])
             patient.save()
     except:
-        return JsonResponse({"message": "adding a user failed"}, status=400)
-    return JsonResponse({"message": "added user successful"}, status=200)
+        return JsonResponse({ "message": "adding a user failed" }, status=400)
+    return JsonResponse({ "message": "added user successful" }, status=200)
+
+def get_patients(request):
+    try:
+        patients = Patient.objects.all()[:10]
+        serialized_patients =  PatientSerializer(patients, many=True)
+    except:
+        return JsonResponse({ "message": "fetching patients failed" }, status=400)
+    return JsonResponse({ "patients": serialized_patients.data }, status=200)
+
 
 @csrf_exempt
 def machine_learning_test(request):

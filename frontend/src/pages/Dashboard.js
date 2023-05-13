@@ -1,8 +1,22 @@
+import React, { useState, useEffect } from 'react';
 import Wrapper from "../layouts/Wrapper";
 import RiskLabel from "../components/base/Labels/RiskLabel";
 import NumberLabel from "../components/base/Labels/NumberLabel";
 
 function Dashboard() {
+
+    const [patients, setPatients] = useState([]);
+
+    useEffect(() => {
+        getPatients();
+    }, []);
+
+    const getPatients = async () => {
+        const response = await fetch("http://localhost:8000/prediction/patients");
+        const jsonData = await response.json();
+        setPatients(jsonData.patients ?? []);
+    }
+
     const feedbacks = [
         {
             name: "Freja",
@@ -59,11 +73,6 @@ function Dashboard() {
             status: "completed"
         },
     ]
-
-    const people = [
-        "Freja", "Signe", "Marie", "Matilde", "Emil", "Oscar", "Noah", "Laura"
-    ]
-
 
     return (
         <Wrapper>
@@ -141,10 +150,10 @@ function Dashboard() {
                     </div>
 
                     <div className="flex gap-4 w-full flex-wrap">
-                        {people.map((person, index) => (
+                        {patients.map((patient, index) => (
                             <a href={`/person/${index}`} className="w-inherit md:w-[320px]">
                                 <div key={index} className="card small flex flex-row flex-wrap justify-between items-center">
-                                    <p><strong>{person}</strong></p>
+                                    <p><strong>{patient.first_name}</strong></p>
                                     <a href="/create/submission" className="button">Create submission</a>
                                 </div>
                             </a>
