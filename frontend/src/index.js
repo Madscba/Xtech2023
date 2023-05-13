@@ -27,7 +27,7 @@ root.render(
             <Route path="login" element={<Login/>} />
             <Route path="signup" element={<SignUp/>} />
             <Route path="dashboard" element={<Dashboard/>} />
-            <Route path="create/submission" element={<CreateSubmission/>} />
+            <Route path="create/submission/:id" element={<CreateSubmission/>} />
             <Route path="add/person" element={<AddPerson />} />
             <Route path="person/:id" element={<Person/>} />
             <Route path="people" element={<AllPeople/>} />
