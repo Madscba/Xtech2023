@@ -8,26 +8,44 @@ function UserDataCollection () {
         firstname: "",
         lastname: "",
         email: "",
-        birthday: null,
+        birthyear: null,
         ethnicity: "",
         diseases : ""
     });
 
-    const { firstname, lastname, email, birthday, ethnicity, diseases } = userData;
+    const { firstname, lastname, email, birthyear, ethnicity, diseases } = userData;
 
     const handleChange = (e) => {
         setUserData({ ...userData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        navigate("/dashboard");
+
+        try {
+            const response = await fetch("http://localhost:8000/prediction/patient/add", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(userData),
+            });
+
+            if(response.status){
+                navigate("/dashboard");
+            }
+
+            //TODO: add error handling
+          } catch (error) {
+            console.error("Error:", error);
+          }
     }
 
     return (
         <form onSubmit={(e) => handleSubmit(e)} className="w-full md:w-1/3 flex flex-col gap-2">
-            <label for="firstname" className="text-sm font-bold">First name</label>
+            <label for="firstname" className="text-sm font-bold">First name *</label>
             <input 
+                required
                 type="text"  
                 placeholder="first name" 
                 name="firstname"
@@ -36,8 +54,9 @@ function UserDataCollection () {
                 className="mb-2"
             ></input>
 
-            <label for="lastname" className="text-sm font-bold">Last name</label>
+            <label for="lastname" className="text-sm font-bold">Last name *</label>
             <input 
+                required
                 type="text"  
                 placeholder="last name" 
                 name="lastname"
@@ -46,8 +65,9 @@ function UserDataCollection () {
                 className="mb-2"
             ></input>
 
-            <label for="email" className="text-sm font-bold">Email</label>
+            <label for="email" className="text-sm font-bold">Email *</label>
             <input 
+                required
                 type="email"  
                 placeholder="e-mail" 
                 name="email"
@@ -56,16 +76,21 @@ function UserDataCollection () {
                 className="mb-2"
             ></input>
 
-            <label for="birthday" className="text-sm font-bold">Birthday</label>
+            <label for="birthyear" className="text-sm font-bold">Birthyear *</label>
             <input 
-                type="date"  
-                name="birthday"
-                value={birthday}
+                required
+                type="number" 
+                min="1900" 
+                max="2099" 
+                step="1" 
+                placeholder="1980" 
+                name="birthyear"
+                value={birthyear}
                 onChange={(e) => handleChange(e)}
                 className="mb-2"
             ></input>
 
-            <label for="birthday" className="text-sm font-bold">Gender</label>
+            <label for="gender" className="text-sm font-bold">Gender *</label>
             <select className="mb-2 px-2 py-2 rounded-md">
                 <option value="female">Female</option>
                 <option value="male">Male</option>

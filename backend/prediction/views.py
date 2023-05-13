@@ -10,11 +10,26 @@ from io import StringIO
 import torchvision.transforms as transforms
 from django.views.decorators.csrf import csrf_exempt 
 from ML.src.torch_utils import transform_image,get_prediction
+from .models import Patient
+import json
+
 sys.path.insert(0, '')
 
 
-def index(request):
-    return render(request, 'eyeopener/hello.html', {})
+#NOTE: the additional user data is not stored for now due to gdpr concerns
+#NOTE: no backend validation yet
+
+@csrf_exempt
+def add_patient(request):
+    try:
+        if request.method == 'POST':
+            data_unicode = request.body.decode('utf-8')
+            data = json.loads(data_unicode)
+            patient = Patient(first_name=data['firstname'], last_name=data['lastname'], email=data['email'], birth_year=data['birthyear'])
+            patient.save()
+    except:
+        return JsonResponse({"message": "adding a user failed"}, status=400)
+    return JsonResponse({"message": "added user successful"}, status=200)
 
 @csrf_exempt
 def machine_learning_test(request):
