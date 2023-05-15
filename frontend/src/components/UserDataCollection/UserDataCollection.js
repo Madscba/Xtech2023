@@ -21,9 +21,9 @@ function UserDataCollection () {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        
         try {
-            const response = await fetch("http://localhost:8000/prediction/patient/add", {
+            const response = await fetch("http://localhost:8000/prediction/patient", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -37,7 +37,7 @@ function UserDataCollection () {
 
             //TODO: add error handling
           } catch (error) {
-            console.error("Error:", error);
+            console.error(error);
           }
     }
 

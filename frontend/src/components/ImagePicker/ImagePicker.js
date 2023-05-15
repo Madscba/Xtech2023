@@ -1,18 +1,13 @@
 import { useState, useRef, useEffect }  from 'react'; 
 import VideoRecorder from '../VideoRecorder/VideoRecorder';
 
-function ImagePicker ( props ) {
+function ImagePicker ({ eyeSide, handleImageSubmission }) {
   
     const [videoPath, setVideoPath] = useState();
     const [imagePath, setImagePath] = useState();
-    const [eyeSide, setEyeSide] = useState();
 
     const canvasElement = useRef();
     const videoElement = useRef();
-
-    useEffect(() => {
-        setEyeSide(props.eyeSide + " eye")
-    }, [props]);
 
     const handleVideoUpload = (event) => {
         setVideoPath(URL.createObjectURL(event.target.files[0]));
@@ -29,9 +24,9 @@ function ImagePicker ( props ) {
             .getContext("2d")
             .drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
 
-   
         canvas.toBlob(blob => {
                 setImagePath(URL.createObjectURL(blob));
+                handleImageSubmission({"eyeSide": eyeSide, "image": blob});
             },
             'image/jpeg',
             0.9,
@@ -83,7 +78,7 @@ function ImagePicker ( props ) {
 
                         <div>
                             <canvas ref={canvasElement} className="w-[400px] pb-4"/>
-                            {imagePath ? 
+                            { imagePath ? 
                                 <a 
                                     class="bg-yellow-200 px-6 py-3 rounded-3xl text-sm h-fit font-semibold" 
                                     href={imagePath} 

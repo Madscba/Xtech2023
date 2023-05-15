@@ -36,7 +36,7 @@ Backend:
 
 Make changes in DB:
 * Make the changes in the models.py files
-* Run `python manage.py manage.py makemigrations`
+* Run `python manage.py makemigrations`
 * Run `python manage.py migrate`
 * Register your changes in the admin.py of the respective app
 

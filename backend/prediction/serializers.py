@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Practioner, Patient, Submission, SubmittedEyes
+from .models import Practioner, Patient, Submission, SubmittedEye
 
 class PractionerSerializer(serializers.ModelSerializer):
     class Meta:
@@ -16,7 +16,7 @@ class SubmissionSerializer(serializers.ModelSerializer):
         model = Submission
         fields = '__all__'
 
-class SubmittedEyesSerializer(serializers.ModelSerializer):
+class SubmittedEyeSerializer(serializers.ModelSerializer):
     class Meta:
-        model = SubmittedEyes
+        model = SubmittedEye
         fields = '__all__'

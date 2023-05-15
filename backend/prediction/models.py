@@ -33,13 +33,27 @@ class Submission(models.Model):
         ("completed", "completed"),
     ]
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(null=True, blank=True)
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     status = models.CharField(max_length=50, choices=STATUS_OPTIONS, null=True, blank=True)
-    detection_result = models.IntegerField(null=True, blank=True)
+    risk_level = models.IntegerField(null=True, blank=True)
     detection_at = models.DateTimeField(null=True, blank=True)
     practioner = models.ForeignKey(Practioner, on_delete=models.CASCADE, null=True, blank=True)
 
-class SubmittedEyes(models.Model):
-    eye_side = models.CharField(max_length=20, null=True, blank=True)
-    eye_image = models.CharField(max_length=200, blank=True, null=True)
+    def __str__(self):
+        return f"submission for:{self.patient.first_name}, status: {self.status}"
+
+def get_file_path(instance, filename):
+        return f"submission-{instance.submission.id}/images/{filename}"
+
+class SubmittedEye(models.Model):
+    EYE_SIDES = [
+        ("left", "left"),
+        ("right", "right"),
+    ]
+    eye_side = models.CharField(max_length=20, choices=EYE_SIDES, null=True, blank=True)
+    image = models.ImageField(upload_to=get_file_path, null=True, blank=True)
+    submission = models.ForeignKey(Submission, on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        return f"submission: {self.submission.id}, eye-side: {self.eye_side}"
+
