@@ -37,8 +37,9 @@ class Submission(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     status = models.CharField(max_length=50, choices=STATUS_OPTIONS, null=True, blank=True)
-    detection_at = models.DateTimeField(null=True, blank=True)
+    detection_at = models.DateTimeField(auto_now=True)
     practioner = models.ForeignKey(Practioner, on_delete=models.CASCADE, null=True, blank=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return f"submission for:{self.patient.first_name}, status: {self.status}"

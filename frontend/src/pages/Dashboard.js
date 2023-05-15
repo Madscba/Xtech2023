@@ -6,10 +6,11 @@ import NumberLabel from "../components/base/Labels/NumberLabel";
 function Dashboard() {
 
     const [patients, setPatients] = useState([]);
+    const [feedbacks, setFeedbacks] = useState([]);
 
     useEffect(() => {
         getPatients();
-        console.log(patients)
+        getFeedbacks();
     }, []);
 
     const getPatients = async () => {
@@ -18,62 +19,11 @@ function Dashboard() {
         setPatients(jsonData.data ?? []);
     }
 
-    const feedbacks = [
-        {
-            name: "Freja",
-            case: 23455,
-            riskLevel: "high",
-            status: "completed"
-        },
-        {
-            name: "Signe",
-            case: 5311,
-            riskLevel: "low",
-            status: "completed"
-        },
-        {
-            name: "Anders",
-            case: 41155,
-            riskLevel: "high",
-            status: "completed"
-        },
-        {
-            name: "Marie",
-            case: 23455,
-            riskLevel: "high",
-            status: "completed"
-        },
-        {
-            name: "Matilde",
-            case: 5311,
-            riskLevel: "low",
-            status: "completed"
-        },
-        {
-            name: "Emil",
-            case: 41155,
-            riskLevel: "high",
-            status: "completed"
-        },
-        {
-            name: "Oscar",
-            case: 23455,
-            riskLevel: "low",
-            status: "completed"
-        },
-        {
-            name: "Noah",
-            case: 5311,
-            riskLevel: "low",
-            status: "completed"
-        },
-        {
-            name: "Laura",
-            case: 5311,
-            riskLevel: "low",
-            status: "completed"
-        },
-    ]
+    const getFeedbacks= async () => {
+        const response = await fetch("http://localhost:8000/api/submissions");
+        const jsonData = await response.json();
+        setFeedbacks(jsonData.data ?? []);
+    }
 
     return (
         <Wrapper>
@@ -110,17 +60,18 @@ function Dashboard() {
                         </a>
                     </div>
 
-                    <div className="flex flex-row flex-nowrap gap-4 overflow-auto pb-4 last:mr-10 lg:last:mr-20"> 
-                        {feedbacks.map((feedback, index) => (
+                    <div className="flex flex-row flex-nowrap gap-4 overflow-auto pb-4 last:mr-10 lg:last:mr-20">
+                        {feedbacks.length === 0 && <p>You haven't added any patients yet.</p>}
+                        {feedbacks?.length > 0 && feedbacks.map((feedback, index) => (
                             <a href={`/feedback/${index}`}>
                                 <div key={index} className="card min-w-[200px] flex flex-col items-center gap-3 hover:scale-110">
-                                    <p><strong>{feedback.name}</strong></p>
-                                    <p className="text-sm pb-1">Case #{feedback.case}</p>
-                                    {feedback.riskLevel && (
-                                        <RiskLabel riskLevel={feedback.riskLevel}>
-                                            Risk is {feedback.riskLevel}
+                                    <p><strong>{feedback.submission.patient.first_name}</strong></p>
+                                    <p className="text-sm pb-1">Case #{feedback.submission.id}</p>
+                                    {feedback.submitted_eyes.length > 0 && feedback.submitted_eyes.map((eye, index) => (
+                                        <RiskLabel riskLevel={eye.risk_level} key={index}>
+                                            Risk on the {eye.eye_side} side is {eye.risk_level}
                                         </RiskLabel>
-                                    )}
+                                     ))}
                                 </div>
                             </a>
                         ))}

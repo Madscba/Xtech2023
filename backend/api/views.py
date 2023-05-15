@@ -5,7 +5,7 @@ import json
 import requests, sys, os, piq
 from datetime import datetime
 from django.contrib.auth.models import User
-from .serializers import PatientSerializer, SubmissionSerializer
+from .serializers import PatientSerializer, SubmissionSerializer, SubmittedEyeSerializer
 from .models import Patient, Submission, SubmittedEye
 from .utils import encode_request_data
 from prediction.views import dummy_glaucoma_prediction
@@ -49,14 +49,15 @@ def create_submission(request):
         if request.method == 'POST':
             patient_id = request.POST['patient']
             patient = Patient.objects.get(id=patient_id)
-            submission = Submission(patient=patient)
+            author = User.objects.get(email=os.environ.get('USER_EMAIL'))
+            submission = Submission(patient=patient, author=author)
             submission.save()
-            if request.FILES["right_eye"]: 
+            if "right_eye" in request.FILES: 
                 risk_level = dummy_glaucoma_prediction(request.FILES["right_eye"])
                 submitted_eye = SubmittedEye(eye_side="right", image=request.FILES["right_eye"], submission=submission, risk_level=risk_level)
                 submitted_eye.save()
                 #TODO:add error handling
-            if request.FILES["left_eye"]: 
+            if "left_eye" in request.FILES: 
                 risk_level = dummy_glaucoma_prediction(request.FILES["left_eye"])
                 submitted_eye = SubmittedEye(eye_side="left", image=request.FILES["left_eye"], submission=submission, risk_level=risk_level)
                 submitted_eye.save()
@@ -64,9 +65,22 @@ def create_submission(request):
             #update current submission
             submission = Submission.objects.get(id=submission.id)
             submission.status = "completed"
-            submission.detection_at = datetime.now()
             submission.save()
     except Exception as e:
         print(e)
         return JsonResponse({ "message": "submission creation failed" }, status=400)
     return JsonResponse({ "message": "submission was created successfully" }, status=200)
+
+def get_submissions(request):
+    try:
+        #TODO: add pagination
+        admin = User.objects.get(email=os.environ.get('USER_EMAIL'))
+        enriched_submissions = []
+        submissions = Submission.objects.all().filter(author=admin)[:10]
+        for submission in submissions:
+            submitted_eyes = SubmittedEye.objects.all().filter(submission=submission)
+            enriched_submissions.append({"submission": SubmissionSerializer(submission, many=False).data, "submitted_eyes": SubmittedEyeSerializer(submitted_eyes, many=True).data})
+    except Exception as e:
+        print(e)
+        return JsonResponse({ "message": "fetching submissions failed" }, status=400)
+    return JsonResponse({ "data": enriched_submissions }, status=200)

@@ -15,6 +15,7 @@ class SubmissionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Submission
         fields = '__all__'
+        depth = 1
 
 class SubmittedEyeSerializer(serializers.ModelSerializer):
     class Meta:

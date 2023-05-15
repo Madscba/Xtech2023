@@ -39,8 +39,14 @@ function CreateSubmission() {
     const createForm = async () => {
         let form_data = new FormData();
         form_data.append("patient", patient.id);
-        form_data.append("right_eye", new File([imageRightSide], "right-eye.jpg", { type: "image/jpeg" }));
-        form_data.append("left_eye", new File([imageLeftSide], "left-eye.jpg", { type: "image/jpeg" }));
+
+        if(imageRightSide){
+            form_data.append("right_eye", new File([imageRightSide], "right-eye.jpg", { type: "image/jpeg" }));
+        }
+
+        if(imageLeftSide){
+            form_data.append("left_eye", new File([imageLeftSide], "left-eye.jpg", { type: "image/jpeg" }));
+        }
         
         return form_data;
     }
