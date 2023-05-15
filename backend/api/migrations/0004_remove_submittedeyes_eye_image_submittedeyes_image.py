@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('prediction', '0003_rename_detection_result_submission_risk_level'),
+        ('api', '0003_rename_detection_result_submission_risk_level'),
     ]
 
     operations = [

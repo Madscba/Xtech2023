@@ -11,7 +11,7 @@ function AllPeople() {
     }, []);
 
     const getPatients = async () => {
-        const response = await fetch("http://localhost:8000/prediction/patients");
+        const response = await fetch("http://localhost:8000/api/patients");
         const jsonData = await response.json();
         setPatients(jsonData.data ?? []);
     }

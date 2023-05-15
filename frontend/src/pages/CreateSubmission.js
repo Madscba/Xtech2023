@@ -20,7 +20,7 @@ function CreateSubmission() {
 
     const getPatient = async () => {
         if(id){
-            const response = await fetch(`http://localhost:8000/prediction/patient/${id}`);
+            const response = await fetch(`http://localhost:8000/api/patient/${id}`);
             const jsonData = await response.json();
             setPatient(jsonData.data);
         }
@@ -61,7 +61,7 @@ function CreateSubmission() {
         let submissionData = await createForm();
 
         try {
-            const response = await fetch("http://localhost:8000/prediction/submission", {
+            const response = await fetch("http://localhost:8000/api/submission", {
                 method: "POST",
                 body: submissionData,
             });

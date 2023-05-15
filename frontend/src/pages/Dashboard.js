@@ -9,10 +9,11 @@ function Dashboard() {
 
     useEffect(() => {
         getPatients();
+        console.log(patients)
     }, []);
 
     const getPatients = async () => {
-        const response = await fetch("http://localhost:8000/prediction/patients");
+        const response = await fetch("http://localhost:8000/api/patients");
         const jsonData = await response.json();
         setPatients(jsonData.data ?? []);
     }
@@ -150,7 +151,8 @@ function Dashboard() {
                     </div>
 
                     <div className="flex gap-4 w-full flex-wrap">
-                        {patients.map((patient, index) => (
+                        {patients.length === 0 && <p>You haven't added any patients yet.</p>}
+                        {patients?.length > 0 && patients.map((patient, index) => (
                             <a href={`/person/${patient.id}`} className="w-inherit md:w-[320px]">
                                 <div key={index} className="card small flex flex-row flex-wrap justify-between items-center">
                                     <p><strong>{patient.first_name}</strong></p>

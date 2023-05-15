@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('prediction', '0004_remove_submittedeyes_eye_image_submittedeyes_image'),
+        ('api', '0004_remove_submittedeyes_eye_image_submittedeyes_image'),
     ]
 
     operations = [

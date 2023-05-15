@@ -30,13 +30,6 @@ DEBUG = os.environ.get('DEBUG', default=True)
 DATABASES = os.environ.get('DATABASE',default='default')
 
 
-ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
-    'xtech2023.onrender.com'
-]
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -48,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     "corsheaders",
+    'api',
     'prediction',
     'users'
 ]

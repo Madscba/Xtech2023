@@ -54,8 +54,8 @@ class Migration(migrations.Migration):
                 ('status', models.CharField(blank=True, choices=[('open', 'open'), ('completed', 'completed')], max_length=50, null=True)),
                 ('detection_result', models.IntegerField(blank=True, null=True)),
                 ('detection_at', models.DateTimeField(blank=True, null=True)),
-                ('patient', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='prediction.patient')),
-                ('practioner', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='prediction.practioner')),
+                ('patient', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.patient')),
+                ('practioner', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='api.practioner')),
             ],
         ),
     ]

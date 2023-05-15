@@ -16,7 +16,7 @@ function Person() {
 
     const getPatientData = async () => {
         if(id){
-            const response = await fetch(`http://localhost:8000/prediction/patient/${id}`);
+            const response = await fetch(`http://localhost:8000/api/patient/${id}`);
             const jsonData = await response.json();
             setPatientData(jsonData.data);
         }
