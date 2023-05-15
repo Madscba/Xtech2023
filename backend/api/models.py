@@ -23,6 +23,8 @@ class Patient(models.Model):
     diseases = models.TextField(null=True, blank=True)
     birth_year = models.IntegerField(null=True, blank=True)
     admin = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    consent = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
@@ -35,7 +37,6 @@ class Submission(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     status = models.CharField(max_length=50, choices=STATUS_OPTIONS, null=True, blank=True)
-    risk_level = models.IntegerField(null=True, blank=True)
     detection_at = models.DateTimeField(null=True, blank=True)
     practioner = models.ForeignKey(Practioner, on_delete=models.CASCADE, null=True, blank=True)
 
@@ -53,6 +54,7 @@ class SubmittedEye(models.Model):
     eye_side = models.CharField(max_length=20, choices=EYE_SIDES, null=True, blank=True)
     image = models.ImageField(upload_to=get_file_path, null=True, blank=True)
     submission = models.ForeignKey(Submission, on_delete=models.CASCADE, null=True, blank=True)
+    risk_level = models.FloatField(null=True, blank=True)
 
     def __str__(self):
         return f"submission: {self.submission.id}, eye-side: {self.eye_side}"

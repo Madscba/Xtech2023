@@ -4,6 +4,7 @@
 
 # production
 /build
+/media
 
 # misc
 .DS_Store

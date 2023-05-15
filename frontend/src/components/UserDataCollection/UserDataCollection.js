@@ -10,13 +10,18 @@ function UserDataCollection () {
         email: "",
         birthyear: null,
         ethnicity: "",
-        diseases : ""
+        diseases : "",
+        consent: false,
     });
 
-    const { firstname, lastname, email, birthyear, ethnicity, diseases } = userData;
+    const { firstname, lastname, email, birthyear, ethnicity, diseases, consent } = userData;
 
     const handleChange = (e) => {
-        setUserData({ ...userData, [e.target.name]: e.target.value });
+        if(e.target.name === "consent"){
+            setUserData({ ...userData, "consent": e.target.checked });
+        } else {
+            setUserData({ ...userData, [e.target.name]: e.target.value });
+        }
     };
 
     const handleSubmit = async (e) => {
@@ -116,6 +121,16 @@ function UserDataCollection () {
                 value={diseases}
                 onChange={(e) => handleChange(e)}
                 className="mb-5"
+            ></input>
+
+            <label for="diseases" className="text-sm font-bold">Do you have the patient's consent?</label>
+            <input 
+                required
+                type="checkbox"  
+                placeholder="consent" 
+                name="consent"
+                onChange={(e) => handleChange(e)}
+                className="mb-5 w-[20px]"
             ></input>
 
             <button className="button">Add person</button>

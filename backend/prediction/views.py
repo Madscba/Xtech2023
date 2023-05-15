@@ -15,6 +15,17 @@ sys.path.insert(0, '')
 
 # Create your views here.
 
+def dummy_glaucoma_prediction(image):
+    image = Image.open(image)
+    image_processor = AutoImageProcessor.from_pretrained("google/mobilenet_v2_1.0_224")
+    model = MobileNetV2ForImageClassification.from_pretrained("google/mobilenet_v2_1.0_224")
+    inputs = image_processor(image, return_tensors="pt")
+    with torch.no_grad():
+        logits = model(**inputs).logits
+    predicted_label = logits.argmax(-1).item()
+    probability = round(torch.nn.functional.softmax(logits, dim=1).max().item(),3)
+    return probability
+
 @csrf_exempt
 def machine_learning_test(request):
     """
@@ -69,7 +80,6 @@ def allowed_file(filename):
     Checks if file extension of image is valid.
     """
     return True #'.' in filename and filename.rsplit('.',1)[-1].lower() in ALLOWED_EXTENSIONS
-
 
 @csrf_exempt
 def predict(request):

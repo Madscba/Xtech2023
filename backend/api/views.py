@@ -3,19 +3,23 @@ from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt 
 import json
 import requests, sys, os, piq
+from datetime import datetime
+from django.contrib.auth.models import User
 from .serializers import PatientSerializer, SubmissionSerializer
 from .models import Patient, Submission, SubmittedEye
 from .utils import encode_request_data
+from prediction.views import dummy_glaucoma_prediction
 
 #TODO: remove @csrf_exempt
 @csrf_exempt
 def create_patient(request):
     try:
         if request.method == 'POST':
+            admin = User.objects.get(email=os.environ.get('USER_EMAIL'))
             #NOTE: the additional user data is not stored for now due to gdpr concerns
             #NOTE: no backend validation yet
             patient_data = encode_request_data(request)
-            patient = Patient(first_name=patient_data['firstname'], last_name=patient_data['lastname'], email=patient_data['email'], birth_year=patient_data['birthyear'])
+            patient = Patient(admin=admin, first_name=patient_data['firstname'], last_name=patient_data['lastname'], email=patient_data['email'], birth_year=patient_data['birthyear'], consent=patient_data['consent'])
             patient.save()
     except:
         return JsonResponse({ "message": "adding a user failed" }, status=400)
@@ -45,14 +49,23 @@ def create_submission(request):
         if request.method == 'POST':
             patient_id = request.POST['patient']
             patient = Patient.objects.get(id=patient_id)
-            submission = Submission(patient=patient, status="open")
+            submission = Submission(patient=patient)
             submission.save()
             if request.FILES["right_eye"]: 
-                submitted_eye = SubmittedEye(eye_side="right", image=request.FILES["right_eye"], submission=submission)
+                risk_level = dummy_glaucoma_prediction(request.FILES["right_eye"])
+                submitted_eye = SubmittedEye(eye_side="right", image=request.FILES["right_eye"], submission=submission, risk_level=risk_level)
                 submitted_eye.save()
+                #TODO:add error handling
             if request.FILES["left_eye"]: 
-                submitted_eye = SubmittedEye(eye_side="left", image=request.FILES["left_eye"], submission=submission)
+                risk_level = dummy_glaucoma_prediction(request.FILES["left_eye"])
+                submitted_eye = SubmittedEye(eye_side="left", image=request.FILES["left_eye"], submission=submission, risk_level=risk_level)
                 submitted_eye.save()
+                #TODO:add error handling
+            #update current submission
+            submission = Submission.objects.get(id=submission.id)
+            submission.status = "completed"
+            submission.detection_at = datetime.now()
+            submission.save()
     except Exception as e:
         print(e)
         return JsonResponse({ "message": "submission creation failed" }, status=400)
