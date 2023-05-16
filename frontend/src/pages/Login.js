@@ -82,7 +82,7 @@ function Login() {
                 {error && <p className="error-msg py-2">{error}</p>}
 
                 <div className="pt-5 text-sm">
-                    <p className="text-dark">Don't have an account? <a href="/signup" className="text-primary">Sign Up now</a></p>
+                    <p className="text-dark">Don't have an account? <a href="/signup" className="text-primary">Sign up now</a></p>
                 </div>
             </div>
         </PlainWrapper>
