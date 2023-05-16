@@ -1,14 +1,14 @@
-from django.shortcuts import render
+# from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-import requests, sys, os
-import piq
-import torch
-from PIL import Image
-from io import StringIO
+# import requests, sys, os
+# import piq
+# import torch
+# from PIL import Image
+# from io import StringIO
 from django.views.decorators.csrf import csrf_exempt 
-from ML.src.torch_utils import transform_image
-import torchvision.transforms as transforms
-from collections import defaultdict
+# from ML.src.torch_utils import transform_image
+# import torchvision.transforms as transforms
+# from collections import defaultdict
 from api.utils import encode_request_data
 from rest_framework_simplejwt.tokens import RefreshToken
 

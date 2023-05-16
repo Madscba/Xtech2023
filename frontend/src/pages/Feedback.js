@@ -85,14 +85,12 @@ function Feedback() {
                         <div className="space-y-4">
                             <h2>Submitted Images</h2>
                             <div className="flex flex-row gap-4">
-                                <div className="flex flex-col gap-4 w-1/3">
-                                    <span className="font-bold">Left eye</span>
-                                    <img className="w-full" src="/assets/images/placeholder-left-eye.png"/>
-                                </div>
-                                <div className="flex flex-col gap-4 w-1/3">
-                                    <span className="font-bold">Right eye</span>
-                                    <img className="w-full" src="/assets/images/placeholder-right-eye.png"/>
-                                </div>
+                                {feedback?.submitted_eyes?.length > 0 && feedback.submitted_eyes.map((eye, index) => (
+                                    <div className="flex flex-col gap-4 w-1/3">
+                                        <span className="font-bold capitalize">{eye.eye_side} eye</span>
+                                        <img className="w-full" src="/assets/images/placeholder-right-eye.png"/>
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </>

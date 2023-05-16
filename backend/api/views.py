@@ -15,6 +15,7 @@ from prediction.views import dummy_glaucoma_prediction
 #TODO: remove @csrf_exempt
 #TODO: add permission classes/middleware
 
+@csrf_exempt
 def create_patient(request):
     try:
         if request.method == 'POST':
