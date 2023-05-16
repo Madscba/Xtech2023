@@ -1,7 +1,9 @@
 import { useState }  from 'react'; 
+import { useNavigate } from 'react-router-dom';
 import PlainWrapper from '../layouts/PlainWrapper';
 
 function Login() {
+    const navigate = useNavigate();
 
     const [userData, setUserData] = useState({
         email: "",
@@ -16,7 +18,7 @@ function Login() {
     
     const handleSubmit = (e) => {
       e.preventDefault();
-      window.location.href="/dashboard";
+      navigate("/dashboard");
       //TODO: save data
     }
 

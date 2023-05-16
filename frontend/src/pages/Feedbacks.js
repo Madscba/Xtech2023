@@ -12,7 +12,7 @@ function Feedbacks() {
     }, []);
 
     const getFeedbacks= async () => {
-        const response = await fetch("http://localhost:8000/api/submissions");
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/submissions`);
         const jsonData = await response.json();
         setFeedbacks(jsonData.data ?? []);
     }

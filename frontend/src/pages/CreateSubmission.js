@@ -20,7 +20,7 @@ function CreateSubmission() {
 
     const getPatient = async () => {
         if(id){
-            const response = await fetch(`http://localhost:8000/api/patient/${id}`);
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/patient/${id}`);
             const jsonData = await response.json();
             setPatient(jsonData.data);
         }

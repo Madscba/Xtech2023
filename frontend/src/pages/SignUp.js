@@ -1,4 +1,3 @@
-import { useState }  from 'react'; 
 import PlainWrapper from '../layouts/PlainWrapper';
 
 function SignUp() {

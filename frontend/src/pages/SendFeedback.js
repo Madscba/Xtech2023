@@ -21,7 +21,7 @@ function SendFeedback() {
             return;
         }
 
-        const response = await fetch(`http://localhost:8000/api/submission/${id}`);
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/submission/${id}`);
         const jsonData = await response.json();
         setFeedback(jsonData.data ?? []);
     }

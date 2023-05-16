@@ -14,13 +14,13 @@ function Dashboard() {
     }, []);
 
     const getPatients = async () => {
-        const response = await fetch("http://localhost:8000/api/patients");
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/patients`);
         const jsonData = await response.json();
         setPatients(jsonData.data ?? []);
     }
 
     const getFeedbacks= async () => {
-        const response = await fetch("http://localhost:8000/api/submissions");
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/submissions`);
         const jsonData = await response.json();
         setFeedbacks(jsonData.data ?? []);
     }
@@ -68,7 +68,7 @@ function Dashboard() {
                                     <p><strong>{feedback.submission.patient.first_name}</strong></p>
                                     <p className="text-sm pb-1">Case #{feedback.submission.id}</p>
                                     {feedback.submitted_eyes.length > 0 && feedback.submitted_eyes.map((eye, index) => (
-                                        <RiskLabel key={index} riskLevel={eye.risk_level} eyeside={eye.eye_side}/>
+                                        <RiskLabel key={index} riskLevel={eye.risk_level} eyeSide={eye.eye_side}/>
                                     ))}
                                 </div>
                             </a>

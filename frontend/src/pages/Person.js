@@ -18,7 +18,7 @@ function Person() {
 
     const getPatientData = async () => {
         if(id){
-            const response = await fetch(`http://localhost:8000/api/patient/${id}`);
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/patient/${id}`);
             const jsonData = await response.json();
             setPatientData(jsonData.data);
         }
@@ -26,7 +26,7 @@ function Person() {
 
     const getSubmissionHistory = async () => {
         if(id){
-            const response = await fetch(`http://localhost:8000/api/submission/history/${id}`);
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/submission/history/${id}`);
             const jsonData = await response.json();
             console.log(jsonData.data)
             setFeedbacks(jsonData.data);
