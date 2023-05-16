@@ -67,20 +67,22 @@ function Dashboard() {
         <Wrapper>
             <div className="py-10 pl-10 md:py-20 md:pl-20 space-y-10">
                 <section className="flex flex-col md:flex-row justify-between gap-10 pr-10 md:pr-20">
-                    <div className="card w-full md:w-2/3 space-y-4 flex flex-col lg:flex-row items-center gap-4">
-                        <div className="space-y-2">
+                    <div className="card w-full md:w-2/3 space-y-4 flex flex-col lg:flex-row items-center p-3">
+                        <div className="space-y-3 p-3">
                             <h2>Welcome back Mie</h2>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                         </div>
                         <div className="hidden md:flex lg:w-1/3 text-7xl justify-center items-center">👋</div>
                     </div>
-                    <div className="card w-full md:w-2/3 space-y-2">
-                        <h2>How to take a good picture</h2>
-                        <p className="pb-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                        <div className="pb-4">
-                            <a href="/material" className="button">
-                                Learn more
-                            </a>
+                    <div className="card w-full md:w-2/3">
+                        <div className="space-y-3 p-3">
+                            <h2>How to take a good picture</h2>
+                            <p className="pb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <div className="pb-3">
+                                <a href="/material" className="button">
+                                    Learn more
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -106,13 +108,15 @@ function Dashboard() {
                                 {feedbacksError && <p className="error-msg">{feedbacksError}</p>}
                                 {feedbacks.length === 0 && <p>You haven't added any patients yet.</p>}
                                 {feedbacks?.length > 0 && feedbacks.map((feedback, index) => (
-                                    <a href={`/feedback/${feedback.submission.id}`}>
-                                        <div key={index} className="card min-w-[200px] flex flex-col items-center gap-3 hover:scale-110">
-                                            <p><strong>{feedback.submission.patient.first_name}</strong></p>
-                                            <p className="text-sm pb-1">Case #{feedback.submission.id}</p>
-                                            {feedback.submitted_eyes.length > 0 && feedback.submitted_eyes.map((eye, index) => (
-                                                <RiskLabel key={index} riskLevel={eye.risk_level} eyeSide={eye.eye_side}/>
-                                            ))}
+                                    <a href={`/feedback/${feedback.submission.id}`} className="flex">
+                                        <div key={index} className="card min-w-[200px] hover:scale-110">
+                                            <div className="p-2 flex flex-col items-center gap-3 ">
+                                                <p><strong>{feedback.submission.patient.first_name}</strong></p>
+                                                <p className="text-sm pb-1">Case #{feedback.submission.id}</p>
+                                                {feedback.submitted_eyes.length > 0 && feedback.submitted_eyes.map((eye, index) => (
+                                                    <RiskLabel key={index} riskLevel={eye.risk_level} eyeSide={eye.eye_side}/>
+                                                ))}
+                                            </div>
                                         </div>
                                     </a>
                                 ))}

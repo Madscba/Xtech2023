@@ -122,14 +122,23 @@ function Person() {
                                         {feedbacks?.length === 0 && <p>No submissions have been created yet</p>}
                                         {feedbacks?.length > 0 && feedbacks.map((feedback, index) => (
                                             <a key={index} href={`/feedback/${feedback.submission.id}`}>
-                                                <div className="card min-w-[200px] h-[180px] flex flex-col items-center gap-3 hover:scale-110">
-                                                    <p><strong>Case #{feedback.submission.id}</strong></p>
-                                                    <StatusLabel status={feedback.submission.status}>{feedback.submission.status}</StatusLabel>
-                                                    {feedback?.submitted_eyes?.length > 0 && feedback.submitted_eyes.map((eye, index) => (
-                                                        <div key={index}>
-                                                            <RiskLabel riskLevel={eye.risk_level} eyeSide={eye.eye_side}/>
-                                                        </div>
-                                                    ))}
+                                                <div className="card flex flex-col gap-4 w-full md:min-w-[200px] hover:scale-110">
+                                                    <div className="self-end">
+                                                        <StatusLabel status={feedback.submission.status} additionalClasses="w-fit">
+                                                            {feedback.submission.status}
+                                                        </StatusLabel>
+                                                    </div>
+                                                    <div className="flex flex-col items-center gap-3 p-4">
+                                                        <p className="p-0"><strong>{feedback.submission.patient.first_name}</strong></p>
+                                                        <p className="text-sm">Case #{feedback.submission.id}</p>                        
+                                                        {feedback.submitted_eyes.length > 0 && feedback.submitted_eyes.map((eye, index) => (
+                                                            <RiskLabel 
+                                                                key={index} 
+                                                                riskLevel={eye.risk_level} 
+                                                                eyeSide={eye.eye_side}
+                                                            />
+                                                        ))}
+                                                    </div>
                                                 </div>
                                             </a>
                                         ))}

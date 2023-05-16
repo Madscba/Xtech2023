@@ -5,13 +5,15 @@ import json
 import requests, sys, os, piq
 from datetime import datetime
 from django.contrib.auth.models import User
+from rest_framework.permissions import IsAuthenticated
 from .serializers import PatientSerializer, SubmissionSerializer, SubmittedEyeSerializer
 from .models import Patient, Submission, SubmittedEye
 from .utils import encode_request_data
 from prediction.views import dummy_glaucoma_prediction
 
 #TODO: remove @csrf_exempt
-@csrf_exempt
+#TODO: add permission classes/middleware
+
 def create_patient(request):
     try:
         if request.method == 'POST':

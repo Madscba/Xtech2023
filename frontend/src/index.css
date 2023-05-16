@@ -22,7 +22,7 @@ h3{
 }
 
 .card{
-    @apply shadow-lg rounded-2xl bg-white p-5 md:p-8;
+    @apply shadow-lg rounded-2xl bg-white p-4;
 
     &.color-card{
         @apply bg-primary text-white;
