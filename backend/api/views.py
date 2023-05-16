@@ -67,7 +67,6 @@ def create_submission(request):
             submission.status = "completed"
             submission.save()
     except Exception as e:
-        print(e)
         return JsonResponse({ "message": "submission creation failed" }, status=400)
     return JsonResponse({ "message": "submission was created successfully" }, status=200)
 
@@ -81,7 +80,6 @@ def get_submissions(request):
             submitted_eyes = SubmittedEye.objects.all().filter(submission=submission)
             enriched_submissions.append({"submission": SubmissionSerializer(submission, many=False).data, "submitted_eyes": SubmittedEyeSerializer(submitted_eyes, many=True).data})
     except Exception as e:
-        print(e)
         return JsonResponse({ "message": "fetching submissions failed" }, status=400)
     return JsonResponse({ "data": enriched_submissions }, status=200)
 
@@ -105,6 +103,5 @@ def get_submission_history(request, patient_id):
             submitted_eyes = SubmittedEye.objects.all().filter(submission=submission)
             enriched_submissions.append({"submission": SubmissionSerializer(submission, many=False).data, "submitted_eyes": SubmittedEyeSerializer(submitted_eyes, many=True).data})
     except Exception as e:
-        print(e)
         return JsonResponse({ "message": "fetching patient's submission history failed" }, status=400)
     return JsonResponse({ "data": enriched_submissions }, status=200)

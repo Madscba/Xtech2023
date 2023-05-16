@@ -7,6 +7,7 @@ function AddPerson() {
     const navigate = useNavigate();
 
     const [error, setError] = useState("");
+
     const [userData, setUserData] = useState({
         firstname: "",
         lastname: "",
@@ -17,11 +18,18 @@ function AddPerson() {
         consent: false,
     });
 
-    const { firstname, lastname, email, birthyear, ethnicity, diseases, consent } = userData;
+    const { 
+        firstname, 
+        lastname, 
+        email,
+        birthyear, 
+        ethnicity, 
+        diseases, 
+        consent 
+    } = userData;
 
     const handleChange = (e) => {
         setError("");
-
         if(e.target.name === "consent"){
             setUserData({ ...userData, "consent": e.target.checked });
         } else {
@@ -30,14 +38,14 @@ function AddPerson() {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        if(!userData.consent){
-            setError("Please make sure you have consent");
-            return;
-        }
-        
         try {
+            e.preventDefault();
+
+            if(!userData.consent){
+                handleError();
+                return;
+            }
+            
             const response = await fetch(`${process.env.REACT_APP_API_URL}/api/patient`, {
                 method: "POST",
                 headers: {
@@ -46,12 +54,20 @@ function AddPerson() {
                 body: JSON.stringify(userData),
             });
 
-            if(response.status === 200){
-                navigate("/dashboard");
+            const jsonData = await response.json();
+            if(response.status !== 200){
+                handleError(jsonData.message);
+                return;
             }
-          } catch (error) {
-            setError("Something went wrong. Please try again later.");
-          }
+
+            navigate("/dashboard");
+        } catch (error) {
+            handleError();
+        }
+    }
+
+    const handleError = (message = "Something went wrong. Please try again later") => {
+        setError(message);
     }
 
     return (

@@ -7,7 +7,6 @@ import Pending from "../components/base/Loading/Pending";
 
 function CreateSubmission() {
     const navigate = useNavigate();
-
     const { id } = useParams();
 
     const [patient, setPatient] = useState();
@@ -17,16 +16,17 @@ function CreateSubmission() {
     const [error, setError] = useState("");
 
     useEffect(() => {
-        setError("");
         getPatient();
     }, []);
 
     const getPatient = async () => {
-        if(id){
-            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/patient/${id}`);
-            const jsonData = await response.json();
-            setPatient(jsonData.data);
+        if(!id){
+            return;
         }
+       
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/patient/${id}`);
+        const jsonData = await response.json();
+        setPatient(jsonData?.data ?? null); 
     }
 
     const handleSubmittedImages = ({ eyeSide, image }) => {
@@ -41,6 +41,7 @@ function CreateSubmission() {
 
     const createForm = async () => {
         let form_data = new FormData();
+
         form_data.append("patient", patient.id);
 
         if(imageRightSide){
@@ -55,31 +56,39 @@ function CreateSubmission() {
     }
 
     const handleSubmission = async (e) => {
-        e.preventDefault();
-
-        if(!patient.id || (!imageRightSide && !imageLeftSide)) {
-            setError("Something went wrong. Please try again later.");
-            return;
-        }
-
-        let submissionData = await createForm();
-
         try {
-            const response = await fetch("http://localhost:8000/api/submission", {
+            e.preventDefault();
+
+            if(!patient.id || (!imageRightSide && !imageLeftSide)) {
+                handleError();
+                return;
+            }
+    
+            const submissionData = await createForm();
+            
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/submission`, {
                 method: "POST",
                 body: submissionData,
             });
 
-            if(response.status === 200){
-                setProcessing(true)
-
-                setTimeout(() => {
-                    navigate(`/feedback/${id}`);
-                }, 5000);
+            if(response.status !== 200){
+                handleError();
+                return;
             }
-          } catch (error) {
-            setError("Something went wrong. Please try again later.");
-          }
+
+            setProcessing(true);
+
+            setTimeout(() => {
+                navigate(`/feedback/${id}`);
+            }, 5000);
+
+        } catch (error) {
+            handleError();
+        }
+    }
+
+    const handleError = (message = "Something went wrong. Please try again later") => {
+        setError(message) 
     }
 
     return (
@@ -90,8 +99,14 @@ function CreateSubmission() {
                     <div className="space-y-4">
                         <h2 className="pb-4">Create a submission {patient?.first_name ? `for ${patient?.first_name }` : ""}</h2>
                         <div className="flex flex-col gap-4">
-                            <ImagePicker eyeSide="left" handleImageSubmission={handleSubmittedImages}/>
-                            <ImagePicker eyeSide="right" handleImageSubmission={handleSubmittedImages}/>
+                            <ImagePicker 
+                                eyeSide="left" 
+                                handleImageSubmission={handleSubmittedImages}
+                            />
+                            <ImagePicker 
+                                eyeSide="right" 
+                                handleImageSubmission={handleSubmittedImages}
+                            />
                         </div>
                     </div>
                     {error && <p className="error-msg">{error}</p>}

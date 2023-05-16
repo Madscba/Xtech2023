@@ -13,30 +13,70 @@ function Person() {
     const [feedbacks, setFeedbacks] = useState();
     const [loadingPatient, setLoadingPatient] = useState(false);
     const [loadingSubmissionHistory, setLoadingSubmissionHistory] = useState(false);
+    const [patientError, setPatientError] = useState("");
+    const [submissionHistoryError, setSubmissionHistoryError] = useState("");
 
     useEffect(() => {
+        setLoadingPatient(true);
         getPatientData();
+        setLoadingSubmissionHistory(true);
         getSubmissionHistory();
     }, []);
 
     const getPatientData = async () => {
-        if(id){
-            setLoadingPatient(true);
+        try {
+            if(!id){
+                handleError("patient");
+                return;
+            }
+    
             const response = await fetch(`${process.env.REACT_APP_API_URL}/api/patient/${id}`);
             const jsonData = await response.json();
+
+            if(response.status !== 200) { 
+                handleError("patient", jsonData.message);
+                return; 
+            }
+
             setPatientData(jsonData.data);
             setLoadingPatient(false);
+        } catch (error) {
+            handleError("patient");
         }
+    
     }
 
     const getSubmissionHistory = async () => {
-        if(id){
-            setLoadingSubmissionHistory(true);
+        try {
+            if(!id){
+                handleError("submission-history");
+                return;
+            }
+
             const response = await fetch(`${process.env.REACT_APP_API_URL}/api/submission/history/${id}`);
             const jsonData = await response.json();
+
+            if(response.status !== 200) { 
+                handleError("submission-history", jsonData.message);
+                return; 
+            }
+
             setFeedbacks(jsonData.data);
             setLoadingSubmissionHistory(false);
+        } catch (error) {
+            handleError("submission-history");
         }
+    }
+
+    const handleError = (type, message = "Something went wrong. Please try again later") => {
+        if(type === "patient"){
+            setPatientError(false);
+            setLoadingPatient(message);
+            return;
+        }
+
+        setLoadingSubmissionHistory(false);
+        setSubmissionHistoryError(message);
     }
 
     return (
@@ -44,7 +84,8 @@ function Person() {
             <div className="p-10 md:p-20 space-y-10">
                 <BackButton/>
                 {loadingPatient && <Loading/>}
-                {(!loadingPatient && patientData) && 
+                {(!loadingPatient && patientError ) && <p className="error-msg">{patientError}</p>}
+                {(!loadingPatient && !patientError) && 
                     <>
                         <div className="flex flex-row justify-between w-full">
                             <div className="space-y-4">
@@ -84,7 +125,8 @@ function Person() {
                             <h2>Submissions for {patientData?.first_name}</h2>
                             <div className="flex flex-row flex-nowrap gap-4 overflow-auto pb-4">
                                 {loadingSubmissionHistory && <p>Loading submission history...</p>}
-                                {!loadingSubmissionHistory && 
+                                {(!loadingSubmissionHistory && submissionHistoryError ) && <p className="error-msg">{submissionHistoryError}</p>}
+                                {(!loadingSubmissionHistory && !submissionHistoryError) && 
                                     <>
                                         {feedbacks?.length === 0 && <p>No submissions have been created yet</p>}
                                         {feedbacks?.length > 0 && feedbacks.map((feedback, index) => (

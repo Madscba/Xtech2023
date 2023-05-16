@@ -12,25 +12,39 @@ function Feedback() {
     const [feedback, setFeedback] = useState();
     const [submissionDate, setSubmissionDate] = useState();
     const [loadingFeedback, setLoadingFeedback] = useState(false);
+    const [error, setError] = useState("");
 
     useEffect(() => {
+        setLoadingFeedback(true);
         getFeedback();
     }, []);
 
-
-    const getFeedback= async () => {
-        setLoadingFeedback(true);
-        
-        if(!id){
+    const getFeedback= async () => {    
+        try {
+            if(!id){
+                handleError();
+                return;
+            }
+    
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/submission/${id}`);
+            const jsonData = await response.json();
+    
+            if(response.status !== 200){
+                handleError(jsonData.message);
+                return;
+            }
+    
+            setFeedback(jsonData.data ?? []);
+            const date = new Date(jsonData.data.submission.created_at);
+            setSubmissionDate(date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear());
             setLoadingFeedback(false);
-            return;
+        } catch (error) {
+            handleError();
         }
+    }
 
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/submission/${id}`);
-        const jsonData = await response.json();
-        setFeedback(jsonData.data ?? []);
-        const date = new Date(jsonData.data.submission.created_at);
-        setSubmissionDate(date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear());
+    const handleError = (message = "Something went wrong. Please try again later") => { 
+        setError(message);   
         setLoadingFeedback(false);
     }
 
@@ -39,7 +53,8 @@ function Feedback() {
             <div className="p-10 md:p-20 space-y-10">
                 <BackButton/>
                 {loadingFeedback && <Loading/>}
-                {(!loadingFeedback && feedback) &&
+                {(!loadingFeedback && error ) && <p className="error-msg">{error}</p>}
+                {(!loadingFeedback && !error && feedback) &&
                     <>
                         <div className="flex flex-col md:flex-row gap-8 md:gap-2 justify-between w-full">
                             <div className="w-full md:w-fit">

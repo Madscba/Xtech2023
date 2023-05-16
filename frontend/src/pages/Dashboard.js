@@ -7,29 +7,62 @@ import Loading from "../components/base/Loading/Loading";
 function Dashboard() {
 
     const [patients, setPatients] = useState([]);
-    const [loadingPatients, setLoadingPatients] = useState(false);
     const [feedbacks, setFeedbacks] = useState([]);
+    const [loadingPatients, setLoadingPatients] = useState(false);
     const [loadingFeedbacks, setLoadingFeedbacks] = useState(false);
+    const [feedbacksError, setFeedbacksError] = useState("");
+    const [patientsError, setPatientsError] = useState("");
 
     useEffect(() => {
+        setLoadingPatients(true);
         getPatients();
+        setLoadingFeedbacks(true);
         getFeedbacks();
     }, []);
 
     const getPatients = async () => {
-        setLoadingPatients(true);
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/patients`);
-        const jsonData = await response.json();
-        setPatients(jsonData.data ?? []);
-        setLoadingPatients(false);
+       try {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/patients`);
+            const jsonData = await response.json();
+
+            if(response.status !== 200){
+                handleError("patients", jsonData.message);
+                return;
+            }
+
+            setPatients(jsonData.data ?? []);
+            setLoadingPatients(false);
+       } catch (error) {
+            handleError("patients");
+       }
     }
 
     const getFeedbacks= async () => {
-        setLoadingFeedbacks(true);
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/submissions`);
-        const jsonData = await response.json();
-        setFeedbacks(jsonData.data ?? []);
-        setLoadingFeedbacks(false);
+        try {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/submissions`);
+            const jsonData = await response.json();
+
+            if(response.status !== 200){
+                handleError("feedbacks", jsonData.message);
+                return;
+            }
+            
+            setFeedbacks(jsonData.data ?? []);
+            setLoadingFeedbacks(false);
+        } catch (error) {
+            handleError("feedbacks");
+        }
+    }
+
+    const handleError = (type, message = "Something went wrong. Please try again later") => {
+        if(type === "feedbacks"){
+            setLoadingFeedbacks(false);
+            setFeedbacksError(message);
+            return;
+        }
+
+        setLoadingPatients(false);
+        setPatientsError(message);
     }
 
     return (
@@ -69,8 +102,10 @@ function Dashboard() {
 
                     <div className="flex flex-row flex-nowrap gap-4 overflow-auto pb-4 last:mr-10 lg:last:mr-20">
                         {loadingFeedbacks && <Loading/>}
-                        {!loadingFeedbacks && 
+                        {(feedbacksError && !loadingFeedbacks) && <p className="error-msg">{feedbacksError}</p>}
+                        {(!feedbacksError && !loadingFeedbacks) && 
                             <>
+                                {feedbacksError && <p className="error-msg">{feedbacksError}</p>}
                                 {feedbacks.length === 0 && <p>You haven't added any patients yet.</p>}
                                 {feedbacks?.length > 0 && feedbacks.map((feedback, index) => (
                                     <a href={`/feedback/${feedback.submission.id}`}>
@@ -113,17 +148,20 @@ function Dashboard() {
 
                     <div className="flex gap-4 w-full flex-wrap">
                         {loadingPatients && <Loading/>}
-                        {!loadingPatients && <>
-                            {patients.length === 0 && <p>You haven't added any patients yet.</p>}
-                            {patients?.length > 0 && patients.map((patient, index) => (
-                                <a href={`/person/${patient.id}`} className="w-inherit md:w-[320px]">
-                                    <div key={index} className="card small flex flex-row flex-wrap justify-between items-center">
-                                        <p><strong>{patient.first_name}</strong></p>
-                                        <a href={`/create/submission/${patient.id}`} className="button">Create submission</a>
-                                    </div>
-                                </a>
-                            ))}
-                        </>}
+                        {(patientsError && !loadingPatients) && <p className="error-msg">{patientsError}</p>}
+                        {(!patientsError && !loadingPatients) && 
+                            <>
+                                {patients.length === 0 && <p>You haven't added any patients yet.</p>}
+                                {patients?.length > 0 && patients.map((patient, index) => (
+                                    <a href={`/person/${patient.id}`} className="w-inherit md:w-[320px]">
+                                        <div key={index} className="card small flex flex-row flex-wrap justify-between items-center">
+                                            <p><strong>{patient.first_name}</strong></p>
+                                            <a href={`/create/submission/${patient.id}`} className="button">Create submission</a>
+                                        </div>
+                                    </a>
+                                ))}
+                            </>
+                        }
                     </div>
                 </section>
             </div>
