@@ -6,6 +6,7 @@ import BackButton from "../components/base/Navigation/BackButton";
 function AddPerson() {
     const navigate = useNavigate();
 
+    const [error, setError] = useState("");
     const [userData, setUserData] = useState({
         firstname: "",
         lastname: "",
@@ -19,6 +20,8 @@ function AddPerson() {
     const { firstname, lastname, email, birthyear, ethnicity, diseases, consent } = userData;
 
     const handleChange = (e) => {
+        setError("");
+
         if(e.target.name === "consent"){
             setUserData({ ...userData, "consent": e.target.checked });
         } else {
@@ -28,23 +31,26 @@ function AddPerson() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if(!userData.consent){
+            setError("Please make sure you have consent");
+            return;
+        }
         
         try {
             const response = await fetch(`${process.env.REACT_APP_API_URL}/api/patient`, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(userData),
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(userData),
             });
 
-            if(response.status){
+            if(response.status === 200){
                 navigate("/dashboard");
             }
-
-            //TODO: add error handling
           } catch (error) {
-            console.error(error);
+            setError("Something went wrong. Please try again later.");
           }
     }
 
@@ -130,16 +136,17 @@ function AddPerson() {
                             className="mb-5"
                         ></input>
 
-                        <label for="diseases" className="text-sm font-bold">Do you have the patient's consent?</label>
-                        <input 
-                            required
-                            type="checkbox"  
-                            placeholder="consent" 
-                            name="consent"
-                            onChange={(e) => handleChange(e)}
-                            className="mb-5 w-[20px]"
-                        ></input>
-
+                        <div className="flex flex-row gap-2 mb-5">
+                            <label for="diseases" className="text-sm font-bold">Do you have the patient's consent?</label>
+                            <input 
+                                type="checkbox"  
+                                className="w-[20px]"
+                                placeholder="consent" 
+                                name="consent"
+                                onChange={(e) => handleChange(e)}
+                            ></input>
+                        </div>
+                        {error && <p className="error-msg mb-5">{error}</p>}
                         <button className="button">Add person</button>
                     </form>
                 </div>

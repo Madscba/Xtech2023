@@ -13,7 +13,8 @@ module.exports = {
       },
       width:{
         'fit': 'fit-content',
-        'inherit': 'inherit'
+        'inherit': 'inherit',
+        'fill': '-webkit-fill-available'
       },
       height:{
         'fit': 'fit-content',

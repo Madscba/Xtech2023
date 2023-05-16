@@ -1,9 +1,9 @@
 import React, { useState, useEffect, } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import ImagePicker from "../components/ImagePicker/ImagePicker";
 import Wrapper from "../layouts/Wrapper";
 import BackButton from "../components/base/Navigation/BackButton";
-import { useNavigate } from 'react-router-dom';
+import Pending from "../components/base/Loading/Pending";
 
 function CreateSubmission() {
     const navigate = useNavigate();
@@ -13,8 +13,11 @@ function CreateSubmission() {
     const [patient, setPatient] = useState();
     const [imageRightSide, setImageRightSide] = useState();
     const [imageLeftSide, setImageLeftSide] = useState();
+    const [isProcessing, setProcessing] = useState(false);
+    const [error, setError] = useState("");
 
     useEffect(() => {
+        setError("");
         getPatient();
     }, []);
 
@@ -54,13 +57,8 @@ function CreateSubmission() {
     const handleSubmission = async (e) => {
         e.preventDefault();
 
-        //TODO: add error handling
-
-        if(!patient.id) {
-            return;
-        }
-
-        if(!imageRightSide && !imageLeftSide) {
+        if(!patient.id || (!imageRightSide && !imageLeftSide)) {
+            setError("Something went wrong. Please try again later.");
             return;
         }
 
@@ -73,28 +71,34 @@ function CreateSubmission() {
             });
 
             if(response.status === 200){
-                navigate("/pending");
-            }
+                setProcessing(true)
 
-            //TODO: add error handling
+                setTimeout(() => {
+                    navigate(`/feedback/${id}`);
+                }, 5000);
+            }
           } catch (error) {
-            console.error(error);
+            setError("Something went wrong. Please try again later.");
           }
     }
 
     return (
         <Wrapper>
-            <div className="p-10 md:p-20 space-y-10">
-                <BackButton/>
-                <div className="space-y-4">
-                    <h2 className="pb-4">Create a submission {patient?.first_name ? `for ${patient?.first_name }` : ""}</h2>
-                    <div className="flex flex-col gap-4">
-                        <ImagePicker eyeSide="left" handleImageSubmission={handleSubmittedImages}/>
-                        <ImagePicker eyeSide="right" handleImageSubmission={handleSubmittedImages}/>
+            {!isProcessing && 
+                <div className="p-10 md:p-20 space-y-10">
+                    <BackButton/>
+                    <div className="space-y-4">
+                        <h2 className="pb-4">Create a submission {patient?.first_name ? `for ${patient?.first_name }` : ""}</h2>
+                        <div className="flex flex-col gap-4">
+                            <ImagePicker eyeSide="left" handleImageSubmission={handleSubmittedImages}/>
+                            <ImagePicker eyeSide="right" handleImageSubmission={handleSubmittedImages}/>
+                        </div>
                     </div>
+                    {error && <p className="error-msg">{error}</p>}
+                    <button className="button" onClick={handleSubmission}>Send submission</button>
                 </div>
-                <button className="button" onClick={handleSubmission}>Send submission</button>
-            </div>
+            }
+            {isProcessing && <Pending/>} 
         </Wrapper>
     );
   }

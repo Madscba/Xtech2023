@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react';
 import Wrapper from "../layouts/Wrapper";
 import RiskLabel from "../components/base/Labels/RiskLabel";
 import NumberLabel from "../components/base/Labels/NumberLabel";
+import Loading from "../components/base/Loading/Loading";
 
 function Dashboard() {
 
     const [patients, setPatients] = useState([]);
+    const [loadingPatients, setLoadingPatients] = useState(false);
     const [feedbacks, setFeedbacks] = useState([]);
+    const [loadingFeedbacks, setLoadingFeedbacks] = useState(false);
 
     useEffect(() => {
         getPatients();
@@ -14,15 +17,19 @@ function Dashboard() {
     }, []);
 
     const getPatients = async () => {
+        setLoadingPatients(true);
         const response = await fetch(`${process.env.REACT_APP_API_URL}/api/patients`);
         const jsonData = await response.json();
         setPatients(jsonData.data ?? []);
+        setLoadingPatients(false);
     }
 
     const getFeedbacks= async () => {
+        setLoadingFeedbacks(true);
         const response = await fetch(`${process.env.REACT_APP_API_URL}/api/submissions`);
         const jsonData = await response.json();
         setFeedbacks(jsonData.data ?? []);
+        setLoadingFeedbacks(false);
     }
 
     return (
@@ -61,18 +68,23 @@ function Dashboard() {
                     </div>
 
                     <div className="flex flex-row flex-nowrap gap-4 overflow-auto pb-4 last:mr-10 lg:last:mr-20">
-                        {feedbacks.length === 0 && <p>You haven't added any patients yet.</p>}
-                        {feedbacks?.length > 0 && feedbacks.map((feedback, index) => (
-                            <a href={`/feedback/${feedback.submission.id}`}>
-                                <div key={index} className="card min-w-[200px] flex flex-col items-center gap-3 hover:scale-110">
-                                    <p><strong>{feedback.submission.patient.first_name}</strong></p>
-                                    <p className="text-sm pb-1">Case #{feedback.submission.id}</p>
-                                    {feedback.submitted_eyes.length > 0 && feedback.submitted_eyes.map((eye, index) => (
-                                        <RiskLabel key={index} riskLevel={eye.risk_level} eyeSide={eye.eye_side}/>
-                                    ))}
-                                </div>
-                            </a>
-                        ))}
+                        {loadingFeedbacks && <Loading/>}
+                        {!loadingFeedbacks && 
+                            <>
+                                {feedbacks.length === 0 && <p>You haven't added any patients yet.</p>}
+                                {feedbacks?.length > 0 && feedbacks.map((feedback, index) => (
+                                    <a href={`/feedback/${feedback.submission.id}`}>
+                                        <div key={index} className="card min-w-[200px] flex flex-col items-center gap-3 hover:scale-110">
+                                            <p><strong>{feedback.submission.patient.first_name}</strong></p>
+                                            <p className="text-sm pb-1">Case #{feedback.submission.id}</p>
+                                            {feedback.submitted_eyes.length > 0 && feedback.submitted_eyes.map((eye, index) => (
+                                                <RiskLabel key={index} riskLevel={eye.risk_level} eyeSide={eye.eye_side}/>
+                                            ))}
+                                        </div>
+                                    </a>
+                                ))}
+                            </>
+                        }
                     </div>
                 </section>
 
@@ -100,15 +112,18 @@ function Dashboard() {
                     </div>
 
                     <div className="flex gap-4 w-full flex-wrap">
-                        {patients.length === 0 && <p>You haven't added any patients yet.</p>}
-                        {patients?.length > 0 && patients.map((patient, index) => (
-                            <a href={`/person/${patient.id}`} className="w-inherit md:w-[320px]">
-                                <div key={index} className="card small flex flex-row flex-wrap justify-between items-center">
-                                    <p><strong>{patient.first_name}</strong></p>
-                                    <a href={`/create/submission/${patient.id}`} className="button">Create submission</a>
-                                </div>
-                            </a>
-                        ))}
+                        {loadingPatients && <Loading/>}
+                        {!loadingPatients && <>
+                            {patients.length === 0 && <p>You haven't added any patients yet.</p>}
+                            {patients?.length > 0 && patients.map((patient, index) => (
+                                <a href={`/person/${patient.id}`} className="w-inherit md:w-[320px]">
+                                    <div key={index} className="card small flex flex-row flex-wrap justify-between items-center">
+                                        <p><strong>{patient.first_name}</strong></p>
+                                        <a href={`/create/submission/${patient.id}`} className="button">Create submission</a>
+                                    </div>
+                                </a>
+                            ))}
+                        </>}
                     </div>
                 </section>
             </div>

@@ -57,3 +57,7 @@ input{
 .number-bullet-point{
     @apply flex flex-row gap-2 items-center;
 }
+
+.error-msg{
+    @apply text-sm font-bold text-red-400;
+}
