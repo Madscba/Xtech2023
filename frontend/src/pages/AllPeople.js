@@ -16,13 +16,12 @@ function AllPeople() {
     const getPatients = async () => {
         try {
             const response = await fetch(`${process.env.REACT_APP_API_URL}/api/patients`);
-            const jsonData = await response.json();
             
-            if(response.status !== 200) { 
-                handleError(jsonData.message);
-                return; 
+            if (!response.ok) {
+                throw new Error();
             }
 
+            const jsonData = await response.json();
             setPatients(jsonData.data ?? []); 
             setLoadingPatients(false); 
         } catch (error) {

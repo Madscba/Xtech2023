@@ -58,12 +58,11 @@ function CreateSubmission() {
     const handleSubmission = async (e) => {
         try {
             e.preventDefault();
-
+            
             setProcessing(true);
 
             if(!patient.id) {
-                handleError();
-                return;
+                throw new Error();
             }
 
             if(!imageRightSide && !imageLeftSide) {
@@ -78,19 +77,14 @@ function CreateSubmission() {
                 body: submissionData,
             });
 
-            const jsonData = await response.json();
-
-            if(response.status !== 200){
-                handleError(jsonData.message);
-                return;
+            if (!response.ok) {
+                throw new Error();
             }
 
-            console.log("jsonData", jsonData);
-
+            const jsonData = await response.json();
             if(!jsonData.submission){
                 handleError();
             }
-
     
             setTimeout(() => {
                 setProcessing(false);

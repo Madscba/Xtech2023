@@ -18,13 +18,12 @@ function Feedbacks() {
     const getFeedbacks= async () => {
         try {
             const response = await fetch(`${process.env.REACT_APP_API_URL}/api/submissions`);
-            const jsonData = await response.json();
 
-            if(response.status !== 200) { 
-                handleError(jsonData.message);
-                return; 
+            if (!response.ok) {
+                throw new Error();
             }
 
+            const jsonData = await response.json();
             setFeedbacks(jsonData.data ?? []);   
             setLoadingFeedbacks(false);  
         } catch (error) {

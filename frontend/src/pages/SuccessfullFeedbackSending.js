@@ -6,7 +6,7 @@ function SuccessfullFeedbackSending() {
 
     setTimeout(() => {
         navigate("/dashboard");
-    }, 2500);
+    }, 2000);
       
     return (
         <Wrapper>

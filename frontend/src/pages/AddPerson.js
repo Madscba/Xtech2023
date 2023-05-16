@@ -42,8 +42,7 @@ function AddPerson() {
             e.preventDefault();
 
             if(!userData.consent){
-                handleError();
-                return;
+                throw new Error();
             }
             
             const response = await fetch(`${process.env.REACT_APP_API_URL}/api/patient`, {
@@ -54,10 +53,8 @@ function AddPerson() {
                 body: JSON.stringify(userData),
             });
 
-            const jsonData = await response.json();
-            if(response.status !== 200){
-                handleError(jsonData.message);
-                return;
+            if (!response.ok) {
+                throw new Error();
             }
 
             navigate("/dashboard");

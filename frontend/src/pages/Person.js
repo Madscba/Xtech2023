@@ -26,18 +26,16 @@ function Person() {
     const getPatientData = async () => {
         try {
             if(!id){
-                handleError("patient");
-                return;
+                throw new Error();
             }
     
             const response = await fetch(`${process.env.REACT_APP_API_URL}/api/patient/${id}`);
-            const jsonData = await response.json();
 
-            if(response.status !== 200) { 
-                handleError("patient", jsonData.message);
-                return; 
+            if (!response.ok) {
+                throw new Error();
             }
 
+            const jsonData = await response.json();
             setPatientData(jsonData.data);
             setLoadingPatient(false);
         } catch (error) {
@@ -49,18 +47,11 @@ function Person() {
     const getSubmissionHistory = async () => {
         try {
             if(!id){
-                handleError("submission-history");
-                return;
+                throw new Error();
             }
 
             const response = await fetch(`${process.env.REACT_APP_API_URL}/api/submission/history/${id}`);
             const jsonData = await response.json();
-
-            if(response.status !== 200) { 
-                handleError("submission-history", jsonData.message);
-                return; 
-            }
-
             setFeedbacks(jsonData.data);
             setLoadingSubmissionHistory(false);
         } catch (error) {
@@ -70,13 +61,13 @@ function Person() {
 
     const handleError = (type, message = "Something went wrong. Please try again later") => {
         if(type === "patient"){
-            setPatientError(false);
-            setLoadingPatient(message);
+            setPatientError(message);
+            setLoadingPatient(false);
             return;
         }
 
-        setLoadingSubmissionHistory(false);
         setSubmissionHistoryError(message);
+        setLoadingSubmissionHistory(false);
     }
 
     return (

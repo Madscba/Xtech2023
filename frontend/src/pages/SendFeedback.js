@@ -66,18 +66,16 @@ function SendFeedback() {
     const getFeedback= async () => {
         try {
             if(!id){
-                handleError();
-                return;
+                throw new Error();
             }
 
             const response = await fetch(`${process.env.REACT_APP_API_URL}/api/submission/${id}`);
-            const jsonData = await response.json();
 
-            if(response.status !== 200) { 
-                handleError(jsonData.message);
-                return; 
+            if (!response.ok) {
+                throw new Error();
             }
 
+            const jsonData = await response.json();
             setFeedback(jsonData.data ?? []);
             setLoadingFeedback(false);
         } catch (error) {
