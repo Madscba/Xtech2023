@@ -32,7 +32,7 @@ def create_patient(request):
 def get_patients(request):
     try:
         #TODO: add pagination
-        patients = Patient.objects.all()[:10]
+        patients = Patient.objects.all().order_by('-created_at')[:15]
         serialized_patients = PatientSerializer(patients, many=True)
     except:
         return JsonResponse({ "message": "fetching patients failed" }, status=400)
@@ -78,7 +78,7 @@ def get_submissions(request):
         #TODO: add pagination
         admin = User.objects.get(email=os.environ.get('USER_EMAIL'))
         enriched_submissions = []
-        submissions = Submission.objects.all().filter(author=admin)[:10]
+        submissions = Submission.objects.all().filter(author=admin).order_by('-created_at')[:15]
         for submission in submissions:
             submitted_eyes = SubmittedEye.objects.all().filter(submission=submission)
             enriched_submissions.append({"submission": SubmissionSerializer(submission, many=False).data, "submitted_eyes": SubmittedEyeSerializer(submitted_eyes, many=True).data})
