@@ -27,15 +27,13 @@ function Feedbacks() {
                     <div className="flex flex-row flex-wrap gap-4 pb-4">
                         {feedbacks.length === 0 && <p>You haven't added any patients yet.</p>}
                         {feedbacks?.length > 0 && feedbacks.map((feedback, index) => (
-                            <a href={`/feedback/${index}`}>
+                            <a href={`/feedback/${feedback.submission.id}`}>
                                 <div key={index} className="card w-full md:min-w-[200px] flex flex-col items-center gap-3 hover:scale-110">
                                     <p><strong>{feedback.submission.patient.first_name}</strong></p>
                                     <p className="text-sm">Case #{feedback.submission.id}</p>
                                     <StatusLabel status={feedback.submission.status}>{feedback.submission.status}</StatusLabel>
                                     {feedback.submitted_eyes.length > 0 && feedback.submitted_eyes.map((eye, index) => (
-                                        <RiskLabel riskLevel={eye.risk_level} key={index}>
-                                            Risk on the {eye.eye_side} side is {eye.risk_level}
-                                        </RiskLabel>
+                                        <RiskLabel key={index} riskLevel={eye.risk_level} eyeside={eye.eye_side}/>
                                     ))}
                                 </div>
                             </a>

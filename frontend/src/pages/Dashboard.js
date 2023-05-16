@@ -63,14 +63,12 @@ function Dashboard() {
                     <div className="flex flex-row flex-nowrap gap-4 overflow-auto pb-4 last:mr-10 lg:last:mr-20">
                         {feedbacks.length === 0 && <p>You haven't added any patients yet.</p>}
                         {feedbacks?.length > 0 && feedbacks.map((feedback, index) => (
-                            <a href={`/feedback/${index}`}>
+                            <a href={`/feedback/${feedback.submission.id}`}>
                                 <div key={index} className="card min-w-[200px] flex flex-col items-center gap-3 hover:scale-110">
                                     <p><strong>{feedback.submission.patient.first_name}</strong></p>
                                     <p className="text-sm pb-1">Case #{feedback.submission.id}</p>
                                     {feedback.submitted_eyes.length > 0 && feedback.submitted_eyes.map((eye, index) => (
-                                        <RiskLabel riskLevel={eye.risk_level} key={index}>
-                                            Risk on the {eye.eye_side} side is {eye.risk_level}
-                                        </RiskLabel>
+                                        <RiskLabel key={index} riskLevel={eye.risk_level} eyeside={eye.eye_side}/>
                                      ))}
                                 </div>
                             </a>
