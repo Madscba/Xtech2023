@@ -21,7 +21,7 @@ def create_patient(request):
         if request.method == 'POST':
             admin = User.objects.get(email=os.environ.get('USER_EMAIL'))
             #NOTE: the additional user data is not stored for now due to gdpr concerns
-            #NOTE: no backend validation yet
+            #TODO: add backend validation
             patient_data = encode_request_data(request)
             patient = Patient(admin=admin, first_name=patient_data['firstname'], last_name=patient_data['lastname'], email=patient_data['email'], birth_year=patient_data['birthyear'], consent=patient_data['consent'])
             patient.save()
@@ -56,6 +56,7 @@ def create_submission(request):
             author = User.objects.get(email=os.environ.get('USER_EMAIL'))
             submission = Submission(patient=patient, author=author)
             submission.save()
+            #TODO: write this more nicely
             if "right_eye" in request.FILES: 
                 risk_level = dummy_glaucoma_prediction(request.FILES["right_eye"])
                 submitted_eye = SubmittedEye(eye_side="right", image=request.FILES["right_eye"], submission=submission, risk_level=risk_level)

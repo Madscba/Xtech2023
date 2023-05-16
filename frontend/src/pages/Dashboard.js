@@ -106,7 +106,7 @@ function Dashboard() {
                         {(!feedbacksError && !loadingFeedbacks) && 
                             <>
                                 {feedbacksError && <p className="error-msg">{feedbacksError}</p>}
-                                {feedbacks.length === 0 && <p>You haven't added any patients yet.</p>}
+                                {feedbacks.length === 0 && <p>You haven't submitted any cases yet.</p>}
                                 {feedbacks?.length > 0 && feedbacks.map((feedback, index) => (
                                     <a href={`/feedback/${feedback.submission.id}`} className="flex">
                                         <div key={index} className="card min-w-[200px] hover:scale-110">

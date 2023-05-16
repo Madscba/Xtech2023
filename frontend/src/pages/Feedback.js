@@ -88,7 +88,7 @@ function Feedback() {
                                 {feedback?.submitted_eyes?.length > 0 && feedback.submitted_eyes.map((eye, index) => (
                                     <div className="flex flex-col gap-4 w-1/3">
                                         <span className="font-bold capitalize">{eye.eye_side} eye</span>
-                                        <img className="w-full" src="/assets/images/placeholder-right-eye.png"/>
+                                        <img className="w-full" src={`${process.env.REACT_APP_API_URL}/${eye.image}`}/>
                                     </div>
                                 ))}
                             </div>

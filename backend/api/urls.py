@@ -1,6 +1,4 @@
 from django.urls import path
-from django.conf import settings
-from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
@@ -11,7 +9,4 @@ urlpatterns = [
     path('submission', views.create_submission),
     path('submission/<int:submission_id>/', views.get_submission),
     path('submission/history/<int:patient_id>/', views.get_submission_history),
-] 
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+]
