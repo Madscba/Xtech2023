@@ -95,3 +95,16 @@ def get_submission(request, submission_id):
     except:
         return JsonResponse({ "message": "fetching submission failed" }, status=400)
     return JsonResponse({ "data": enriched_submission }, status=200)
+
+def get_submission_history(request, patient_id):
+    try:
+        patient = Patient.objects.get(id=patient_id)
+        enriched_submissions = [] 
+        submissions = Submission.objects.all().filter(patient=patient)
+        for submission in submissions:
+            submitted_eyes = SubmittedEye.objects.all().filter(submission=submission)
+            enriched_submissions.append({"submission": SubmissionSerializer(submission, many=False).data, "submitted_eyes": SubmittedEyeSerializer(submitted_eyes, many=True).data})
+    except Exception as e:
+        print(e)
+        return JsonResponse({ "message": "fetching patient's submission history failed" }, status=400)
+    return JsonResponse({ "data": enriched_submissions }, status=200)

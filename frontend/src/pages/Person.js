@@ -9,9 +9,11 @@ function Person() {
     const { id } = useParams();
 
     const [patientData, setPatientData] = useState();
+    const [feedbacks, setFeedbacks] = useState();
 
     useEffect(() => {
         getPatientData();
+        getSubmissionHistory();
     }, []);
 
     const getPatientData = async () => {
@@ -22,28 +24,14 @@ function Person() {
         }
     }
 
-    const feedbacks = [
-        {
-            case: 23455,
-            riskLevel: "",
-            status: "open"
-        },
-        {
-            case: 5311,
-            riskLevel: "low",
-            status: "completed"
-        },
-        {
-            case: 41155,
-            riskLevel: "high",
-            status: "completed"
-        },
-        {
-            case: 23455,
-            riskLevel: "high",
-            status: "completed"
+    const getSubmissionHistory = async () => {
+        if(id){
+            const response = await fetch(`http://localhost:8000/api/submission/history/${id}`);
+            const jsonData = await response.json();
+            console.log(jsonData.data)
+            setFeedbacks(jsonData.data);
         }
-    ]
+    }
 
     return (
         <Wrapper>
@@ -84,14 +72,19 @@ function Person() {
                 </div>
 
                 <div className="space-y-4">
-                    <h2>Your submissions</h2>
+                    <h2>Submissions for {patientData?.first_name}</h2>
                     <div className="flex flex-row flex-nowrap gap-4 overflow-auto pb-4">
-                        {feedbacks.map((feedback, index) => (
-                            <a key={index} href={`/feedback/${index}`}>
+                        {feedbacks?.length === 0 && <p>No submissions have been created yet</p>}
+                        {feedbacks?.length > 0 && feedbacks.map((feedback, index) => (
+                            <a key={index} href={`/feedback/${feedback.submission.id}`}>
                                 <div className="card min-w-[200px] h-[180px] flex flex-col items-center gap-3 hover:scale-110">
-                                    <p><strong>Case #{feedback.case}</strong></p>
-                                    <StatusLabel status={feedback.status}>{feedback.status}</StatusLabel>
-                                    {feedback.riskLevel && <RiskLabel riskLevel={feedback.riskLevel}>Risk is {feedback.riskLevel}</RiskLabel>}
+                                    <p><strong>Case #{feedback.submission.id}</strong></p>
+                                    <StatusLabel status={feedback.submission.status}>{feedback.submission.status}</StatusLabel>
+                                    {feedback?.submitted_eyes?.length > 0 && feedback.submitted_eyes.map((eye, index) => (
+                                        <div key={index}>
+                                            <RiskLabel riskLevel={eye.risk_level} eyeSide={eye.eye_side}/>
+                                        </div>
+                                    ))}
                                 </div>
                             </a>
                         ))}
