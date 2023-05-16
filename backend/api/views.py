@@ -4,6 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 import requests, sys, os, piq
 from datetime import datetime
+from PIL import Image
 from django.contrib.auth.models import User
 from rest_framework.permissions import IsAuthenticated
 from .serializers import PatientSerializer, SubmissionSerializer, SubmittedEyeSerializer
@@ -58,17 +59,15 @@ def create_submission(request):
                 risk_level = dummy_glaucoma_prediction(request.FILES["right_eye"])
                 submitted_eye = SubmittedEye(eye_side="right", image=request.FILES["right_eye"], submission=submission, risk_level=risk_level)
                 submitted_eye.save()
-                #TODO:add error handling
             if "left_eye" in request.FILES: 
                 risk_level = dummy_glaucoma_prediction(request.FILES["left_eye"])
                 submitted_eye = SubmittedEye(eye_side="left", image=request.FILES["left_eye"], submission=submission, risk_level=risk_level)
                 submitted_eye.save()
-                #TODO:add error handling
-            #update current submission
             submission = Submission.objects.get(id=submission.id)
             submission.status = "completed"
             submission.save()
     except Exception as e:
+        print(e)
         return JsonResponse({ "message": "submission creation failed" }, status=400)
     return JsonResponse({ "message": "submission was created successfully", "submission": submission.id }, status=200)
 

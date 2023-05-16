@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib import admin
 from django.contrib.auth.models import User
+from .utils import compress_image
 
 #NOTE: Some of the field are null/blank for now, but shouldn't be. 
 
@@ -56,6 +57,11 @@ class SubmittedEye(models.Model):
     image = models.ImageField(upload_to=get_file_path, null=True, blank=True)
     submission = models.ForeignKey(Submission, on_delete=models.CASCADE, null=True, blank=True)
     risk_level = models.FloatField(null=True, blank=True)
+
+    def save(self, *args, **kwargs):                
+        new_image = compress_image(self.image)                
+        self.image = new_image               
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"submission: {self.submission.id}, eye-side: {self.eye_side}"

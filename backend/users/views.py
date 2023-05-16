@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-# Create your views here.
 import requests, sys, os
 import piq
 import torch
