@@ -69,7 +69,7 @@ function Dashboard() {
                                     <p className="text-sm pb-1">Case #{feedback.submission.id}</p>
                                     {feedback.submitted_eyes.length > 0 && feedback.submitted_eyes.map((eye, index) => (
                                         <RiskLabel key={index} riskLevel={eye.risk_level} eyeside={eye.eye_side}/>
-                                     ))}
+                                    ))}
                                 </div>
                             </a>
                         ))}

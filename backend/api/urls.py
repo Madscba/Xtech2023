@@ -9,6 +9,7 @@ urlpatterns = [
     path('patient/<int:patient_id>/', views.get_patient),
     path('submissions', views.get_submissions),
     path('submission', views.create_submission),
+    path('submission/<int:submission_id>/', views.get_submission),
 ] 
 
 if settings.DEBUG:

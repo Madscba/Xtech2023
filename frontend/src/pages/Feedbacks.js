@@ -11,7 +11,6 @@ function Feedbacks() {
         getFeedbacks();
     }, []);
 
-
     const getFeedbacks= async () => {
         const response = await fetch("http://localhost:8000/api/submissions");
         const jsonData = await response.json();

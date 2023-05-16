@@ -84,3 +84,14 @@ def get_submissions(request):
         print(e)
         return JsonResponse({ "message": "fetching submissions failed" }, status=400)
     return JsonResponse({ "data": enriched_submissions }, status=200)
+
+def get_submission(request, submission_id):
+    try:
+        if submission_id: 
+            admin = User.objects.get(email=os.environ.get('USER_EMAIL'))
+            submission = Submission.objects.get(id=submission_id)
+            submitted_eyes = SubmittedEye.objects.all().filter(submission=submission)
+            enriched_submission = {"submission": SubmissionSerializer(submission, many=False).data, "submitted_eyes": SubmittedEyeSerializer(submitted_eyes, many=True).data}
+    except:
+        return JsonResponse({ "message": "fetching submission failed" }, status=400)
+    return JsonResponse({ "data": enriched_submission }, status=200)
