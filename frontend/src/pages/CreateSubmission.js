@@ -59,36 +59,51 @@ function CreateSubmission() {
         try {
             e.preventDefault();
 
-            if(!patient.id || (!imageRightSide && !imageLeftSide)) {
+            setProcessing(true);
+
+            if(!patient.id) {
                 handleError();
+                return;
+            }
+
+            if(!imageRightSide && !imageLeftSide) {
+                handleError("Please upload images.");
                 return;
             }
     
             const submissionData = await createForm();
-            
+
             const response = await fetch(`${process.env.REACT_APP_API_URL}/api/submission`, {
                 method: "POST",
                 body: submissionData,
             });
 
+            const jsonData = await response.json();
+
             if(response.status !== 200){
-                handleError();
+                handleError(jsonData.message);
                 return;
             }
 
-            setProcessing(true);
+            console.log("jsonData", jsonData);
 
+            if(!jsonData.submission){
+                handleError();
+            }
+
+    
             setTimeout(() => {
-                navigate(`/feedback/${id}`);
-            }, 5000);
-
+                setProcessing(false);
+                navigate(`/feedback/${jsonData.submission}`);
+            }, 2000);
         } catch (error) {
             handleError();
         }
     }
 
     const handleError = (message = "Something went wrong. Please try again later") => {
-        setError(message) 
+        setError(message);
+        setProcessing(false);
     }
 
     return (

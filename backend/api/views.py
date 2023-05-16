@@ -68,7 +68,7 @@ def create_submission(request):
             submission.save()
     except Exception as e:
         return JsonResponse({ "message": "submission creation failed" }, status=400)
-    return JsonResponse({ "message": "submission was created successfully" }, status=200)
+    return JsonResponse({ "message": "submission was created successfully", "submission": submission.id }, status=200)
 
 def get_submissions(request):
     try:
