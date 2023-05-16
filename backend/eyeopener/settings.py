@@ -83,6 +83,8 @@ WSGI_APPLICATION = 'eyeopener.wsgi.application'
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "https://xtech2023-frontend.onrender.com",
+    "http://xtech2023-frontend.onrender.com"
 ]
 
 # Database
