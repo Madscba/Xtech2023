@@ -5,21 +5,53 @@ import PlainWrapper from '../layouts/PlainWrapper';
 function Login() {
     const navigate = useNavigate();
 
+    const [error, setError] = useState("");
     const [userData, setUserData] = useState({
-        email: "",
+        username: "",
         password: "",
     });
-    
-    const { email, password } = userData;
+
+    const { username, password } = userData;
     
     const handleChange = (e) => {
-      setUserData({ ...userData, [e.target.name]: e.target.value });
+        setError("");
+        setUserData({ ...userData, [e.target.name]: e.target.value });
     };
     
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      navigate("/dashboard");
-      //TODO: save data
+    const handleSubmit = async (e) => {
+      try {
+        e.preventDefault();
+
+        if(!userData){
+            throw new Error();
+        }
+      
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/auth/user/login/`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(userData),
+        });
+
+        if (!response.ok) {
+            throw new Error();
+        }
+
+        const jsonData = await response.json();
+
+        if(!jsonData.access){
+            throw new Error();
+        }
+
+        localStorage.clear();
+        localStorage.setItem('access_token', jsonData.access);
+        localStorage.setItem('refresh_token', jsonData.refresh);
+
+        navigate("/dashboard");
+      } catch (error) {
+        setError("Soemthing went wrong, please try again later.");   
+      }
     }
 
     return (
@@ -32,8 +64,8 @@ function Login() {
                         type="email" 
                         required
                         placeholder="e-mail" 
-                        name="email"
-                        value={email}
+                        name="username"
+                        value={username}
                         onChange={(e) => handleChange(e)}
                     ></input>
                     <input 
@@ -47,7 +79,9 @@ function Login() {
                     <button className="button w-full">Login</button>
                 </form>
 
-                <div className="pt-10 text-sm">
+                {error && <p className="error-msg py-2">{error}</p>}
+
+                <div className="pt-5 text-sm">
                     <p className="text-dark">Don't have an account? <a href="/signup" className="text-primary">Sign Up now</a></p>
                 </div>
             </div>
