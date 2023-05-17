@@ -28,9 +28,6 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', default=True)
 
-DATABASES = os.environ.get('DATABASE',default='default')
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -84,22 +81,31 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
     "https://xtech2023-frontend.onrender.com",
-    "http://xtech2023-frontend.onrender.com"
+    "http://xtech2023-frontend.onrender.com",
+    "https://xtech2023.onrender.com",
 ]
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    },
-    'production': dj_database_url.config(        # Feel free to alter this value to suit your needs.
-            default = os.environ.get('DATABASE_URL'),
-            conn_max_age=600)
-}
-
+if os.environ.get('DEBUG', default=True):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ.get('DB_NAME'),
+            'USER': os.environ.get('DB_USER'),
+            'PASSWORD': os.environ.get('DB_PASSWORD'),
+            'HOST': os.environ.get('DB_HOST'),
+            'PORT': os.environ.get('DB_PORT'),
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
