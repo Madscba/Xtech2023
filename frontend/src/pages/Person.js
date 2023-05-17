@@ -78,31 +78,31 @@ function Person() {
                 {(!loadingPatient && patientError ) && <p className="error-msg">{patientError}</p>}
                 {(!loadingPatient && !patientError) && 
                     <>
-                        <div className="flex flex-row justify-between w-full">
+                        <div className="flex flex-col sm:flex-row gap-3 justify-between w-full">
                             <div className="space-y-4">
                                 <h2>Data - {patientData?.first_name ?? ""} </h2>
                                 <div className="flex flex-col gap-2">
-                                    <div className="flex flex-row gap-2">
+                                    <div className="flex flex-col sm:flex-row gap-2">
                                         <p><strong>Name:</strong></p>
                                         <p>{patientData?.first_name} {patientData?.last_name}</p>
                                     </div>
-                                    <div className="flex flex-row gap-2">
+                                    <div className="flex flex-col sm:flex-rowgap-2">
                                         <p><strong>Birth year:</strong></p>
                                         <p>{patientData?.birth_year}</p>
                                     </div>
-                                    <div className="flex flex-row gap-2">
+                                    <div className="flex fflex-col sm:flex-row gap-2">
                                         <p><strong>Email:</strong></p>
                                         <p>{patientData?.email}</p>
                                     </div>
-                                    <div className="flex flex-row gap-2">
+                                    <div className="flex flex-col sm:flex-row gap-2">
                                         <p><strong>Gender:</strong></p>
                                         <p>{patientData?.gender ?? "not defined"}</p>
                                     </div>
-                                    <div className="flex flex-row gap-2">
+                                    <div className="flex flex-col sm:flex-row gap-2">
                                         <p><strong>Ethnicity:</strong></p>
                                         <p>{patientData?.ethnicity ?? "not defined"}</p>
                                     </div>
-                                    <div className="flex flex-row gap-2">
+                                    <div className="flex flex-col sm:flex-row gap-2">
                                         <p><strong>Previous Diseases:</strong></p>
                                         <p>{patientData?.diseases ?? "not defined"}</p>
                                     </div>
