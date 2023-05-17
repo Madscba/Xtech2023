@@ -76,7 +76,7 @@ function Login() {
                         value={password}
                         onChange={(e) => handleChange(e)}
                     ></input>
-                    <button className="button w-full">Login</button>
+                    <button className="button large">Login</button>
                 </form>
 
                 {error && <p className="error-msg py-2">{error}</p>}

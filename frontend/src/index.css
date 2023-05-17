@@ -38,7 +38,11 @@ input{
 }
 
 .button{
-    @apply w-fill max-w-[300px] bg-primary text-white text-center px-4 py-2 md:px-6 md:py-3 rounded-3xl text-xs md:text-sm h-fit font-semibold;
+    @apply w-fit bg-primary text-white text-center px-4 py-2 md:px-6 md:py-3 rounded-3xl text-xs md:text-sm h-fit font-semibold;
+}
+
+.button.large{
+    @apply w-fill;
 }
 
 .button.orange{

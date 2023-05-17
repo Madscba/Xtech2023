@@ -1,7 +1,7 @@
 databases:
-  - name: eyeopener
-    databaseName: eyeopener
-    user: sensvue
+  - name: DB_HOST
+    databaseName: DB_NAME
+    user: DB_USER
 
 services:
   - type: web
