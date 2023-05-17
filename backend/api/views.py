@@ -26,6 +26,7 @@ def create_patient(request):
             patient = Patient(admin=admin, first_name=patient_data['firstname'], last_name=patient_data['lastname'], email=patient_data['email'], birth_year=patient_data['birthyear'], consent=patient_data['consent'])
             patient.save()
     except:
+        print(e)
         return JsonResponse({ "message": "adding a user failed" }, status=400)
     return JsonResponse({ "message": "added user successfully" }, status=200)
 
@@ -83,6 +84,7 @@ def get_submissions(request):
             submitted_eyes = SubmittedEye.objects.all().filter(submission=submission)
             enriched_submissions.append({"submission": SubmissionSerializer(submission, many=False).data, "submitted_eyes": SubmittedEyeSerializer(submitted_eyes, many=True).data})
     except Exception as e:
+        print(e)
         return JsonResponse({ "message": "fetching submissions failed" }, status=400)
     return JsonResponse({ "data": enriched_submissions }, status=200)
 
@@ -94,6 +96,7 @@ def get_submission(request, submission_id):
             submitted_eyes = SubmittedEye.objects.all().filter(submission=submission)
             enriched_submission = {"submission": SubmissionSerializer(submission, many=False).data, "submitted_eyes": SubmittedEyeSerializer(submitted_eyes, many=True).data}
     except:
+        print(e)
         return JsonResponse({ "message": "fetching submission failed" }, status=400)
     return JsonResponse({ "data": enriched_submission }, status=200)
 
