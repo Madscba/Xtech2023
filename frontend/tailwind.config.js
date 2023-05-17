@@ -13,7 +13,13 @@ module.exports = {
       },
       width:{
         'fit': 'fit-content',
-        'inherit': 'inherit'
+        'inherit': 'inherit',
+        'fill': '-webkit-fill-available'
+      },
+      maxWidth:{
+        'container-limit': '500px',
+        'text-limit': '700px',
+        'lg-container-limit': '1400px',
       },
       height:{
         'fit': 'fit-content',

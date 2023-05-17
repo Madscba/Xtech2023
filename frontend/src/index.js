@@ -14,7 +14,6 @@ import Material from './pages/Material';
 import SendFeedback from './pages/SendFeedback';
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
-import Pending from './pages/Pending';
 import SuccessfullFeedbackSending from './pages/SuccessfullFeedbackSending';
 import './index.css';
 
@@ -27,7 +26,7 @@ root.render(
             <Route path="login" element={<Login/>} />
             <Route path="signup" element={<SignUp/>} />
             <Route path="dashboard" element={<Dashboard/>} />
-            <Route path="create/submission" element={<CreateSubmission/>} />
+            <Route path="create/submission/:id" element={<CreateSubmission/>} />
             <Route path="add/person" element={<AddPerson />} />
             <Route path="person/:id" element={<Person/>} />
             <Route path="people" element={<AllPeople/>} />
@@ -36,7 +35,6 @@ root.render(
             <Route path="send/feedback/:id" element={<SendFeedback/>} />
             <Route path="feedback/:id" element={<Feedback/>} />
             <Route path="feedbacks" element={<Feedbacks/>} />
-            <Route path="pending" element={<Pending/>} />
             <Route path="pending" element={<SuccessfullFeedbackSending/>} />
             <Route path="*" element={<NoPage/>} />
         </Routes>

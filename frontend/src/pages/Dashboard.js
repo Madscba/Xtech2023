@@ -1,98 +1,94 @@
+import React, { useState, useEffect } from 'react';
 import Wrapper from "../layouts/Wrapper";
 import RiskLabel from "../components/base/Labels/RiskLabel";
 import NumberLabel from "../components/base/Labels/NumberLabel";
-import { useState }  from 'react'; 
+import Loading from "../components/base/Loading/Loading";
 
 function Dashboard() {
 
-    const [personWasAdded, setPersonWasAdded] = useState(false);
+    const [patients, setPatients] = useState([]);
+    const [feedbacks, setFeedbacks] = useState([]);
+    const [loadingPatients, setLoadingPatients] = useState(false);
+    const [loadingFeedbacks, setLoadingFeedbacks] = useState(false);
+    const [feedbacksError, setFeedbacksError] = useState("");
+    const [patientsError, setPatientsError] = useState("");
 
-    const feedbacks = [
-        {
-            name: "Freja",
-            case: 23455,
-            riskLevel: "high",
-            status: "completed"
-        },
-        {
-            name: "Signe",
-            case: 5311,
-            riskLevel: "low",
-            status: "completed"
-        },
-        {
-            name: "Anders",
-            case: 41155,
-            riskLevel: "high",
-            status: "completed"
-        },
-        {
-            name: "Marie",
-            case: 23455,
-            riskLevel: "high",
-            status: "completed"
-        },
-        {
-            name: "Matilde",
-            case: 5311,
-            riskLevel: "low",
-            status: "completed"
-        },
-        {
-            name: "Emil",
-            case: 41155,
-            riskLevel: "high",
-            status: "completed"
-        },
-        {
-            name: "Oscar",
-            case: 23455,
-            riskLevel: "low",
-            status: "completed"
-        },
-        {
-            name: "Noah",
-            case: 5311,
-            riskLevel: "low",
-            status: "completed"
-        },
-        {
-            name: "Laura",
-            case: 5311,
-            riskLevel: "low",
-            status: "completed"
-        },
-    ]
+    useEffect(() => {
+        setLoadingPatients(true);
+        getPatients();
+        setLoadingFeedbacks(true);
+        getFeedbacks();
+    }, []);
 
-    const people = [
-        "Freja", "Signe", "Marie", "Matilde", "Emil", "Oscar", "Noah", "Laura"
-    ]
+    const getPatients = async () => {
+       try {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/patients`);
 
+            if (!response.ok) {
+                throw new Error();
+            }
+
+            const jsonData = await response.json();
+            setPatients(jsonData.data ?? []);
+            setLoadingPatients(false);
+       } catch (error) {
+            handleError("patients");
+       }
+    }
+
+    const getFeedbacks= async () => {
+        try {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/submissions`);
+
+            if (!response.ok) {
+                throw new Error();
+            }
+
+            const jsonData = await response.json();
+            setFeedbacks(jsonData.data ?? []);
+            setLoadingFeedbacks(false);
+        } catch (error) {
+            handleError("feedbacks");
+        }
+    }
+
+    const handleError = (type, message = "Something went wrong. Please try again later") => {
+        if(type === "feedbacks"){
+            setLoadingFeedbacks(false);
+            setFeedbacksError(message);
+            return;
+        }
+
+        setLoadingPatients(false);
+        setPatientsError(message);
+    }
 
     return (
         <Wrapper>
-            <div className="py-10 pl-10 md:py-20 md:pl-20 space-y-10">
-                <section className="flex flex-col md:flex-row justify-between gap-10 pr-10 md:pr-20">
-                    <div className="card w-full md:w-2/3 space-y-4 flex flex-col lg:flex-row items-center gap-4">
-                        <div className="space-y-2">
+            <div className="py-10 pl-10 md:py-20 md:pl-12 lg:pl-20 space-y-10">
+                <section className="flex flex-col md:flex-row justify-between gap-10 pr-10 md:pr-12 lg:pr-20">
+                    <div className="card w-full md:w-2/4 flex flex-col lg:flex-row items-center p-3">
+                        <div className="space-y-3 p-3">
                             <h2>Welcome back Mie</h2>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                         </div>
-                        <div className="hidden md:flex lg:w-1/3 text-7xl justify-center items-center">👋</div>
+                        <div className="hidden md:flex lg:w-2/4 text-5xl justify-center items-center">👋</div>
                     </div>
-                    <div className="card w-full md:w-2/3 space-y-2">
-                        <h2>How to take a good picture</h2>
-                        <p className="pb-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                        <div className="pb-4">
-                            <a href="/material" className="button">
-                                Learn more
-                            </a>
+                    <div className="card w-full md:w-2/3">
+                        <div className="space-y-3 p-3">
+                            <h2>How to take a good picture</h2>
+                            <p className="pb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <div className="pb-3">
+                                <a href="/material" className="button">
+                                    Learn more
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </section>
 
                 <section className="space-y-4">
-                    <div className="flex flex-row justify-between pr-10 md:pr-20">
+                    <div className="flex flex-row justify-between pr-10 md:pr-12 lg:pr-20">
                         <div className="flex flex-row gap-2 items-center">
                             <h2>Feedbacks</h2>
                             <NumberLabel>6</NumberLabel>
@@ -104,24 +100,32 @@ function Dashboard() {
                         </a>
                     </div>
 
-                    <div className="flex flex-row flex-nowrap gap-4 overflow-auto pb-4 last:mr-10 lg:last:mr-20"> 
-                        {feedbacks.map((feedback, index) => (
-                            <a href={`/feedback/${index}`}>
-                                <div key={index} className="card min-w-[200px] flex flex-col items-center gap-3 hover:scale-110">
-                                    <p><strong>{feedback.name}</strong></p>
-                                    <p className="text-sm pb-1">Case #{feedback.case}</p>
-                                    {feedback.riskLevel ? 
-                                        <RiskLabel riskLevel={feedback.riskLevel}>
-                                            Risk is {feedback.riskLevel}
-                                        </RiskLabel> : <></>
-                                    }
-                                </div>
-                            </a>
-                        ))}
+                    <div className="flex flex-row flex-nowrap gap-4 overflow-auto pb-4 last:pr-10 lg:last:pr-20">
+                        {loadingFeedbacks && <Loading/>}
+                        {(feedbacksError && !loadingFeedbacks) && <p className="error-msg">{feedbacksError}</p>}
+                        {(!feedbacksError && !loadingFeedbacks) && 
+                            <>
+                                {feedbacksError && <p className="error-msg">{feedbacksError}</p>}
+                                {feedbacks.length === 0 && <p>You haven't submitted any cases yet.</p>}
+                                {feedbacks?.length > 0 && feedbacks.map((feedback, index) => (
+                                    <a href={`/feedback/${feedback.submission.id}`} className="flex">
+                                        <div key={index} className="card min-w-[200px] hover:scale-110">
+                                            <div className="p-2 flex flex-col items-center gap-3 ">
+                                                <p><strong>{feedback.submission.patient.first_name}</strong></p>
+                                                <p className="text-sm pb-1">Case #{feedback.submission.id}</p>
+                                                {feedback.submitted_eyes.length > 0 && feedback.submitted_eyes.map((eye, index) => (
+                                                    <RiskLabel key={index} riskLevel={eye.risk_level} eyeSide={eye.eye_side}/>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </a>
+                                ))}
+                            </>
+                        }
                     </div>
                 </section>
 
-                <section className="space-y-4 pr-10 md:pr-20">
+                <section className="space-y-4 pr-10 md:pr-12 lg:pr-20">
                     <div className="flex flex-row justify-between">
                         <div className="flex flex-row gap-2 items-center">
                             <h2>People</h2>
@@ -145,23 +149,21 @@ function Dashboard() {
                     </div>
 
                     <div className="flex gap-4 w-full flex-wrap">
-                        { personWasAdded ? 
-                            <a href="/person/22" className="w-inherit md:w-[320px]">
-                                <div key="22" className="card small flex flex-row flex-wrap justify-between items-center">
-                                    <p><strong>Ida</strong></p>
-                                    <a href="/create/submission" className="button">Create submission</a>
-                                </div>
-                            </a>: <></>
+                        {loadingPatients && <Loading/>}
+                        {(patientsError && !loadingPatients) && <p className="error-msg">{patientsError}</p>}
+                        {(!patientsError && !loadingPatients) && 
+                            <>
+                                {patients.length === 0 && <p>You haven't added any patients yet.</p>}
+                                {patients?.length > 0 && patients.map((patient, index) => (
+                                    <a href={`/person/${patient.id}`} className="w-inherit md:w-[320px]">
+                                        <div key={index} className="card small flex flex-row justify-between items-center gap-3">
+                                            <p><strong>{patient.first_name}</strong></p>
+                                            <a href={`/create/submission/${patient.id}`} className="button">Create submission</a>
+                                        </div>
+                                    </a>
+                                ))}
+                            </>
                         }
-                
-                        {people.map((person, index) => (
-                            <a href={`/person/${index}`} className="w-inherit md:w-[320px]">
-                                <div key={index} className="card small flex flex-row flex-wrap justify-between items-center">
-                                    <p><strong>{person}</strong></p>
-                                    <a href="/create/submission" className="button">Create submission</a>
-                                </div>
-                            </a>
-                        ))}
                     </div>
                 </section>
             </div>

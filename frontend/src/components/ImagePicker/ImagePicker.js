@@ -1,18 +1,13 @@
 import { useState, useRef, useEffect }  from 'react'; 
 import VideoRecorder from '../VideoRecorder/VideoRecorder';
 
-function ImagePicker ( props ) {
+function ImagePicker ({ eyeSide, handleImageSubmission }) {
   
     const [videoPath, setVideoPath] = useState();
     const [imagePath, setImagePath] = useState();
-    const [eyeSide, setEyeSide] = useState();
 
     const canvasElement = useRef();
     const videoElement = useRef();
-
-    useEffect(() => {
-        setEyeSide(props.eyeSide + " eye")
-    }, [props]);
 
     const handleVideoUpload = (event) => {
         setVideoPath(URL.createObjectURL(event.target.files[0]));
@@ -29,9 +24,9 @@ function ImagePicker ( props ) {
             .getContext("2d")
             .drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
 
-   
         canvas.toBlob(blob => {
                 setImagePath(URL.createObjectURL(blob));
+                handleImageSubmission({"eyeSide": eyeSide, "image": blob});
             },
             'image/jpeg',
             0.9,
@@ -45,28 +40,28 @@ function ImagePicker ( props ) {
     return (
        <div>
             <h3 className="capitalize">{eyeSide ?? ""}</h3>
-            <div className="flex flex-col md:flex-row gap-4 md:gap-10 pt-4">
+            <div className="w-fill flex flex-col sm:flex-row gap-4 md:gap-10 pt-4">
                 {!videoPath ? 
-                    <>
+                    <div className="space-y-8">
                         <VideoRecorder handleRecordedVideo={updateVideoPath}/>
                         <div className="space-y-2">
-                            <p><strong>Upload a video or image</strong></p>
+                            <p><strong>Upload a video</strong></p>
                             <input 
                                 type="file" 
                                 onChange={handleVideoUpload} 
-                                accept="video/*, image/png, image/jpeg"
+                                accept="video/*"
                                 className="p-0!"
                             />
                         </div>
-                    </>
+                    </div>
                 : 
-                    <div className="flex flex-row gap-4 items-start">
-                        <div className="space-y-2">
+                    <div className="w-fill flex flex-col sm:flex-row gap-6 items-end">
+                        <div className="w-fill sm:w-3/6 sm:max-w-[400px] flex flex-col gap-4">
                             <video 
                                 ref={videoElement} 
                                 controls 
                                 muted 
-                                width="400"
+                                className="w-fill"
                             >
                                 <source 
                                     src={videoPath} 
@@ -81,17 +76,14 @@ function ImagePicker ( props ) {
                             </button>
                         </div>
 
-                        <div>
-                            <canvas ref={canvasElement} className="w-[400px] pb-4"/>
-                            {imagePath ? 
-                                <a 
-                                    class="bg-yellow-200 px-6 py-2 rounded-3xl text-sm font-bold" 
+                        <div className="w-fill sm:w-3/6 sm:max-w-[400px] flex flex-col gap-4">
+                            <canvas ref={canvasElement} className="w-fill h-fill object-cover object-center"/>
+                            { imagePath && 
+                                <a class="bg-yellow-200 px-4 py-2 md:px-6 md:py-3 rounded-3xl text-xs md:text-sm text-center h-fit font-semibold" 
                                     href={imagePath} 
-                                    download
-                                >
-                                    Ready to download
+                                    download >
+                                    Ready to download 
                                 </a>
-                                : <></>
                             }
                         </div>
                     </div>

@@ -10,19 +10,23 @@ body {
 }
 
 h1{
-    @apply text-4xl font-extrabold;
+    @apply text-4xl font-extrabold leading-[130%] md:leading-[120%];
 }
 
 h2{
-    @apply text-2xl font-bold;
+    @apply text-2xl font-bold leading-[130%] md:leading-[120%];
 }
 
 h3{
-    @apply text-xl font-bold;
+    @apply text-xl font-bold leading-[130%] md:leading-[120%];
+}
+
+p{
+    @apply leading-[140%];
 }
 
 .card{
-    @apply shadow-lg rounded-2xl bg-white p-5 md:p-8;
+    @apply shadow-lg rounded-2xl bg-white p-4;
 
     &.color-card{
         @apply bg-primary text-white;
@@ -30,12 +34,11 @@ h3{
 }
 
 input{
-    @apply p-3 rounded-2xl;
-    width: 100%;
+    @apply w-fill px-4 py-2 md:px-6 md:py-3 rounded-3xl text-xs md:text-sm;
 }
 
 .button{
-    @apply bg-primary text-white px-6 py-3 rounded-3xl text-sm h-fit font-semibold;
+    @apply w-fill max-w-[300px] bg-primary text-white text-center px-4 py-2 md:px-6 md:py-3 rounded-3xl text-xs md:text-sm h-fit font-semibold;
 }
 
 .button.orange{
@@ -57,3 +60,12 @@ input{
 .number-bullet-point{
     @apply flex flex-row gap-2 items-center;
 }
+
+.error-msg{
+    @apply text-sm font-bold text-red-400;
+}
+
+.container{
+    @apply p-10 md:p-12 lg:p-20 space-y-10;
+}
+
