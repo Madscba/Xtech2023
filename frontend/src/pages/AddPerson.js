@@ -69,11 +69,11 @@ function AddPerson() {
 
     return (
         <Wrapper>
-            <div className="w-full p-10 md:p-20 space-y-10">
+            <div className="container">
                 <BackButton/>
                 <div className="space-y-4">
                     <h2>Add a person</h2>
-                    <form onSubmit={(e) => handleSubmit(e)} className="w-full md:w-1/3 flex flex-col gap-2">
+                    <form onSubmit={(e) => handleSubmit(e)} className="w-full md:w-6/12 md:max-w-container-limit flex flex-col gap-2">
                         <label for="firstname" className="text-sm font-bold">First name *</label>
                         <input 
                             required

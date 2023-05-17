@@ -38,7 +38,7 @@ function Feedbacks() {
 
     return (
         <Wrapper>
-            <div className="p-10 md:p-20 space-y-10">
+            <div className="container">
                 <BackButton/>
                 <div className="space-y-6">
                     {loadingFeedbacks && <Loading/>}
@@ -49,7 +49,7 @@ function Feedbacks() {
                             <div className="flex flex-row flex-wrap gap-4 pb-4">
                                 {feedbacks.length === 0 && <p>You haven't added any patients yet.</p>}
                                 {feedbacks?.length > 0 && feedbacks.map((feedback, index) => (
-                                    <a href={`/feedback/${feedback.submission.id}`} className="flex">
+                                    <a href={`/feedback/${feedback.submission.id}`} className="w-fill sm:w-fit flex">
                                         <div key={index} className="card flex flex-col gap-4 w-full md:min-w-[200px] hover:scale-110">
                                             <div className="self-end">
                                                 <StatusLabel status={feedback.submission.status} additionalClasses="w-fit">

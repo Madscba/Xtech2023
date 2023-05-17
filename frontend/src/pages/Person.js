@@ -72,7 +72,7 @@ function Person() {
 
     return (
         <Wrapper>
-            <div className="p-10 md:p-20 space-y-10">
+            <div className="container">
                 <BackButton/>
                 {loadingPatient && <Loading/>}
                 {(!loadingPatient && patientError ) && <p className="error-msg">{patientError}</p>}

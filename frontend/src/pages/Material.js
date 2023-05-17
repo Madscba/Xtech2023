@@ -5,10 +5,10 @@ import BackButton from "../components/base/Navigation/BackButton";
 function Material() {
     return (
         <Wrapper>
-            <div className="p-10 md:p-20 space-y-10">
+            <div className="container">
                 <BackButton/>
-                <div className="space-y-6 md:w-2/3">
-                    <div className="space-y-2">
+                <div className="space-y-6 w-full">
+                    <div className="space-y-2 md:max-w-text-limit">
                         <h2>How to take a good picture</h2>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Adipiscing diam donec adipiscing tristique risus nec feugiat. Cursus euismod quis viverra nibh cras pulvinar mattis nunc sed</p>
                     </div>

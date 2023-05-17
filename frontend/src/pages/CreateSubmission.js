@@ -103,11 +103,11 @@ function CreateSubmission() {
     return (
         <Wrapper>
             {!isProcessing && 
-                <div className="p-10 md:p-20 space-y-10">
+                <div className="container">
                     <BackButton/>
                     <div className="space-y-4">
                         <h2 className="pb-4">Create a submission {patient?.first_name ? `for ${patient?.first_name }` : ""}</h2>
-                        <div className="flex flex-col gap-4">
+                        <div className="space-y-8">
                             <ImagePicker 
                                 eyeSide="left" 
                                 handleImageSubmission={handleSubmittedImages}

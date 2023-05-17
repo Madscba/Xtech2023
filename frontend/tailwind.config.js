@@ -16,6 +16,11 @@ module.exports = {
         'inherit': 'inherit',
         'fill': '-webkit-fill-available'
       },
+      maxWidth:{
+        'container-limit': '500px',
+        'text-limit': '700px',
+        'lg-container-limit': '1400px',
+      },
       height:{
         'fit': 'fit-content',
         'inherit': 'inherit'

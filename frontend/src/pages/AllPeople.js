@@ -36,20 +36,20 @@ function AllPeople() {
 
     return (
         <Wrapper>
-            <div className="p-10 md:p-20 space-y-10">
+            <div className="container">
                 <BackButton/>
                <div className="space-y-4">
                 {loadingPatients && <Loading/>}
                 {(!loadingPatients && error ) && <p className="error-msg">{error}</p>}
                 {(!loadingPatients && !error) && 
                     <>
-                        <h2>People List</h2>
-                        <div className="flex gap-4 w-full flex-wrap">
+                        <h2>Patients List</h2>
+                        <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap">
                             {patients.map((patient, index) => (
-                                <a key={index} href={`/person/${index}`}>
-                                    <div className="card small w-[350px] flex flex-row justify-between items-center">
-                                        <p><strong>{patient?.first_name}</strong></p>
-                                        <a href={`/person/${patient.id}`} className="button">Create new submission</a>
+                                <a key={index} href={`/person/${index}`} className="w-fill md:w-[320px]">
+                                    <div className="card small flex flex-row justify-between items-center gap-2">
+                                        <p className="truncate"><strong>{patient?.first_name}</strong></p>
+                                        <a href={`/person/${patient.id}`} className="button">Create submission</a>
                                     </div>
                                 </a>
                             ))}

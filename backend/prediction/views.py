@@ -13,7 +13,9 @@ import json
 
 sys.path.insert(0, '')
 
-def dummy_glaucoma_prediction(image):
+#     ################# Prediction views ########################
+
+def dummy_glaucoma_detection(image):
     image = Image.open(image)
     image_processor = AutoImageProcessor.from_pretrained("google/mobilenet_v2_1.0_224")
     model = MobileNetV2ForImageClassification.from_pretrained("google/mobilenet_v2_1.0_224")
@@ -122,71 +124,71 @@ def dummy_glaucoma_prediction(image):
 
 #     ################# Image quality views ########################
     
-# @csrf_exempt
-# def img_quality_local_test(request):
-#     """
-#     Purpose: test function. Test if local file can be loaded, transformed and inference run, and result returned.
-#     Result: Yes, it works.
-#     Returns response that is simple HTML with ML prediction as part of text.
-#     """
-#     image_input = Image.open('prediction/stingray.jpg')
-#     image_reference = Image.open('prediction/fundus_image_reference.jpg')
+@csrf_exempt
+def img_quality_local_test(request):
+    """
+    Purpose: test function. Test if local file can be loaded, transformed and inference run, and result returned.
+    Result: Yes, it works.
+    Returns response that is simple HTML with ML prediction as part of text.
+    """
+    image_input = Image.open('prediction/stingray.jpg')
+    image_reference = Image.open('prediction/fundus_image_reference.jpg')
 
-#     brisque_score = round(piq.brisque(resize_and_to_torch(image_input), data_range=1., reduction='none').item(),3)
-#     DISTS_score = round(piq.DISTS(reduction='none')(resize_and_to_torch(image_reference), resize_and_to_torch(image_input)).item(),3)
-#     resp_dict = {"brisque_score": brisque_score, "DISTS": DISTS_score}
-#     print(resp_dict)
-#     return JsonResponse(resp_dict)
-
-
-
-# #TODO add error handling
-# def image_quality_msg(brisque_score,DISTS_score, brisque_score_threshold:float=20, DISTS_score_threshold:float=0.3 ):
-#     brisque = brisque_score > brisque_score_threshold  
-#     dist = DISTS_score < DISTS_score_threshold
-#     good_enough = (brisque and dist)
-
-#     if good_enough:
-#         msg = "Image appears ready for diagnosis!"
-#     if brisque:
-#         msg =  "Try again, image quality does not appear to be high enough"
-#     else:
-#         msg =  "Try again, the anterior part of the eye does not appear to be visible"
-#     return msg, good_enough
+    brisque_score = round(piq.brisque(resize_and_to_torch(image_input), data_range=1., reduction='none').item(),3)
+    DISTS_score = round(piq.DISTS(reduction='none')(resize_and_to_torch(image_reference), resize_and_to_torch(image_input)).item(),3)
+    resp_dict = {"brisque_score": brisque_score, "DISTS": DISTS_score}
+    print(resp_dict)
+    return JsonResponse(resp_dict)
 
 
-# def resize_and_to_torch(img):
-#     img_resized = img.resize((256,256))
-#     transform = transforms.Compose([
-#     transforms.ToTensor()])
-#     img_tensor = transform(img_resized)
-#     img_tensor = torch.reshape(img_tensor.unsqueeze(1), (1, 3, 256, 256))
-#     return img_tensor
 
-# @csrf_exempt
-# def evaluate_img_quality(request):
-#     """
-#     To be the predict view that we set in production"""
-#     if request.method == "POST":
-#         file = request.FILES['image']
-#         #file = request.files.get('file')
-#         if file is None:
-#             return JsonResponse({'error': 'no file'})
-#         if not allowed_file(file):
-#             return JsonResponse({'error': 'format not supported. Only .PNG, .JPG and .JPEG files are allowed'})
+#TODO add error handling
+def image_quality_msg(brisque_score,DISTS_score, brisque_score_threshold:float=20, DISTS_score_threshold:float=0.3 ):
+    brisque = brisque_score > brisque_score_threshold  
+    dist = DISTS_score < DISTS_score_threshold
+    good_enough = (brisque and dist)
 
-#         #try:
-#         img_bytes = file.read()
-#         PIL_img = transform_image(img_bytes, to_tensor=False)
+    if good_enough:
+        msg = "Image appears ready for diagnosis!"
+    if brisque:
+        msg =  "Try again, image quality does not appear to be high enough"
+    else:
+        msg =  "Try again, the anterior part of the eye does not appear to be visible"
+    return msg, good_enough
 
-#         image_reference = Image.open('prediction/fundus_image_reference.jpg')
-#         brisque_score = round(piq.brisque(resize_and_to_torch(PIL_img), data_range=1., reduction='none').item(),3)
-#         DISTS_score = round(piq.DISTS(reduction='none')(resize_and_to_torch(image_reference), resize_and_to_torch(PIL_img)).item(),3)
+
+def resize_and_to_torch(img):
+    img_resized = img.resize((256,256))
+    transform = transforms.Compose([
+    transforms.ToTensor()])
+    img_tensor = transform(img_resized)
+    img_tensor = torch.reshape(img_tensor.unsqueeze(1), (1, 3, 256, 256))
+    return img_tensor
+
+@csrf_exempt
+def evaluate_img_quality(request):
+    """
+    To be the predict view that we set in production"""
+    if request.method == "POST":
+        file = request.FILES['image']
+        #file = request.files.get('file')
+        if file is None:
+            return JsonResponse({'error': 'no file'})
+        if not allowed_file(file):
+            return JsonResponse({'error': 'format not supported. Only .PNG, .JPG and .JPEG files are allowed'})
+
+        #try:
+        img_bytes = file.read()
+        PIL_img = transform_image(img_bytes, to_tensor=False)
+
+        image_reference = Image.open('prediction/fundus_image_reference.jpg')
+        brisque_score = round(piq.brisque(resize_and_to_torch(PIL_img), data_range=1., reduction='none').item(),3)
+        DISTS_score = round(piq.DISTS(reduction='none')(resize_and_to_torch(image_reference), resize_and_to_torch(PIL_img)).item(),3)
 
         
-#         msg, good_enough = image_quality_msg(brisque_score, DISTS_score)
-#         resp_dict = {"brisque_score": brisque_score, "DISTS": DISTS_score,"good_enough": good_enough, "msg":msg}
+        msg, good_enough = image_quality_msg(brisque_score, DISTS_score)
+        resp_dict = {"brisque_score": brisque_score, "DISTS": DISTS_score,"good_enough": good_enough, "msg":msg}
 
-#         return JsonResponse(resp_dict)
+        return JsonResponse(resp_dict)
 
     

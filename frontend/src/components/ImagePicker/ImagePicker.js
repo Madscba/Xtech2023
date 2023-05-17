@@ -40,9 +40,9 @@ function ImagePicker ({ eyeSide, handleImageSubmission }) {
     return (
        <div>
             <h3 className="capitalize">{eyeSide ?? ""}</h3>
-            <div className="flex flex-col md:flex-row gap-4 md:gap-10 pt-4">
+            <div className="w-fill flex flex-col sm:flex-row gap-4 md:gap-10 pt-4">
                 {!videoPath ? 
-                    <>
+                    <div className="space-y-8">
                         <VideoRecorder handleRecordedVideo={updateVideoPath}/>
                         <div className="space-y-2">
                             <p><strong>Upload a video</strong></p>
@@ -53,15 +53,15 @@ function ImagePicker ({ eyeSide, handleImageSubmission }) {
                                 className="p-0!"
                             />
                         </div>
-                    </>
+                    </div>
                 : 
-                    <div className="flex flex-row gap-4 items-start">
-                        <div className="space-y-2">
+                    <div className="w-fill flex flex-col sm:flex-row gap-6 items-end">
+                        <div className="w-fill sm:w-3/6 sm:max-w-[400px] flex flex-col gap-4">
                             <video 
                                 ref={videoElement} 
                                 controls 
                                 muted 
-                                width="400"
+                                className="w-fill"
                             >
                                 <source 
                                     src={videoPath} 
@@ -76,17 +76,14 @@ function ImagePicker ({ eyeSide, handleImageSubmission }) {
                             </button>
                         </div>
 
-                        <div>
-                            <canvas ref={canvasElement} className="w-[400px] pb-4"/>
-                            { imagePath ? 
-                                <a 
-                                    class="bg-yellow-200 px-6 py-3 rounded-3xl text-sm h-fit font-semibold" 
+                        <div className="w-fill sm:w-3/6 sm:max-w-[400px] flex flex-col gap-4">
+                            <canvas ref={canvasElement} className="w-fill h-fill object-cover object-center"/>
+                            { imagePath && 
+                                <a class="bg-yellow-200 px-4 py-2 md:px-6 md:py-3 rounded-3xl text-xs md:text-sm text-center h-fit font-semibold" 
                                     href={imagePath} 
-                                    download
-                                >
+                                    download >
                                     Ready to download 
                                 </a>
-                                : <></>
                             }
                         </div>
                     </div>

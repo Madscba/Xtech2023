@@ -65,14 +65,14 @@ function Dashboard() {
 
     return (
         <Wrapper>
-            <div className="py-10 pl-10 md:py-20 md:pl-20 space-y-10">
-                <section className="flex flex-col md:flex-row justify-between gap-10 pr-10 md:pr-20">
-                    <div className="card w-full md:w-2/3 space-y-4 flex flex-col lg:flex-row items-center p-3">
+            <div className="py-10 pl-10 md:py-20 md:pl-12 lg:pl-20 space-y-10">
+                <section className="flex flex-col md:flex-row justify-between gap-10 pr-10 md:pr-12 lg:pr-20">
+                    <div className="card w-full md:w-2/4 flex flex-col lg:flex-row items-center p-3">
                         <div className="space-y-3 p-3">
                             <h2>Welcome back Mie</h2>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                         </div>
-                        <div className="hidden md:flex lg:w-1/3 text-7xl justify-center items-center">👋</div>
+                        <div className="hidden md:flex lg:w-2/4 text-5xl justify-center items-center">👋</div>
                     </div>
                     <div className="card w-full md:w-2/3">
                         <div className="space-y-3 p-3">
@@ -88,7 +88,7 @@ function Dashboard() {
                 </section>
 
                 <section className="space-y-4">
-                    <div className="flex flex-row justify-between pr-10 md:pr-20">
+                    <div className="flex flex-row justify-between pr-10 md:pr-12 lg:pr-20">
                         <div className="flex flex-row gap-2 items-center">
                             <h2>Feedbacks</h2>
                             <NumberLabel>6</NumberLabel>
@@ -100,7 +100,7 @@ function Dashboard() {
                         </a>
                     </div>
 
-                    <div className="flex flex-row flex-nowrap gap-4 overflow-auto pb-4 last:mr-10 lg:last:mr-20">
+                    <div className="flex flex-row flex-nowrap gap-4 overflow-auto pb-4 last:pr-10 lg:last:pr-20">
                         {loadingFeedbacks && <Loading/>}
                         {(feedbacksError && !loadingFeedbacks) && <p className="error-msg">{feedbacksError}</p>}
                         {(!feedbacksError && !loadingFeedbacks) && 
@@ -125,7 +125,7 @@ function Dashboard() {
                     </div>
                 </section>
 
-                <section className="space-y-4 pr-10 md:pr-20">
+                <section className="space-y-4 pr-10 md:pr-12 lg:pr-20">
                     <div className="flex flex-row justify-between">
                         <div className="flex flex-row gap-2 items-center">
                             <h2>People</h2>
@@ -156,7 +156,7 @@ function Dashboard() {
                                 {patients.length === 0 && <p>You haven't added any patients yet.</p>}
                                 {patients?.length > 0 && patients.map((patient, index) => (
                                     <a href={`/person/${patient.id}`} className="w-inherit md:w-[320px]">
-                                        <div key={index} className="card small flex flex-row flex-wrap justify-between items-center">
+                                        <div key={index} className="card small flex flex-row justify-between items-center gap-3">
                                             <p><strong>{patient.first_name}</strong></p>
                                             <a href={`/create/submission/${patient.id}`} className="button">Create submission</a>
                                         </div>

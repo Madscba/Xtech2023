@@ -56,21 +56,21 @@ function Login() {
 
     return (
         <PlainWrapper>
-            <div className="space-y-4 flex flex-col items-center justify-start">
+            <div className="space-y-4 flex flex-col items-center justify-start w-full md:w-6/12 md:max-w-container-limit mx-auto">
                 <h1 className="text-primary">Login</h1>
-                <p className="text-sm text-dark">Lorem ipsum dolor sit amet, consectetur adipiscing eli.</p>
-                <form onSubmit={(e) => handleSubmit(e)} className="w-full md:w-1/3 flex flex-col items-center justify-center gap-4">
+                <p className="text-sm text-dark text-center">Sens-Vue will provide you with the credentials, if you would like to access the prototype.</p>
+                <form onSubmit={(e) => handleSubmit(e)} className="w-fill flex flex-col items-center justify-center gap-4">
                     <input 
-                        type="email" 
                         required
+                        type="email" 
                         placeholder="e-mail" 
                         name="username"
                         value={username}
                         onChange={(e) => handleChange(e)}
                     ></input>
                     <input 
-                        type="password" 
                         required
+                        type="password" 
                         placeholder="password" 
                         name="password"
                         value={password}

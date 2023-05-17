@@ -10,7 +10,7 @@ from rest_framework.permissions import IsAuthenticated
 from .serializers import PatientSerializer, SubmissionSerializer, SubmittedEyeSerializer
 from .models import Patient, Submission, SubmittedEye
 from .utils import encode_request_data
-from prediction.views import dummy_glaucoma_prediction
+from prediction.views import dummy_glaucoma_detection
 
 #TODO: remove @csrf_exempt
 #TODO: add permission classes/middleware
@@ -58,11 +58,11 @@ def create_submission(request):
             submission.save()
             #TODO: write this more nicely
             if "right_eye" in request.FILES: 
-                risk_level = dummy_glaucoma_prediction(request.FILES["right_eye"])
+                risk_level = dummy_glaucoma_detection(request.FILES["right_eye"])
                 submitted_eye = SubmittedEye(eye_side="right", image=request.FILES["right_eye"], submission=submission, risk_level=risk_level)
                 submitted_eye.save()
             if "left_eye" in request.FILES: 
-                risk_level = dummy_glaucoma_prediction(request.FILES["left_eye"])
+                risk_level = dummy_glaucoma_detection(request.FILES["left_eye"])
                 submitted_eye = SubmittedEye(eye_side="left", image=request.FILES["left_eye"], submission=submission, risk_level=risk_level)
                 submitted_eye.save()
             submission = Submission.objects.get(id=submission.id)

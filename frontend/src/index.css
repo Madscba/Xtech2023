@@ -10,15 +10,19 @@ body {
 }
 
 h1{
-    @apply text-4xl font-extrabold leading-snug;
+    @apply text-4xl font-extrabold leading-[130%] md:leading-[120%];
 }
 
 h2{
-    @apply text-2xl font-bold leading-snug;
+    @apply text-2xl font-bold leading-[130%] md:leading-[120%];
 }
 
 h3{
-    @apply text-xl font-bold leading-snug;
+    @apply text-xl font-bold leading-[130%] md:leading-[120%];
+}
+
+p{
+    @apply leading-[140%];
 }
 
 .card{
@@ -30,12 +34,11 @@ h3{
 }
 
 input{
-    @apply p-3 rounded-2xl;
-    width: 100%;
+    @apply w-fill px-4 py-2 md:px-6 md:py-3 rounded-3xl text-xs md:text-sm;
 }
 
 .button{
-    @apply bg-primary text-white px-6 py-3 rounded-3xl text-sm h-fit font-semibold;
+    @apply w-fill max-w-[300px] bg-primary text-white text-center px-4 py-2 md:px-6 md:py-3 rounded-3xl text-xs md:text-sm h-fit font-semibold;
 }
 
 .button.orange{
@@ -61,3 +64,8 @@ input{
 .error-msg{
     @apply text-sm font-bold text-red-400;
 }
+
+.container{
+    @apply p-10 md:p-12 lg:p-20 space-y-10;
+}
+
