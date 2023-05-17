@@ -4,8 +4,6 @@
 
 # production
 /build
-/media
-/staticfiles
 
 # misc
 .DS_Store
