@@ -101,8 +101,8 @@ function SendFeedback() {
 
     return (
         <>
-            {!feedback ? <p>Loading...</p>
-            : <Wrapper>
+            { loadingFeedback && <Loading/>}
+            { !loadingFeedback && <Wrapper>
                 <div className="container">
                     <BackButton/>
                         {loadingFeedback && <Loading/>}
